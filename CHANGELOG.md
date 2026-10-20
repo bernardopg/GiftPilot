@@ -98,12 +98,12 @@ Nova identidade: o projeto passa a se chamar **GiftPilot**. As configurações s
 
 ## [2.0.1] e anteriores
 
-Versões publicadas como "AutoJoin for SteamGifts", incluindo a migração para Manifest V3 (2.0.0). O histórico detalhado anterior a 2.0.2 não é verificável no git atual; consulte as [releases](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases).
+Versões publicadas como "AutoJoin for SteamGifts", incluindo a migração para Manifest V3 (2.0.0). O histórico detalhado anterior a 2.0.2 não é verificável no git atual; consulte as [releases](https://github.com/bernardopg/GiftPilot/releases).
 
-[Não lançado]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v3.0.0...HEAD
-[3.0.0]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v2.1.0...v3.0.0
-[2.1.0]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v2.0.1...v2.1.0
-[2.0.3]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/commit/57465c8
-[2.0.2]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/commit/e6063d5
+[Não lançado]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/bernardopg/GiftPilot/compare/v2.1.0...v3.0.0
+[2.1.0]: https://github.com/bernardopg/GiftPilot/compare/v2.0.1...v2.1.0
+[2.0.3]: https://github.com/bernardopg/GiftPilot/commit/57465c8
+[2.0.2]: https://github.com/bernardopg/GiftPilot/commit/e6063d5
 
-[2.0.1] e anteriores: https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/tag/v2.0.1
+[2.0.1] e anteriores: https://github.com/bernardopg/GiftPilot/releases/tag/v2.0.1

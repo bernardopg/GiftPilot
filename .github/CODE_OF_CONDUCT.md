@@ -11,7 +11,7 @@ O GiftPilot adota o [Contributor Covenant 2.1](https://www.contributor-covenant.
 
 ## Como reportar
 
-Reporte comportamentos inaceitáveis de forma privada ao mantenedor, [@bernardopg](https://github.com/bernardopg), pelo [reporte privado do GitHub](https://github.com/bernardopg/AutoJoin-for-SteamGifts/security/advisories/new) (indique que é um caso de conduta). Os reportes são tratados com sigilo.
+Reporte comportamentos inaceitáveis de forma privada ao mantenedor, [@bernardopg](https://github.com/bernardopg), pelo [reporte privado do GitHub](https://github.com/bernardopg/GiftPilot/security/advisories/new) (indique que é um caso de conduta). Os reportes são tratados com sigilo.
 
 ## Consequências
 

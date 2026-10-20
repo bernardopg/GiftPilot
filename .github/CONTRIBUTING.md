@@ -4,15 +4,15 @@ Obrigado por ajudar! Este guia cobre o essencial; as regras técnicas completas 
 
 ## Antes de começar
 
-- Procure uma [issue](https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues) existente ou abra uma descrevendo o problema ou a ideia.
+- Procure uma [issue](https://github.com/bernardopg/GiftPilot/issues) existente ou abra uma descrevendo o problema ou a ideia.
 - Para vulnerabilidades, **não** abra issue pública: siga a [política de segurança](SECURITY.md).
 - Ao participar você concorda com o [código de conduta](CODE_OF_CONDUCT.md).
 
 ## Ambiente
 
 ```bash
-git clone https://github.com/bernardopg/AutoJoin-for-SteamGifts.git
-cd AutoJoin-for-SteamGifts
+git clone https://github.com/bernardopg/GiftPilot.git
+cd GiftPilot
 nvm use        # Node.js 24 (22 e 26 também são suportados)
 npm ci
 ```

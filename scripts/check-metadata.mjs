@@ -27,8 +27,8 @@ expect(
   'package.json description must stay aligned with manifest.json description',
 );
 expect(
-  /bernardopg\/AutoJoin-for-SteamGifts/.test(packageJson.repository?.url || ''),
-  'package.json repository.url must point to bernardopg/AutoJoin-for-SteamGifts',
+  /bernardopg\/GiftPilot/.test(packageJson.repository?.url || ''),
+  'package.json repository.url must point to bernardopg/GiftPilot',
 );
 expect(
   packageJson.homepage === manifestJson.homepage_url,

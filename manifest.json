@@ -4,7 +4,7 @@
   "short_name": "GiftPilot",
   "version": "3.0.0",
   "description": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
-  "homepage_url": "https://bernardopg.github.io/AutoJoin-for-SteamGifts/",
+  "homepage_url": "https://bernardopg.github.io/GiftPilot/",
   "default_locale": "en",
   "icons": {
     "16": "assets/icons/icon-16.png",

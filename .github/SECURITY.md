@@ -2,11 +2,11 @@
 
 ## Versões suportadas
 
-Somente a versão mais recente (a da [última release](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/latest)) recebe correções.
+Somente a versão mais recente (a da [última release](https://github.com/bernardopg/GiftPilot/releases/latest)) recebe correções.
 
 ## Como reportar
 
-Use o [reporte privado de vulnerabilidades](https://github.com/bernardopg/AutoJoin-for-SteamGifts/security/advisories/new) do GitHub. Inclua:
+Use o [reporte privado de vulnerabilidades](https://github.com/bernardopg/GiftPilot/security/advisories/new) do GitHub. Inclua:
 
 - versão do GiftPilot e do navegador;
 - passos para reproduzir e impacto esperado;

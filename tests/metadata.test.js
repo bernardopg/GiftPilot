@@ -20,15 +20,9 @@ test('package metadata stays aligned with the browser manifest', () => {
   assert.equal(packageJson.name, 'giftpilot');
   assert.equal(manifestJson.name, 'GiftPilot');
   assert.equal(packageJson.description, manifestJson.description);
-  assert.match(
-    packageJson.repository.url,
-    /bernardopg\/AutoJoin-for-SteamGifts/,
-  );
+  assert.match(packageJson.repository.url, /bernardopg\/GiftPilot/);
   assert.equal(packageJson.homepage, manifestJson.homepage_url);
-  assert.match(
-    packageJson.homepage,
-    /bernardopg\.github\.io\/AutoJoin-for-SteamGifts/,
-  );
+  assert.match(packageJson.homepage, /bernardopg\.github\.io\/GiftPilot/);
 });
 
 test('development workflow scripts exist and point to real files', () => {

@@ -6,12 +6,12 @@
 
 **Seu copiloto no SteamGifts.** Tema escuro de verdade, filtros que limpam a lista, chance de vitória em cada sorteio e um piloto automático com ritmo humano.
 
-[![Version](https://img.shields.io/badge/version-3.0.0-6D5BFF)](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases)
-[![CI](https://github.com/bernardopg/AutoJoin-for-SteamGifts/actions/workflows/ci.yml/badge.svg)](https://github.com/bernardopg/AutoJoin-for-SteamGifts/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/badge/version-3.0.0-6D5BFF)](https://github.com/bernardopg/GiftPilot/releases)
+[![CI](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml/badge.svg)](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-14B8D4)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22C55E)](LICENSE)
 
-[Site](https://bernardopg.github.io/AutoJoin-for-SteamGifts/) ·
+[Site](https://bernardopg.github.io/GiftPilot/) ·
 [Instalar](#instalação) ·
 [Recursos](#recursos) ·
 [Desenvolvimento](#desenvolvimento) ·
@@ -58,15 +58,15 @@ GiftPilot funciona em navegadores Chromium (Chrome, Edge, Brave, Opera, Vivaldi)
 
 **Pelo pacote da release**
 
-1. Baixe `giftpilot-vX.Y.Z.zip` na [última release](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/latest) e extraia.
+1. Baixe `giftpilot-vX.Y.Z.zip` na [última release](https://github.com/bernardopg/GiftPilot/releases/latest) e extraia.
 2. Abra `chrome://extensions` e ative o **Modo do desenvolvedor**.
 3. Clique em **Carregar sem compactação** e escolha a pasta extraída.
 
 **Pelo código-fonte**
 
 ```bash
-git clone https://github.com/bernardopg/AutoJoin-for-SteamGifts.git
-cd AutoJoin-for-SteamGifts
+git clone https://github.com/bernardopg/GiftPilot.git
+cd GiftPilot
 npm ci
 npm run build   # gera build/extension
 ```
@@ -158,6 +158,6 @@ Se o GiftPilot te ajuda, considere [apoiar o projeto](https://github.com/sponsor
 
 **GiftPilot** is a Chromium extension (Manifest V3) for [SteamGifts](https://www.steamgifts.com): a full dark theme generated from the site's own CSS, filters, win odds, infinite scrolling, win notifications with optional key redemption and an opt-in, human-paced auto-entry mode. Its UI lives in a closed shadow root and its requests match the site's own, so the page cannot see it.
 
-Install: download the zip from [Releases](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/latest), open `chrome://extensions`, enable Developer mode and use **Load unpacked**. Build from source with `npm ci && npm run build`.
+Install: download the zip from [Releases](https://github.com/bernardopg/GiftPilot/releases/latest), open `chrome://extensions`, enable Developer mode and use **Load unpacked**. Build from source with `npm ci && npm run build`.
 
 Auto-entry is against SteamGifts rules and may get your account suspended; it is off by default. Licensed under [MIT](LICENSE).
