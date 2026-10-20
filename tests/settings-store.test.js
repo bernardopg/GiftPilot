@@ -50,7 +50,7 @@ function loadSettingsStore({ getImpl, setImpl, onChangedImpl } = {}) {
   vm.runInNewContext(moduleSource, context, { filename: modulePath });
 
   return {
-    store: context.AutoJoinSettingsStore,
+    store: context.GiftPilotSettingsStore,
     listeners,
   };
 }

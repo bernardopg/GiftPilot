@@ -5,6 +5,14 @@ const assert = require('node:assert/strict');
 
 const rootDir = path.resolve(__dirname, '..');
 
+// SteamGifts ships an anti-extension canary in its JS bundle. bundle-v18.js
+// needed all three ids below; bundle-v19.js (2026-10) reports the account
+// (ajax.php do=jh8Dn) when ANY of these is found on window load, and also on
+// any click inside input#btnAutoJoin:
+//   input#btnAutoJoin, #btnSettings with text "AutoJoin Settings",
+//   #ajFooter, #navbarPin, #ajFooterArrow.
+// The original v18 notes follow.
+//
 // SteamGifts ships an anti-extension canary in its JS bundle (bundle-v18.js):
 // on window load it looks for elements whose ids match specific patterns
 // historically injected by autojoin extensions and, when ALL of them are
@@ -19,6 +27,8 @@ const rootDir = path.resolve(__dirname, '..');
 // createElement configs, HTML attributes and CSS selectors) and fails if any
 // of them matches a known canary pattern.
 const CANARIES = [
+  { name: 'btnAutoJoin', matches: (id) => id === 'btnAutoJoin' },
+  { name: 'btnSettings', matches: (id) => id === 'btnSettings' },
   {
     name: 'ajFooter',
     matches: (id) =>
@@ -140,23 +150,35 @@ const FINGERPRINT_TOKENS = [
   'aj-permission-banner',
   'aj-dismiss-modal',
   '__AJ_',
+  'btnAutoJoin',
+  'btnSettings',
+  'suspensionNotice',
+  'ajSuspensionNotice',
+  'aj_suspension',
+  'data-aj-',
+  'ajSettings',
+  'aj-fontawesome',
+  'aj-perm-retry',
+  'pageFooterDock',
+  'navPinToggle',
+  'navSettingsBtn',
 ];
 
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8'),
+);
+
+// Everything steamgifts.com can observe: content scripts, their CSS and the
+// stylesheets the service worker injects on demand.
 const CONTENT_SCRIPT_FILES = [
-  'js/autoentry.js',
-  'js/suspension-notice.js',
-  'js/utils-enhanced.js',
-  'js/core/autoentry-giveaway.js',
-  'js/core/autoentry-steam-data.js',
-  'js/core/giveaway.js',
-  'js/core/i18n.js',
-  'js/core/page-enhancements.js',
-  'js/core/settings-actions.js',
-  'js/core/settings-store.js',
-  'js/core/steam-community.js',
-  'js/core/timing.js',
-  'css/general.css',
-  'css/night.css',
+  ...new Set([
+    ...manifest.content_scripts.flatMap((entry) => [
+      ...(entry.js || []),
+      ...(entry.css || []),
+    ]),
+    'css/site/dark.css',
+    'css/site/pin.css',
+  ]),
 ];
 
 test('no extension fingerprint tokens in content scripts or injected CSS', () => {
@@ -189,7 +211,7 @@ test('manifest requests declarativeNetRequest for header normalization', () => {
 
 test('background script installs session header rules', () => {
   const source = fs.readFileSync(
-    path.join(rootDir, 'js/backgroundpage.js'),
+    path.join(rootDir, 'js/background/service-worker.js'),
     'utf8',
   );
   assert.ok(
@@ -200,4 +222,50 @@ test('background script installs session header rules', () => {
     source.includes('modifyHeaders'),
     'backgroundpage.js must rewrite Origin/Referer via modifyHeaders',
   );
+});
+
+test('page UI is rendered in a closed shadow root', () => {
+  const source = fs.readFileSync(
+    path.join(rootDir, 'js/content/panel.js'),
+    'utf8',
+  );
+  assert.match(source, /attachShadow\(\{\s*mode:\s*'closed'\s*\}\)/);
+  assert.doesNotMatch(source, /mode:\s*'open'/);
+});
+
+test('content scripts never write to the page localStorage or <html lang>', () => {
+  const offenders = CONTENT_SCRIPT_FILES.filter((rel) => rel.endsWith('.js'))
+    .map((rel) => [rel, fs.readFileSync(path.join(rootDir, rel), 'utf8')])
+    .filter(([, source]) =>
+      /localStorage\.setItem|sessionStorage\.setItem/.test(source),
+    )
+    .map(([rel]) => rel);
+  assert.deepEqual(offenders, []);
+});
+
+test('entry requests follow the live bundle version', () => {
+  const request = require('../js/core/sg-request');
+  assert.equal(request.styleForVersion(18), 'formdata');
+  assert.equal(request.styleForVersion(19), 'jquery');
+  assert.deepEqual(
+    Object.keys(request.orderEntry({ code: 'a', do: 'b', xsrf_token: 'c' })),
+    ['xsrf_token', 'do', 'code'],
+  );
+  const init = request.buildFormDataInit({
+    xsrf_token: 'x',
+    do: 'entry_insert',
+  });
+  assert.ok(init.body instanceof FormData);
+  assert.equal(init.headers, undefined);
+});
+
+test('ajax requests mimic the site jQuery calls', () => {
+  const request = require('../js/core/sg-request');
+  const init = request.buildPostInit({ do: 'entry_insert', code: 'abcde' });
+  assert.equal(init.headers['X-Requested-With'], 'XMLHttpRequest');
+  assert.match(
+    init.headers['Content-Type'],
+    /^application\/x-www-form-urlencoded/,
+  );
+  assert.equal(init.body, 'do=entry_insert&code=abcde');
 });

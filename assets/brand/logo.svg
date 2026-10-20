@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="t">
+  <title id="t">GiftPilot</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6D5BFF"/>
+      <stop offset="1" stop-color="#14B8D4"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB547"/>
+      <stop offset="1" stop-color="#FF6A3D"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <!-- gift box -->
+  <rect x="26" y="58" width="62" height="44" rx="7" fill="#FFFFFF"/>
+  <rect x="21" y="45" width="72" height="17" rx="6" fill="#FFFFFF"/>
+  <rect x="52" y="45" width="10" height="57" fill="#6D5BFF" opacity="0.9"/>
+  <path d="M57 45c-6-13-22-16-24-6-1.5 7 11 8 24 6z" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M57 45c6-13 22-16 24-6 1.5 7-11 8-24 6z" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
+  <!-- pilot arrow -->
+  <path d="M84 14 L114 26 L99 31 L94 46 Z" fill="url(#arrow)" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"/>
+</svg>

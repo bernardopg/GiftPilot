@@ -17,12 +17,18 @@ const fileExists = (relativePath) =>
 
 test('package metadata stays aligned with the browser manifest', () => {
   assert.equal(packageJson.version, manifestJson.version);
-  assert.equal(packageJson.name, 'autojoin-for-steamgifts');
+  assert.equal(packageJson.name, 'giftpilot');
+  assert.equal(manifestJson.name, 'GiftPilot');
+  assert.equal(packageJson.description, manifestJson.description);
   assert.match(
     packageJson.repository.url,
     /bernardopg\/AutoJoin-for-SteamGifts/,
   );
-  assert.match(packageJson.homepage, /bernardopg\/AutoJoin-for-SteamGifts/);
+  assert.equal(packageJson.homepage, manifestJson.homepage_url);
+  assert.match(
+    packageJson.homepage,
+    /bernardopg\.github\.io\/AutoJoin-for-SteamGifts/,
+  );
 });
 
 test('development workflow scripts exist and point to real files', () => {

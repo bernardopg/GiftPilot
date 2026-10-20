@@ -1,31 +1,30 @@
 {
-  "background": {
-    "service_worker": "js/backgroundpage.js"
-  },
+  "manifest_version": 3,
+  "name": "GiftPilot",
+  "short_name": "GiftPilot",
+  "version": "3.0.0",
+  "description": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
+  "homepage_url": "https://bernardopg.github.io/AutoJoin-for-SteamGifts/",
   "default_locale": "en",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "GiftPilot",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png"
+    }
+  },
+  "background": {
+    "service_worker": "js/background/service-worker.js"
+  },
   "content_scripts": [
     {
       "run_at": "document_start",
-      "css": [
-        "css/fontawesome/fontawesome.min.css",
-        "css/general.css",
-        "css/night.css"
-      ],
-      "js": [
-        "js/utils-enhanced.js",
-        "js/core/i18n.js",
-        "js/core/steam-community.js",
-        "js/core/settings-store.js",
-        "js/core/settings-actions.js",
-        "js/core/giveaway.js",
-        "js/core/timing.js",
-        "js/core/page-enhancements.js",
-        "js/core/autoentry-steam-data.js",
-        "js/core/autoentry-giveaway.js",
-        "js/autoentry.js",
-        "js/settings.js",
-        "js/suspension-notice.js"
-      ],
       "matches": [
         "*://www.steamgifts.com/",
         "*://www.steamgifts.com/giveaways/search?*",
@@ -33,61 +32,50 @@
         "*://steamgifts.com/",
         "*://steamgifts.com/giveaways/search?*",
         "*://steamgifts.com/game/*"
+      ],
+      "css": ["css/site/widgets.css"],
+      "js": [
+        "js/core/i18n.js",
+        "js/core/settings-store.js",
+        "js/core/timing.js",
+        "js/core/sg-request.js",
+        "js/content/panel.js",
+        "js/core/giveaway-parse.js",
+        "js/core/autojoin-plan.js",
+        "js/content/infinite-scroll.js",
+        "js/core/steam-community.js",
+        "js/content/steam-data.js",
+        "js/content/rows.js",
+        "js/content/page.js",
+        "js/content/listing.js"
       ]
     },
     {
-      "css": [
-        "css/fontawesome/fontawesome.min.css",
-        "css/general.css",
-        "css/night.css"
+      "run_at": "document_start",
+      "matches": ["*://www.steamgifts.com/*", "*://steamgifts.com/*"],
+      "exclude_matches": [
+        "*://www.steamgifts.com/",
+        "*://www.steamgifts.com/giveaways/search?*",
+        "*://www.steamgifts.com/game/*",
+        "*://steamgifts.com/",
+        "*://steamgifts.com/giveaways/search?*",
+        "*://steamgifts.com/game/*"
       ],
-      "js": ["js/utils-enhanced.js", "js/core/page-enhancements.js"],
-      "matches": [
-        "*://steamgifts.com/giveaways/created/*",
-        "*://www.steamgifts.com/giveaways/created/*",
-        "*://steamgifts.com/giveaways/entered/*",
-        "*://www.steamgifts.com/giveaways/entered/*",
-        "*://steamgifts.com/giveaways/won/*",
-        "*://www.steamgifts.com/giveaways/won/*",
-        "*://steamgifts.com/trades/*",
-        "*://www.steamgifts.com/trades/*",
-        "*://steamgifts.com/sales/*",
-        "*://www.steamgifts.com/sales/*",
-        "*://steamgifts.com/discussions/*",
-        "*://www.steamgifts.com/discussions/*",
-        "*://steamgifts.com/discussion/*",
-        "*://www.steamgifts.com/discussion/*",
-        "*://steamgifts.com/about/*",
-        "*://www.steamgifts.com/about/*",
-        "*://steamgifts.com/support/*",
-        "*://www.steamgifts.com/support/*",
-        "*://steamgifts.com/messages/*",
-        "*://www.steamgifts.com/messages/*",
-        "*://steamgifts.com/account/*",
-        "*://www.steamgifts.com/account/*",
-        "*://steamgifts.com/trade/*",
-        "*://www.steamgifts.com/trade/*",
-        "*://steamgifts.com/users/*",
-        "*://www.steamgifts.com/users/*",
-        "*://steamgifts.com/user/*",
-        "*://www.steamgifts.com/user/*",
-        "*://steamgifts.com/giveaway/*",
-        "*://www.steamgifts.com/giveaway/*",
-        "*://steamgifts.com/legal/*",
-        "*://www.steamgifts.com/legal/*"
+      "css": ["css/site/widgets.css"],
+      "js": [
+        "js/core/i18n.js",
+        "js/core/settings-store.js",
+        "js/core/sg-request.js",
+        "js/content/panel.js",
+        "js/content/infinite-scroll.js",
+        "js/content/page.js"
       ]
     }
   ],
-  "icons": {
-    "128": "media/autologo.png",
-    "16": "media/autologo16.png",
-    "32": "media/autologo32.png",
-    "48": "media/autologo48.png"
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
   },
-  "manifest_version": 3,
-  "name": "AutoJoin for SteamGifts",
-  "short_name": "AutoJoin",
-  "description": "Enhanced AutoJoin for SteamGifts with modern UI, improved accessibility, and optimized performance",
   "permissions": [
     "alarms",
     "declarativeNetRequest",
@@ -102,27 +90,5 @@
     "*://store.steampowered.com/*"
   ],
   "optional_host_permissions": ["*://steamcommunity.com/profiles/*"],
-  "version": "2.1.0",
-  "web_accessible_resources": [
-    {
-      "use_dynamic_url": true,
-      "resources": [
-        "html/settings.html",
-        "css/night.css",
-        "css/fontawesome/fontawesome.min.css",
-        "css/fontawesome/webfonts/fa-brands-400.woff2",
-        "css/fontawesome/webfonts/fa-regular-400.woff2",
-        "css/fontawesome/webfonts/fa-solid-900.woff2",
-        "css/fontawesome/webfonts/fa-v4compatibility.woff2",
-        "media/autologo.png",
-        "media/audio.mp3"
-      ],
-      "matches": ["*://steamgifts.com/*", "*://www.steamgifts.com/*"],
-      "extension_ids": []
-    }
-  ],
-  "options_ui": {
-    "page": "html/settings.html",
-    "open_in_tab": true
-  }
+  "minimum_chrome_version": "116"
 }

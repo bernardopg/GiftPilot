@@ -1,0 +1,58 @@
+# Rules for .github/workflows/labeler.yml (actions/labeler v5+ syntax).
+# Label names and colors are defined in .github/labels.json.
+
+'area: content':
+  - changed-files:
+      - any-glob-to-any-file: ['js/content/**', 'css/site/widgets.css']
+
+'area: core':
+  - changed-files:
+      - any-glob-to-any-file: ['js/core/**']
+
+'area: background':
+  - changed-files:
+      - any-glob-to-any-file:
+          ['js/background/**', 'js/offscreen/**', 'html/offscreen.html']
+
+'area: options':
+  - changed-files:
+      - any-glob-to-any-file:
+          ['js/options/**', 'html/options.html', 'css/options/**']
+
+'area: theme':
+  - changed-files:
+      - any-glob-to-any-file: ['css/site/**', 'scripts/build-site-dark.mjs']
+
+'i18n':
+  - changed-files:
+      - any-glob-to-any-file: ['js/core/i18n.js', '_locales/**']
+
+'manifest':
+  - changed-files:
+      - any-glob-to-any-file: ['manifest.json']
+
+'tests':
+  - changed-files:
+      - any-glob-to-any-file: ['tests/**']
+
+'documentation':
+  - changed-files:
+      - any-glob-to-any-file: ['*.md', '.github/*.md', 'docs/**']
+
+'ci':
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            '.github/workflows/**',
+            '.github/dependabot.yml',
+            '.github/labeler.yml',
+            '.github/labels.json',
+          ]
+
+'dependencies':
+  - changed-files:
+      - any-glob-to-any-file: ['package.json', 'package-lock.json']
+
+'brand':
+  - changed-files:
+      - any-glob-to-any-file: ['assets/**']

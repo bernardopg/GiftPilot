@@ -1,8 +1,8 @@
 {
-  "name": "autojoin-for-steamgifts",
-  "version": "2.1.0",
-  "description": "Enhanced AutoJoin for SteamGifts with modern UI, improved accessibility, and optimized performance",
-  "main": "js/backgroundpage.js",
+  "name": "giftpilot",
+  "version": "3.0.0",
+  "description": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
+  "main": "js/background/service-worker.js",
   "scripts": {
     "lint": "eslint js tests scripts",
     "lint:fix": "eslint js tests scripts --fix",
@@ -19,10 +19,13 @@
   },
   "keywords": [
     "steamgifts",
+    "giveaways",
     "browser-extension",
-    "automation"
+    "chrome-extension",
+    "manifest-v3",
+    "dark-theme"
   ],
-  "author": "bernardopg",
+  "author": "Bernardo Pinto Gomes (https://github.com/bernardopg)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues"
   },
-  "homepage": "https://github.com/bernardopg/AutoJoin-for-SteamGifts#readme",
+  "homepage": "https://bernardopg.github.io/AutoJoin-for-SteamGifts/",
   "engines": {
     "node": "^22.13.0 || ^24.0.0 || >=26.0.0"
   },

@@ -12,7 +12,7 @@ const fileExists = (relativePath) =>
 
 test('manifest metadata is present', () => {
   assert.equal(manifest.manifest_version, 3, 'Extension must use Manifest V3');
-  assert.equal(manifest.name, 'AutoJoin for SteamGifts');
+  assert.equal(manifest.name, 'GiftPilot');
   assert.equal(typeof manifest.version, 'string');
   assert.equal(manifest.default_locale, 'en');
   assert.ok(Array.isArray(manifest.permissions));
@@ -60,28 +60,32 @@ test('icon assets are available', () => {
   });
 });
 
-test('settings logo asset is available', () => {
-  assert.ok(fileExists('media/autologo.png'), 'Missing settings logo asset');
+test('brand assets are available', () => {
+  ['assets/brand/logo.svg', 'assets/brand/logo-small.svg'].forEach((file) =>
+    assert.ok(fileExists(file), `Missing brand asset: ${file}`),
+  );
+  assert.ok(fileExists('assets/sounds/win.mp3'), 'Missing win sound');
 });
 
-test('font awesome assets are web accessible', () => {
-  const resources = manifest.web_accessible_resources || [];
-  const allResources = resources.flatMap((entry) => entry.resources || []);
-  const expectedResources = [
-    'css/fontawesome/fontawesome.min.css',
-    'css/fontawesome/webfonts/fa-brands-400.woff2',
-    'css/fontawesome/webfonts/fa-regular-400.woff2',
-    'css/fontawesome/webfonts/fa-solid-900.woff2',
-    'css/fontawesome/webfonts/fa-v4compatibility.woff2',
-    'media/autologo.png',
-  ];
+test('no extension resource is web accessible', () => {
+  // Web-accessible resources let any page probe for the extension.
+  assert.equal(manifest.web_accessible_resources, undefined);
+});
 
-  expectedResources.forEach((resourcePath) => {
-    assert.ok(
-      allResources.includes(resourcePath),
-      `${resourcePath} must be web accessible`,
-    );
+test('options page font awesome assets are packaged', () => {
+  [
+    'css/vendor/fontawesome/fontawesome.min.css',
+    'css/vendor/fontawesome/webfonts/fa-solid-900.woff2',
+    'css/vendor/fontawesome/webfonts/fa-regular-400.woff2',
+  ].forEach((resourcePath) => {
+    assert.ok(fileExists(resourcePath), `Missing ${resourcePath}`);
   });
+});
+
+test('site stylesheets injected on demand exist', () => {
+  ['css/site/dark.css', 'css/site/pin.css', 'css/site/widgets.css'].forEach(
+    (file) => assert.ok(fileExists(file), `Missing ${file}`),
+  );
 });
 
 test('host permissions include SteamGifts domains', () => {
@@ -102,5 +106,13 @@ test('host permissions include SteamGifts domains', () => {
       return host === 'steamgifts.com' || host.endsWith('.steamgifts.com');
     }),
     'Expect SteamGifts host permissions in manifest',
+  );
+});
+
+test('GitHub Pages ships the current logo', () => {
+  assert.equal(
+    fs.readFileSync(path.join(rootDir, 'docs/assets/logo.svg'), 'utf8'),
+    fs.readFileSync(path.join(rootDir, 'assets/brand/logo.svg'), 'utf8'),
+    'docs/assets/logo.svg must be a copy of assets/brand/logo.svg',
   );
 });

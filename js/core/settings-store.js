@@ -121,5 +121,5 @@
     listen,
   };
 
-  globalThis.AutoJoinSettingsStore = settingsStore;
+  globalThis.GiftPilotSettingsStore = settingsStore;
 })();

@@ -1,405 +1,109 @@
-# 📝 Changelog
+# Changelog
 
-Todas as mudanças notáveis neste projeto são documentadas aqui.
+Todas as mudanças relevantes do GiftPilot ficam registradas aqui.
 
-O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
-e este projeto segue [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+O formato segue o [Keep a Changelog 1.1.0](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/). Seções possíveis por versão: **Adicionado**, **Alterado**, **Descontinuado**, **Removido**, **Corrigido** e **Segurança**.
 
-## [Unreleased]
+## [Não lançado]
+
+## [3.0.0] - 2026-10-20
+
+Nova identidade: o projeto passa a se chamar **GiftPilot**. As configurações salvas são mantidas.
+
+### Adicionado
+
+- Nome, logotipo, ícones e paleta próprios (`assets/brand/`, `assets/icons/`).
+- Painel flutuante em _shadow root_ fechado com pontos, nível, botão do piloto automático, status, avisos e notificações (`js/content/panel.js`).
+- Piloto automático com fila sequencial e cancelável (o botão vira "Parar"), retomada após o recarregamento do modo "repetir a cada N horas" e espera com recuo em erros de rede.
+- Tratamento de sorteios com descrição obrigatória: o site trava o botão de entrada (`is-locked`) até a descrição ser aberta. O piloto abre a descrição nativa, espera um tempo de leitura proporcional ao texto e só depois entra; o segundo plano faz o mesmo com `do=giveaway_description`.
+- Ponte de requisições: com uma aba do SteamGifts aberta, o service worker executa as requisições dentro dela e espelha pontos e linhas na aba.
+- Tema escuro gerado a partir do CSS oficial do site (`scripts/build-site-dark.mjs` → `css/site/dark.css`, ajustes em `css/site/dark.overrides.css`).
+- Clique no ícone da extensão abre as configurações.
+- Campos de configuração que existiam sem controle na tela: ignorar whitelist em segundo plano, tempo máximo restante (em horas) e prioridade por nível.
+- Links do site, de issues e do changelog na página de configurações.
+- Testes de seleção do piloto automático (`tests/autojoin-plan.test.js`) e novas verificações anti-detecção.
+- Site no GitHub Pages, `FUNDING.yml`, rotulagem automática de PRs, formulários de issue e `AGENTS.md` para agentes de IA.
+
+### Alterado
+
+- Estrutura de pastas: `js/{background,content,core,offscreen,options}`, `css/{site,options,vendor}`, `assets/`; documentos da comunidade em `.github/`.
+- Parser de sorteios reescrito para o HTML atual (links relativos sem barra final, `?utm_source`, cópias e custo por expressão regular, nível pelo `title` decimal) e compartilhado entre página e documento offscreen.
+- Uma única rolagem infinita (`js/content/infinite-scroll.js`); as páginas carregadas recebem botões, filtros e chance de vitória.
+- Entradas seguem o formato do bundle ativo do site: `FormData` multipart no `bundle-v18` e jQuery urlencoded no `bundle-v19`.
+- Tema escuro e barra fixa aplicados pelo service worker com `chrome.scripting.insertCSS`, sem classe no `<body>` e sem flash branco.
+- Cache de dados da Steam com validade; DLC e cartas via `appdetails`; comentários enviados como formulário comum.
+- Globais internos renomeados de `AutoJoin*` para `GiftPilot*`. As chaves de configuração não mudaram.
+- README, guia de contribuição, política de segurança, `TO-DO.md` e este changelog reescritos e padronizados.
+- Workflows do GitHub revisados: CI sem a branch inexistente `develop`, release com o nome novo, Dependabot com grupos e rótulos coerentes.
+
+### Removido
+
+- `web_accessible_resources` (permitiam sondar a extensão a partir da página).
+- Script do aviso de suspensão, escritas no `localStorage` da página e alteração de `<html lang>`.
+- Módulo legado `js/core/giveaway.js`, `css/general.css`, `IMPROVEMENTS.md` e links para a extensão original na página de configurações.
+
+### Corrigido
+
+- Resgate automático de chaves: `res.json()` sem `await`, `winner_id` enviado como o texto literal `'winnerId'` e sessão da Steam ausente.
+- Busca de `/giveaways/won` sem cookies; vitórias agora detectadas também pelo contador de ganhos.
+- `PointsToPreserve`, `MaxTimeLeftBG` e `MinLevelBG` ignorados em segundo plano; service worker mantido ativo durante a rotina.
+- Configurações: listener de restauração duplicado, comparação `this.value === 0` que nunca era verdadeira e campo "repetir a cada" gravado na chave errada (`hoursField` em vez de `RepeatHours`).
+- Notificações da página de configurações, que não carregava o módulo de avisos.
+
+### Segurança
+
+- Canário do `bundle-v19.js` neutralizado: o site reporta a conta (`ajax.php`, `do=jh8Dn`) ao encontrar qualquer um de `input#btnAutoJoin`, `#btnSettings` com o texto "AutoJoin Settings", `#ajFooter`, `#navbarPin` ou `#ajFooterArrow`. Nenhum desses marcadores existe mais na página.
 
 ## [2.1.0] - 2026-10-15
 
-### 🔒 Segurança (anti-detecção)
+### Adicionado
 
-- **Normalização de headers do service worker**: nova permissão `declarativeNetRequest` e regras de sessão que reescrevem `Origin` e `Referer` das requisições feitas pelo service worker para `https://www.steamgifts.com`. Antes, os fetches de background saíam com `Origin: chrome-extension://<id>` (ou sem `Referer`), um indicador trivial de automação no lado do servidor. Somente requisições iniciadas pela própria extensão são afetadas; o tráfego da página permanece intacto.
-- **Fingerprints de DOM removidos**: classes e globals com assinatura reconhecível de script de autojoin (`btnSingle`, `buttonsAJ`, `AutoJoinButtonEnabled`, `pointsFloating`, `aj-hidden`, `aj-modal-open`, `aj-minimized`, `aj-permanently-hidden`, `aj-permission-banner`, `aj-dismiss-modal`, `__AJ_*`) foram renomeados para identificadores neutros com prefixo `sgx`/`sgx-`, sem nenhuma referência a "autojoin" no DOM injetado.
-- `tests/stealth.test.js` ampliado: além dos canários de id, agora varre os content scripts e o CSS injetado procurando tokens de fingerprint, exige a permissão `declarativeNetRequest` no manifest e garante que o background instala as regras de header.
+- Permissão `declarativeNetRequest` com regras de sessão que reescrevem `Origin` e `Referer` das requisições do service worker para `https://www.steamgifts.com`.
+
+### Alterado
+
+- Classes e globais com assinatura de autojoin (`btnSingle`, `buttonsAJ`, `AutoJoinButtonEnabled`, `pointsFloating`, `aj-*`, `__AJ_*`) renomeados para o prefixo neutro `sgx`.
+
+### Segurança
+
+- `tests/stealth.test.js` passa a varrer content scripts e CSS injetado em busca de marcadores conhecidos.
 
 ## [2.0.3] - 2026-10-15
 
-### 🔒 Segurança (anti-detecção)
+### Adicionado
 
-- **Honeypot do SteamGifts neutralizado**: o bundle oficial do site (`bundle-v18.js`) procura, no `window.load`, por elementos com ids característicos de extensões de autojoin (`ajFooter`, `navbarPin`, `ajFooterArrow` — padrões ofuscados em base64) e, encontrando os três, reporta a conta ao servidor via `ajax.php?do=dbb8ff`. Os ids injetados pela extensão foram renomeados para `pageFooterDock`, `pageFooterDockToggle`, `pageFooterDockArrow`, `navPinToggle` e `navSettingsBtn`, que não casam com nenhum padrão conhecido. Testado em navegador real: zero relatórios `dbb8ff` enviados.
-- Novo módulo `js/core/timing.js` com agendamento humanizado: delays cumulativos com jitter não-uniforme (passos normais, leitura lenta e pausas de "distração" ocasionais) e lead-in aleatório, substituindo o espaçamento fixo `índice × Delay + jitter pequeno`, que é um padrão clássico de bot. Aplicado tanto ao AutoJoin da página (`autoentry.js`) quanto ao background (`backgroundpage.js`).
-- Fetch de entrada do service worker agora envia `credentials: 'include'` explicitamente, alinhando os cookies ao fluxo da página.
-- Novo teste de regressão (`tests/stealth.test.js`) que varre todos os ids injetáveis (JS, HTML e seletores CSS) e falha se algum casar com os padrões canário conhecidos do SteamGifts.
-- Novos testes (`tests/timing.test.js`) cobrindo o agendador, a distribuição dos multiplicadores e a não-uniformidade dos intervalos.
+- `js/core/timing.js`: agendamento com variação não uniforme (ritmo normal, leitura lenta e pausas ocasionais) no lugar do intervalo fixo.
+
+### Alterado
+
+- Requisições de entrada do service worker com `credentials: 'include'`.
+
+### Segurança
+
+- Ids detectados pelo canário do `bundle-v18.js` (`ajFooter`, `navbarPin`, `ajFooterArrow`) renomeados; o site reportava contas via `ajax.php?do=dbb8ff` ao encontrar os três.
 
 ## [2.0.2] - 2026-10-15
 
-### 🚀 Adicionado
+### Adicionado
 
-- Workflow `codeql.yml` (CodeQL `security-and-quality`) habilitando o code scanning do GitHub, que até então não tinha nenhuma análise.
-- Workflow `dependency-review.yml` bloqueando PRs que introduzam dependências com vulnerabilidade `high` ou superior.
-- `.github/CODEOWNERS` substituindo a chave `reviewers` (descontinuada) do Dependabot.
-- Scripts `lint:fix` e `format:fix` para correção automática.
-- Node 24 na matriz de testes e campo `engines` no `package.json`.
-- Testes para `settings-store`, regras de giveaway, helpers do background, metadata e regressões de fixtures.
-- Verificação de uso de chaves i18n na fonte e paridade entre idiomas.
-- Helpers puros compartilhados para cálculo de win chance, bloqueio de sessão Steam e regras de giveaway.
-- Trava no snapshot de SteamGifts para evitar carregamento de scripts externos de ads.
-- `.nvmrc` com a versão LTS padrão (24) e `.npmrc` com `engine-strict`, `package-lock` e `fund=false`.
-- `.prettierignore` listando `build/`, `dist/`, `node_modules/` e diretórios de ferramentas, para não depender do `--ignore-path .gitignore` (removido no Prettier 4).
-- Campos `engines` e `devEngines` no `package.json` declarando o runtime Node.js suportado e o npm como gerenciador de pacotes.
+- Workflows de CodeQL e de revisão de dependências, `CODEOWNERS`, scripts `lint:fix` e `format:fix`, testes de configurações, regras, metadados e fixtures do SteamGifts.
 
-### ✨ Melhorado
+### Alterado
 
-- Font Awesome empacotado atualizado de `6.0.0` (2022) para `7.3.1`: CSS regerado a partir do `all.css` oficial com os caminhos de fonte em `./webfonts/` (como `js/autoentry.js` espera) e as quatro fontes `woff2` substituídas pelas oficiais. As 30 classes de ícone usadas pela extensão continuam existindo na v7; as únicas classes legadas (`fa-clock-o`, `fa-times`, etc.) que a v7 não define são seletores do HTML do SteamGifts, não ícones próprios.
-- Dependências de desenvolvimento atualizadas: ESLint `10.12.0`, `globals` `17.13.0`, Prettier `3.9.10` e lockfile regenerado via `npm ci`.
-- Node 20 (fim de vida em 2026-04-30) removido do `engines` e da matriz de testes; o CI agora roda em Node 22, 24 e 26, com Node 24 como versão padrão dos jobs.
-- Workflows do GitHub Actions com `timeout-minutes`, `persist-credentials: false` no checkout e auto-merge do Dependabot removendo a branch após o merge.
-- Dependabot com `cooldown` por severidade SemVer (reduz risco de supply chain), agendamento semanal explícito e prefixos de commit `chore`/`ci`.
-- ESLint migrado da v8 (fim de vida) para a v10 com flat config (`eslint.config.mjs`); `eslint-config-airbnb-base` e `eslint-plugin-import`, ambos sem manutenção e travando o upgrade, foram removidos.
-- `scripts/*.mjs` passaram a ser cobertos por lint e format check.
-- Job de build do CI passou a usar `npm run package`, gerando o mesmo `.zip` do build local em vez de um zip ad-hoc que incluía arquivos internos do repositório.
-- Job de release passou a pular a publicação quando a tag da versão já existe.
-- Auditoria de segurança do CI separada: dependências de runtime bloqueiam o pipeline, dependências de desenvolvimento apenas reportam.
-- Actions com pins consistentes entre todos os workflows (`checkout@v7`, `setup-node@v7`, `upload-artifact@v7`, `download-artifact@v8`).
-- `concurrency` adicionado aos workflows e `permissions` reduzidas ao mínimo por job.
-- Dependabot com agrupamento de updates minor/patch para reduzir ruído de PRs.
-- README alinhado com defaults reais, scripts disponíveis e convenção de locale.
-- Documentação do locale esclarecida: a app usa `pt-BR` e os messages da extensão ficam em `_locales/pt_BR`.
-- `html/settings.html` passou a usar `media/autologo.png` para evitar 404 do logo.
+- Font Awesome 6.0.0 → 7.3.1 (somente `woff2`), ESLint 8 → 10 com _flat config_, Node.js 22/24/26 na matriz de CI.
 
-### 🔧 Alterado
+### Corrigido
 
-- `js/autoentry.js`, `js/core/autoentry-giveaway.js`, `js/core/autoentry-steam-data.js` e `js/settings.js` foram corrigidos e reestruturados.
-- `js/backgroundpage.js` e `js/core/giveaway.js` agora delegam lógica pura para helpers testáveis.
-- `TO-DO.md` foi sincronizado com as entregas concluídas.
+- Oito alertas do CodeQL (checagem de host por `includes`, sanitização por regex, injeção de propriedade em `getUrlParams`), vulnerabilidades em dependências de desenvolvimento e o 404 do logotipo nas configurações.
 
-### 🗑️ Removido
+## [2.0.1] e anteriores
 
-- Fontes `ttf` (`fa-brands-400`, `fa-regular-400`, `fa-solid-900`, `fa-v4compatibility`) removidas de `css/fontawesome/webfonts/` e de `web_accessible_resources`: a Font Awesome 7 só publica `woff2`, suportado por todos os navegadores alvo. Isso reduz o pacote em ~550 KB.
+Versões publicadas como "AutoJoin for SteamGifts", incluindo a migração para Manifest V3 (2.0.0). O histórico detalhado anterior a 2.0.2 não é verificável no git atual; consulte as [releases](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases).
 
-### 🐛 Corrigido
+[Não lançado]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v2.1.0...v3.0.0
+[2.1.0]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/compare/v2.0.1...v2.1.0
+[2.0.3]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/commit/57465c8
+[2.0.2]: https://github.com/bernardopg/AutoJoin-for-SteamGifts/commit/e6063d5
 
-- Os 8 alertas da primeira análise do CodeQL:
-  - `js/incomplete-url-substring-sanitization` (4x): checagens de host por `String.includes` em `background-helpers.js`, `backgroundpage.js`, `page-enhancements.js` e `tests/manifest.test.js` aceitavam hosts como `steamcommunity.com.evil.tld`. Agora comparam o hostname parseado via novo helper `matchesHost`.
-  - `js/bad-tag-filter` e `js/incomplete-multi-character-sanitization`: removido o strip de `<script>` por regex em `settings.js`. O comentário do usuário só é enviado como campo de `FormData`, nunca vai para `innerHTML`, e o regex era contornável (`</script >`).
-  - `js/remote-property-injection`: `AutoJoinUtils.getUrlParams` acumulava chaves da query string via escrita dinâmica de propriedade, permitindo `?__proto__=`. Passou a usar `Object.fromEntries`, que define propriedades próprias e não aciona setters.
-  - `js/comparison-between-incompatible-types`: guarda duplicada de `cacheData` em `autoentry-giveaway.js`.
-- Alertas abertos do Dependabot (`js-yaml` e `brace-expansion`, ambos `high`) resolvidos via atualização do `package-lock.json`; era essa a causa da falha recorrente do job `🔒 Security Audit` no CI.
-- `brace-expansion` `5.0.9` → `5.0.12` no lockfile (GHSA-q2hr-2g5m-vwhr, GHSA-qhr7-859c-m2p7 e GHSA-6j4f-fj2g-mc7p); `npm audit` volta a reportar zero vulnerabilidades.
-- `js/core/page-enhancements.js`: declaração `let` sem bloco dentro de `case` do atalho `Alt+S` (vazava o binding para os demais `case`).
-- `js/backgroundpage.js`: atribuições iniciais mortas em `latestSteamKeyRedeemResponse` e `linkToUse`.
-- Bindings de `catch` não utilizados substituídos por optional catch binding.
-- Erros de sintaxe e wiring que quebravam o fluxo principal da extensão.
-- 404 do logo no settings.
-- Carregamento externo de `adsbygoogle` no snapshot de SteamGifts.
-
-## [2.0.1] - 2024-12-17
-
-### 🐛 Corrigido
-
-- Compatibilidade com Manifest V3
-- Melhorias na interface do usuário
-- Otimizações de performance
-
-### 🔒 Segurança
-
-- Atualização de dependências com vulnerabilidades
-- Implementação de Content Security Policy rigorosa
-
-## [2.0.0] - 2024-10-15
-
-### 🚀 Adicionado
-
-- **BREAKING**: Migração completa para Manifest V3
-- Service Workers substituindo background scripts
-- Offscreen documents para processamento isolado
-- Interface moderna com tema escuro aprimorado
-- Sistema de filtragem avançado
-- Notificações nativas do navegador
-- Sincronização de configurações entre dispositivos
-
-### ✨ Melhorado
-
-- Performance significativamente melhorada
-- Interface mais responsiva e acessível
-- Sistema de logs mais limpo
-- Compatibilidade estendida com navegadores
-
-### 🔧 Alterado
-
-- **BREAKING**: Estrutura de arquivos reorganizada
-- **BREAKING**: APIs internas refatoradas
-- Migração de jQuery para JavaScript vanilla
-- Simplificação da arquitetura de componentes
-
-### 🗑️ Removido
-
-- **BREAKING**: Suporte para Manifest V2
-- Dependências legadas descontinuadas
-- Código não utilizado e comentado
-
-### 🔒 Segurança
-
-- Implementação de CSP (Content Security Policy)
-- Validação rigorosa de inputs
-- Permissões mínimas necessárias
-- Isolamento de contextos de execução
-
-## [1.9.2] - 2024-08-20
-
-### 🐛 Corrigido
-
-- Bug na sincronização de configurações
-- Problema com detecção de sorteios duplicados
-- Memory leak em long-running sessions
-
-### 🔒 Segurança
-
-- Patch para vulnerabilidade em dependência externa
-
-## [1.9.1] - 2024-07-12
-
-### 🐛 Corrigido
-
-- Incompatibilidade com atualizações do SteamGifts
-- Erro na validação de nível de usuário
-- Problema de timeout em conexões lentas
-
-### ✨ Melhorado
-
-- Mensagens de erro mais informativas
-- Tratamento melhor de edge cases
-
-## [1.9.0] - 2024-06-05
-
-### 🚀 Adicionado
-
-- Filtro por odds de vitória
-- Blacklist de jogos indesejados
-- Estatísticas de uso da extensão
-- Backup/restore de configurações
-
-### ✨ Melhorado
-
-- Algoritmo de detecção de sorteios otimizado
-- Interface de configurações redesenhada
-- Performance geral da extensão
-
-### 🔧 Alterado
-
-- Estrutura de dados de configuração
-- Sistema de cache interno
-
-## [1.8.3] - 2024-04-18
-
-### 🐛 Corrigido
-
-- Bug crítico no auto-join
-- Problemas de compatibilidade com Firefox
-- Erro na contagem de pontos disponíveis
-
-## [1.8.2] - 2024-03-22
-
-### 🐛 Corrigido
-
-- Interface quebrada no modo escuro
-- Problema com sorteios de grupos privados
-- Memory leak em páginas de longa duração
-
-### ✨ Melhorado
-
-- Velocidade de scanning de páginas
-- Precisão na detecção de sorteios elegíveis
-
-## [1.8.1] - 2024-02-14
-
-### 🐛 Corrigido
-
-- Crash ao carregar configurações corrompidas
-- Problema com caracteres especiais em nomes de jogos
-- Bug na navegação entre páginas
-
-### 🔒 Segurança
-
-- Sanitização melhorada de inputs de usuário
-
-## [1.8.0] - 2024-01-10
-
-### 🚀 Adicionado
-
-- Suporte inicial para Manifest V3
-- Sistema de agenda para auto-join
-- Integração com lista de desejos Steam
-- Modo de compatibilidade para updates do site
-
-### ✨ Melhorado
-
-- Arquitetura preparada para migração MV3
-- Sistema de logs mais robusto
-- Interface mais polida
-
-### 🔧 Alterado
-
-- Refatoração de módulos principais
-- Otimização de imports e dependências
-
-## [1.7.2] - 2023-11-25
-
-### 🐛 Corrigido
-
-- Problemas com atualizações do SteamGifts
-- Bug na detecção de level restriction
-- Erro em sorteios com múltiplas cópias
-
-## [1.7.1] - 2023-10-08
-
-### 🐛 Corrigido
-
-- Incompatibilidade com Chrome 118+
-- Problema na sincronização de configurações
-- Bug visual no contador de pontos
-
-### ✨ Melhorado
-
-- Suporte aprimorado para temas customizados
-- Performance em páginas com muitos sorteios
-
-## [1.7.0] - 2023-09-12
-
-### 🚀 Adicionado
-
-- Filtro por tipo de jogo (jogo base vs DLC)
-- Suporte para grupos de prioridade
-- Sistema de comentários automáticos
-- Dashboard de estatísticas
-
-### ✨ Melhorado
-
-- UI/UX completamente redesenhada
-- Sistema de notificações mais inteligente
-- Algoritmos de filtragem otimizados
-
-### 🔧 Alterado
-
-- Migração para arquitetura modular
-- Sistema de configuração refatorado
-
-## [1.6.5] - 2023-07-20
-
-### 🐛 Corrigido
-
-- Bug crítico em auto-join loop
-- Problema com detecção de página
-- Erro na validação de nível mínimo
-
-### 🔒 Segurança
-
-- Correção de vulnerabilidade XSS potencial
-
-## [1.6.4] - 2023-06-15
-
-### 🐛 Corrigido
-
-- Compatibilidade com Firefox 114+
-- Problema na leitura de configurações
-- Bug na interface de configurações
-
-## [1.6.3] - 2023-05-10
-
-### 🐛 Corrigido
-
-- Crash em páginas específicas do SteamGifts
-- Problema com sorteios regionais
-- Bug na contagem de entradas
-
-### ✨ Melhorado
-
-- Tratamento de erros mais robusto
-- Performance em conexões lentas
-
-## [1.6.2] - 2023-04-05
-
-### 🐛 Corrigido
-
-- Problemas após update do SteamGifts
-- Bug na detecção de whitelist
-- Erro na interface mobile
-
-## [1.6.1] - 2023-03-12
-
-### 🐛 Corrigido
-
-- Memory leak em sessões longas
-- Problema com caracteres Unicode
-- Bug visual no modo escuro
-
-### ✨ Melhorado
-
-- Estabilidade geral da extensão
-- Compatibilidade com atualizações do site
-
-## [1.6.0] - 2023-02-20
-
-### 🚀 Adicionado
-
-- Sistema de whitelist/blacklist avançado
-- Filtros personalizáveis por regex
-- Backup automático de configurações
-- Modo debug para desenvolvedores
-
-### ✨ Melhorado
-
-- Interface de usuário modernizada
-- Sistema de filtragem mais flexível
-- Performance geral otimizada
-
-### 🔧 Alterado
-
-- Estrutura interna de dados
-- Algoritmos de matching
-
----
-
-## 📊 Estatísticas de Versão
-
-| Versão | Data | Tipo | Mudanças |
-|--------|------|------|----------|
-| 2.0.1 | 2024-12-17 | Patch | Bug fixes, security |
-| 2.0.0 | 2024-10-15 | Major | Manifest V3, breaking changes |
-| 1.9.x | 2024-08-20 | Minor | Features, improvements |
-| 1.8.x | 2024-04-18 | Minor | Stability, performance |
-| 1.7.x | 2023-11-25 | Minor | UI/UX redesign |
-| 1.6.x | 2023-06-15 | Minor | Core features |
-
----
-
-## 🔗 Links Úteis
-
-- **Releases**: [GitHub Releases](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases)
-- **Issues**: [Report Bugs](https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues/new/choose)
-- **Discussões**: [GitHub Discussions](https://github.com/bernardopg/AutoJoin-for-SteamGifts/discussions)
-
----
-
-## 📝 Notas de Versão
-
-### Convenções de Versionamento
-
-Este projeto segue [Semantic Versioning](https://semver.org/):
-
-- **MAJOR** (2.0.0): Mudanças incompatíveis na API
-- **MINOR** (1.9.0): Nova funcionalidade mantendo compatibilidade
-- **PATCH** (1.8.1): Correções de bugs mantendo compatibilidade
-
-### Tipos de Mudanças
-
-- **🚀 Adicionado**: Novas funcionalidades
-- **✨ Melhorado**: Melhorias em funcionalidades existentes
-- **🔧 Alterado**: Mudanças em funcionalidades existentes
-- **🐛 Corrigido**: Correções de bugs
-- **🗑️ Removido**: Funcionalidades removidas
-- **🔒 Segurança**: Correções e melhorias de segurança
-
----
-
-<div align="center">
-
-**📝 Mantenha-se atualizado com as mudanças! 🔄**
-
-Para mais detalhes sobre cada versão, visite nossa página de [releases](https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases).
-
-</div>
+[2.0.1] e anteriores: https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/tag/v2.0.1

@@ -1,68 +1,54 @@
+# Dependabot: weekly, grouped, with a cooldown so a freshly published
+# (possibly compromised or broken) release can be yanked before we adopt it.
+# Minor/patch PRs are auto-merged by .github/workflows/auto-merge.yml once CI
+# passes; majors always wait for a human.
 version: 2
+
 updates:
-  # ---------------------------------------------------------------------------
-  # npm - the extension ships zero runtime dependencies, so this only covers
-  # the lint/format toolchain in devDependencies.
-  # ---------------------------------------------------------------------------
-  - package-ecosystem: "npm"
-    directory: "/"
+  # Dev tooling only (ESLint, Prettier, globals). The extension ships no
+  # runtime dependencies.
+  - package-ecosystem: npm
+    directory: /
+    target-branch: main
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "America/Sao_Paulo"
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: America/Sao_Paulo
     open-pull-requests-limit: 5
-    assignees:
-      - "bernardopg"
-    labels:
-      - "dependencies"
+    versioning-strategy: increase-if-necessary
+    labels: [dependencies]
     commit-message:
-      prefix: "chore"
-      prefix-development: "chore"
-      include: "scope"
-    versioning-strategy: "increase-if-necessary"
-    # Let a release sit on the registry for a few days before proposing it, so
-    # a compromised or immediately-broken version can be yanked first.
+      prefix: chore
+      prefix-development: chore
+      include: scope
     cooldown:
       default-days: 7
       semver-major-days: 30
       semver-minor-days: 7
       semver-patch-days: 3
     groups:
-      # One PR per week for the whole lint/format toolchain instead of one each.
       dev-tooling:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
+        patterns: ['*']
+        update-types: [minor, patch]
 
-  # ---------------------------------------------------------------------------
-  # GitHub Actions used by the workflows in .github/workflows.
-  # ---------------------------------------------------------------------------
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  # Actions used by .github/workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: main
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "America/Sao_Paulo"
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: America/Sao_Paulo
     open-pull-requests-limit: 5
-    assignees:
-      - "bernardopg"
-    labels:
-      - "dependencies"
-      - "github-actions"
+    labels: [dependencies, github-actions]
     commit-message:
-      prefix: "ci"
-      include: "scope"
-    # Major/minor/patch specific cooldowns are not supported for this ecosystem.
+      prefix: ci
+      include: scope
     cooldown:
       default-days: 7
     groups:
       actions:
-        patterns:
-          - "*"
-        update-types:
-          - "minor"
-          - "patch"
+        patterns: ['*']
+        update-types: [minor, patch]

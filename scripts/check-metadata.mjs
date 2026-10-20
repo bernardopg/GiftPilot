@@ -31,11 +31,11 @@ expect(
   'package.json repository.url must point to bernardopg/AutoJoin-for-SteamGifts',
 );
 expect(
-  /bernardopg\/AutoJoin-for-SteamGifts/.test(packageJson.homepage || ''),
-  'package.json homepage must point to bernardopg/AutoJoin-for-SteamGifts',
+  packageJson.homepage === manifestJson.homepage_url,
+  'package.json homepage must match manifest.json homepage_url',
 );
 expect(
-  readme.includes(`version-${manifestJson.version}-blue`),
+  readme.includes(`version-${manifestJson.version}-`),
   'README version badge must reference the current manifest version',
 );
 ['build', 'package', 'release'].forEach((scriptName) => {

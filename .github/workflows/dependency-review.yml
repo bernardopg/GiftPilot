@@ -1,8 +1,8 @@
-name: 🧾 Dependency Review
+name: Dependency review
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main]
 
 permissions:
   contents: read
@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   review:
-    name: 🧾 Review Dependency Changes
+    name: Review dependency changes
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -22,12 +22,12 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: 📥 Checkout Code
+      - name: Checkout
         uses: actions/checkout@v7
         with:
           persist-credentials: false
 
-      - name: 🧾 Dependency Review
+      - name: Dependency review
         uses: actions/dependency-review-action@v5
         with:
           fail-on-severity: high

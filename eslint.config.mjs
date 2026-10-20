@@ -3,7 +3,12 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['node_modules/**', 'build/**', 'dist/**', 'css/fontawesome/**'],
+    ignores: [
+      'node_modules/**',
+      'build/**',
+      'dist/**',
+      'css/vendor/fontawesome/**',
+    ],
   },
   js.configs.recommended,
   {
@@ -14,12 +19,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.webextensions,
-        $: 'readonly',
         importScripts: 'readonly',
-        // Scripts are loaded as classic scripts and share these via globalThis.
-        loadSettings: 'writable',
-        AutoJoinUtils: 'readonly',
-        Giveaway: 'readonly',
         // js/core modules double as CommonJS for the test suite.
         module: 'writable',
         require: 'readonly',
@@ -32,11 +32,6 @@ export default [
       'no-empty': ['error', { allowEmptyCatch: true }],
       'no-console': 'off',
     },
-  },
-  {
-    // Files that own the shared classic-script globals declared above.
-    files: ['js/core/giveaway.js', 'js/settings.js', 'js/utils-enhanced.js'],
-    rules: { 'no-redeclare': 'off' },
   },
   {
     files: ['tests/**/*.js'],

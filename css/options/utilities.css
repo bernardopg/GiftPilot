@@ -1,0 +1,101 @@
+/* Utility Classes and Performance Optimizations */
+
+/* Giveaway Enhancements */
+.giveaway__columns .fa-trophy {
+  color: #ffd700;
+  filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+}
+
+/* Accessibility Improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus Management */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #000000;
+    --text-primary: #000000;
+    --bg-primary: #ffffff;
+  }
+
+  body.night-theme {
+    --border-color: #ffffff;
+    --text-primary: #ffffff;
+    --bg-primary: #000000;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better Text Rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Container Queries Support (Modern Browsers) */
+@container (min-width: 600px) {
+  .settings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 900px) {
+  .settings-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .settings-close,
+  .tab-button,
+  #SaveCancelContainer {
+    display: none !important;
+  }
+
+  #settingsDiv {
+    position: static !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    max-width: none !important;
+  }
+}

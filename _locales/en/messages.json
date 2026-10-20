@@ -1,11 +1,14 @@
 {
-  "extensionName": {
-    "message": "AutoJoin for SteamGifts"
+  "appName": {
+    "message": "GiftPilot",
+    "description": "Extension name"
   },
-  "extensionShortName": {
-    "message": "AutoJoin"
+  "appShortName": {
+    "message": "GiftPilot",
+    "description": "Short name"
   },
-  "extensionDescription": {
-    "message": "Enhanced AutoJoin for SteamGifts with modern UI, improved accessibility, and optimized performance"
+  "appDescription": {
+    "message": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
+    "description": "Extension description"
   }
 }

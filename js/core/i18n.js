@@ -5,9 +5,9 @@
       'common.auto': 'Automatic (browser)',
       'common.english': 'English',
       'common.portugueseBrazil': 'Portuguese (Brazil)',
-      'settings.title': 'AutoJoin Settings',
+      'settings.title': 'GiftPilot',
       'settings.subtitle':
-        'Configure the AutoJoin extension to match your preferences',
+        'Your SteamGifts co-pilot: tune themes, filters and auto-entry',
       'settings.close': 'Close settings',
       'settings.tabs.categories': 'Settings categories',
       'settings.tabs.general': 'General',
@@ -15,12 +15,12 @@
       'settings.tabs.filters': 'Filters',
       'settings.sections.display': 'Display Options',
       'settings.sections.comments': 'Comments',
-      'settings.sections.autojoinFeatures': 'AutoJoin Features',
+      'settings.sections.autojoinFeatures': 'Autopilot',
       'settings.sections.autojoinPriority': 'Prioritize giveaways by:',
       'settings.sections.autojoinIgnore': 'Ignore giveaways by:',
-      'settings.sections.autojoinSettings': 'AutoJoin Settings',
+      'settings.sections.autojoinSettings': 'Autopilot settings',
       'settings.sections.notifications': 'Notifications & Audio',
-      'settings.sections.backgroundAutoJoin': 'Background AutoJoin',
+      'settings.sections.backgroundAutoJoin': 'Background Autopilot',
       'settings.sections.backgroundPriority': 'Priority Settings',
       'settings.sections.backgroundIgnore': 'Ignore Settings',
       'settings.sections.backgroundTiming': 'Timing Settings',
@@ -29,7 +29,7 @@
       'settings.sections.levelFilters': 'Level Filters',
       'settings.sections.costFilters': 'Cost Filters',
       'settings.display.infiniteScroll': 'Enable Infinite Scrolling',
-      'settings.display.showPoints': 'Show points and level in top-left corner',
+      'settings.display.showPoints': 'Show points and level in the panel',
       'settings.display.showButtons': 'Show buttons beside each giveaway',
       'settings.display.autoDescription':
         'Auto-load descriptions of joined giveaways',
@@ -40,13 +40,13 @@
         'Automatically post comment on joined giveaways',
       'settings.comments.placeholder': 'Separate different comments with #',
       'settings.warnings.autojoin':
-        'Warning: AutoJoin features are against SteamGifts rules and may result in account suspension',
+        'Warning: automatic entry is against SteamGifts rules and may result in account suspension',
       'settings.warnings.background':
-        'Warning: Background AutoJoin is against SteamGifts rules and may result in account suspension',
-      'settings.autojoin.showButton': 'Show AutoJoin button',
+        'Warning: background entry is against SteamGifts rules and may result in account suspension',
+      'settings.autojoin.showButton': 'Show Autopilot button',
       'settings.autojoin.loadBefore.prefix': 'Load',
-      'settings.autojoin.loadBefore.suffix': 'pages before Auto-join',
-      'settings.autojoin.repeat.prefix': 'AutoJoin every',
+      'settings.autojoin.loadBefore.suffix': 'pages before Autopilot',
+      'settings.autojoin.repeat.prefix': 'Run Autopilot every',
       'settings.autojoin.repeat.suffix': 'hours if page is open',
       'settings.autojoin.priority.wishlist': 'Steam wishlist giveaways',
       'settings.autojoin.priority.group': 'Steam group giveaways',
@@ -63,7 +63,7 @@
       'settings.notifications.notifyLimit.prefix': 'Notify when I have',
       'settings.notifications.notifyLimit.suffix': '+ points',
       'settings.notifications.autoRedeem': 'Auto-redeem Steam keys',
-      'settings.background.enable.prefix': 'Enable AutoJoin in background on:',
+      'settings.background.enable.prefix': 'Run Autopilot in background on:',
       'settings.background.page.all': 'Main page (All)',
       'settings.background.page.wishlist': 'Wishlist',
       'settings.background.page.group': 'Group',
@@ -79,7 +79,11 @@
       'settings.background.ignoreGroups':
         'Ignore groups giveaways for Main page',
       'settings.background.ignoreFeatured': 'Ignore featured giveaways',
-      'settings.background.repeatEvery': 'AutoJoin every',
+      'settings.background.ignoreWhitelist': 'Ignore whitelist giveaways',
+      'settings.background.maxTimeLeft':
+        'Only giveaways ending within (hours, 0 = any)',
+      'settings.autojoin.priority.level': 'Higher level giveaways first',
+      'settings.background.repeatEvery': 'Run Autopilot every',
       'settings.background.pagesToLoad': 'Pages to load',
       'settings.background.delay': 'Delay between requests',
       'settings.background.minLevel': 'Min level',
@@ -95,10 +99,10 @@
       'settings.filters.hideLevelsAbove': 'Hide giveaways above level',
       'settings.filters.hideCostsBelow': 'Hide giveaways below',
       'settings.filters.hideCostsAbove': 'Hide giveaways above',
-      'settings.links.chrome': 'Chrome Web Store',
-      'settings.links.firefox': 'Firefox Add-ons',
-      'settings.links.steamGroup': 'Steam Group',
-      'settings.links.github': 'GitHub Page',
+      'settings.links.website': 'Website',
+      'settings.links.issues': 'Report a problem',
+      'settings.links.changelog': 'Changelog',
+      'settings.links.github': 'GitHub',
       'settings.actions.save': 'Save Settings',
       'settings.actions.cancel': 'Cancel',
       'settings.actions.reset': 'Reset to defaults',
@@ -112,8 +116,16 @@
       'settings.status.unsaved': 'You have unsaved changes.',
       'settings.status.validation':
         'Please review the highlighted fields before saving.',
-      'content.settingsButton': 'AutoJoin Settings',
-      'content.autoJoin': 'AutoJoin',
+      'content.settingsButton': 'Settings',
+      'content.stop': 'Stop',
+      'content.stopping': 'Stopping...',
+      'content.progress': 'Joining {current} of {total}...',
+      'content.panel.level': 'Level {level}',
+      'content.panel.minimize': 'Minimize',
+      'content.panel.expand': 'Show panel',
+      'content.panel.dismiss': 'Got it',
+      'page.theme.toggle': 'Toggle dark theme',
+      'content.autoJoin': 'Autopilot',
       'content.loadingPages': 'Loading Pages...',
       'content.processing': 'Processing...',
       'content.join': 'Join',
@@ -131,9 +143,8 @@
       'content.hideDescription': 'Hide description',
       'content.winOddsTitle': 'approx. odds of winning',
       'content.suspensionRisk':
-        'By using AutoJoin button and AutoJoin in background you risk getting a suspension.',
-      'content.readMore': 'Click to read more...',
-      'content.notifications.autoJoinFailed': 'AutoJoin failed: {message}',
+        'Automatic entry (button or background) is against SteamGifts rules and may get your account suspended.',
+      'content.notifications.autoJoinFailed': 'Autopilot failed: {message}',
       'content.notifications.settingsLoadFailed':
         'Failed to load settings. Please refresh the page.',
       'content.notifications.settingsSaveFailed': 'Failed to save settings.',
@@ -160,7 +171,6 @@
         'Grant permission when prompted and ensure your Steam profile game details and wishlist are public.',
       'content.permissionBanner.loginBody':
         'Sign in to Steam in this browser, allow Steam cookies for extension requests if your browser blocks them, and ensure your game details and wishlist are public.',
-      'content.permissionBanner.retry': 'Check permission again',
       'content.noDescription': 'No description.',
       'utils.notification.success': 'Success',
       'utils.notification.error': 'Error',
@@ -186,23 +196,7 @@
       'page.infinite.page': 'Page {page}',
       'page.theme.dark': 'Dark theme enabled',
       'page.theme.light': 'Light theme enabled',
-      'page.aria.joinGiveaway': 'Join giveaway: {label}',
-      'page.aria.leaveGiveaway': 'Leave giveaway: {label}',
-      'page.aria.viewGiveaway': 'View giveaway: {name}',
-      'page.aria.viewGiveawayFallback': 'Game',
-      'page.aria.viewSteamStore': 'View on Steam Store',
-      'page.skip.content': 'Skip to main content',
-      'page.skip.settings': 'Skip to settings',
-      'suspensionNotice.ariaLabel':
-        'Suspension warning. Press Escape or click X to dismiss.',
-      'suspensionNotice.title': 'Suspension Warning Options',
-      'suspensionNotice.description':
-        'How would you like to handle this warning?',
-      'suspensionNotice.option.permanent': 'Hide permanently',
-      'suspensionNotice.option.minimize': 'Minimize',
-      'suspensionNotice.option.session': 'Hide for this session',
-      'suspensionNotice.option.cancel': 'Cancel',
-      'background.title': 'AutoJoin',
+      'background.title': 'GiftPilot',
       'background.winFallbackName': 'a game',
       'background.notifications.win':
         'You won {name}! Click here to open SteamGifts.com',
@@ -259,28 +253,30 @@
       'validation.fields.hideCostsBelow': 'Hide costs below',
       'validation.fields.hideCostsAbove': 'Hide costs above',
       'validation.fields.backgroundMinimumLevel': 'Background minimum level',
+      'validation.fields.backgroundMaxTimeLeft': 'Background max time left',
     },
     'pt-BR': {
       'common.language': 'Idioma',
       'common.auto': 'Automático (navegador)',
       'common.english': 'Inglês',
       'common.portugueseBrazil': 'Português (Brasil)',
-      'settings.title': 'Configurações do AutoJoin',
+      'settings.title': 'GiftPilot',
       'settings.subtitle':
-        'Configure a extensão AutoJoin de acordo com suas preferências',
+        'Seu copiloto no SteamGifts: tema, filtros e entrada automática',
       'settings.close': 'Fechar configurações',
       'settings.tabs.categories': 'Categorias de configurações',
       'settings.tabs.general': 'Geral',
-      'settings.tabs.background': 'Background',
+      'settings.tabs.background': 'Segundo plano',
       'settings.tabs.filters': 'Filtros',
       'settings.sections.display': 'Opções de exibição',
       'settings.sections.comments': 'Comentários',
-      'settings.sections.autojoinFeatures': 'Recursos do AutoJoin',
+      'settings.sections.autojoinFeatures': 'Piloto automático',
       'settings.sections.autojoinPriority': 'Priorizar sorteios por:',
       'settings.sections.autojoinIgnore': 'Ignorar sorteios por:',
-      'settings.sections.autojoinSettings': 'Configurações do AutoJoin',
+      'settings.sections.autojoinSettings': 'Ajustes do piloto automático',
       'settings.sections.notifications': 'Notificações e áudio',
-      'settings.sections.backgroundAutoJoin': 'AutoJoin em background',
+      'settings.sections.backgroundAutoJoin':
+        'Piloto automático em segundo plano',
       'settings.sections.backgroundPriority': 'Configurações de prioridade',
       'settings.sections.backgroundIgnore': 'Configurações de ignorar',
       'settings.sections.backgroundTiming': 'Configurações de tempo',
@@ -289,8 +285,7 @@
       'settings.sections.levelFilters': 'Filtros de nível',
       'settings.sections.costFilters': 'Filtros de custo',
       'settings.display.infiniteScroll': 'Ativar rolagem infinita',
-      'settings.display.showPoints':
-        'Mostrar pontos e nível no canto superior esquerdo',
+      'settings.display.showPoints': 'Mostrar pontos e nível no painel',
       'settings.display.showButtons': 'Mostrar botões ao lado de cada sorteio',
       'settings.display.autoDescription':
         'Carregar automaticamente descrições dos sorteios participados',
@@ -301,13 +296,14 @@
         'Publicar comentário automaticamente nos sorteios em que entrar',
       'settings.comments.placeholder': 'Separe comentários diferentes com #',
       'settings.warnings.autojoin':
-        'Aviso: os recursos de AutoJoin violam as regras do SteamGifts e podem resultar em suspensão da conta',
+        'Aviso: a entrada automática viola as regras do SteamGifts e pode resultar em suspensão da conta',
       'settings.warnings.background':
-        'Aviso: o AutoJoin em background viola as regras do SteamGifts e pode resultar em suspensão da conta',
-      'settings.autojoin.showButton': 'Mostrar botão AutoJoin',
+        'Aviso: a entrada em segundo plano viola as regras do SteamGifts e pode resultar em suspensão da conta',
+      'settings.autojoin.showButton': 'Mostrar botão Piloto automático',
       'settings.autojoin.loadBefore.prefix': 'Carregar',
-      'settings.autojoin.loadBefore.suffix': 'páginas antes do AutoJoin',
-      'settings.autojoin.repeat.prefix': 'Executar AutoJoin a cada',
+      'settings.autojoin.loadBefore.suffix':
+        'páginas antes do piloto automático',
+      'settings.autojoin.repeat.prefix': 'Executar o piloto automático a cada',
       'settings.autojoin.repeat.suffix': 'horas se a página estiver aberta',
       'settings.autojoin.priority.wishlist': 'Sorteios da wishlist da Steam',
       'settings.autojoin.priority.group': 'Sorteios de grupos da Steam',
@@ -327,7 +323,8 @@
       'settings.notifications.notifyLimit.suffix': '+ pontos',
       'settings.notifications.autoRedeem':
         'Resgatar chaves Steam automaticamente',
-      'settings.background.enable.prefix': 'Ativar AutoJoin em background em:',
+      'settings.background.enable.prefix':
+        'Piloto automático em segundo plano em:',
       'settings.background.page.all': 'Página principal (Todas)',
       'settings.background.page.wishlist': 'Wishlist',
       'settings.background.page.group': 'Grupo',
@@ -343,7 +340,12 @@
       'settings.background.ignoreGroups':
         'Ignorar sorteios de grupos na página principal',
       'settings.background.ignoreFeatured': 'Ignorar sorteios em destaque',
-      'settings.background.repeatEvery': 'Executar AutoJoin a cada',
+      'settings.background.ignoreWhitelist': 'Ignorar sorteios de whitelist',
+      'settings.background.maxTimeLeft':
+        'Só sorteios que terminam em até (horas, 0 = qualquer)',
+      'settings.autojoin.priority.level':
+        'Sorteios de nível mais alto primeiro',
+      'settings.background.repeatEvery': 'Executar o piloto automático a cada',
       'settings.background.pagesToLoad': 'Páginas para carregar',
       'settings.background.delay': 'Intervalo entre requisições',
       'settings.background.minLevel': 'Nível mínimo',
@@ -361,10 +363,10 @@
       'settings.filters.hideLevelsAbove': 'Ocultar sorteios acima do nível',
       'settings.filters.hideCostsBelow': 'Ocultar sorteios abaixo de',
       'settings.filters.hideCostsAbove': 'Ocultar sorteios acima de',
-      'settings.links.chrome': 'Chrome Web Store',
-      'settings.links.firefox': 'Complementos do Firefox',
-      'settings.links.steamGroup': 'Grupo Steam',
-      'settings.links.github': 'Página no GitHub',
+      'settings.links.website': 'Site',
+      'settings.links.issues': 'Relatar um problema',
+      'settings.links.changelog': 'Novidades',
+      'settings.links.github': 'GitHub',
       'settings.actions.save': 'Salvar configurações',
       'settings.actions.cancel': 'Cancelar',
       'settings.actions.reset': 'Restaurar padrões',
@@ -378,8 +380,16 @@
       'settings.status.unsaved': 'Você tem alterações não salvas.',
       'settings.status.validation':
         'Revise os campos destacados antes de salvar.',
-      'content.settingsButton': 'Configurações do AutoJoin',
-      'content.autoJoin': 'AutoJoin',
+      'content.settingsButton': 'Configurações',
+      'content.stop': 'Parar',
+      'content.stopping': 'Parando...',
+      'content.progress': 'Participando {current} de {total}...',
+      'content.panel.level': 'Nível {level}',
+      'content.panel.minimize': 'Minimizar',
+      'content.panel.expand': 'Mostrar painel',
+      'content.panel.dismiss': 'Entendi',
+      'page.theme.toggle': 'Alternar tema escuro',
+      'content.autoJoin': 'Piloto automático',
       'content.loadingPages': 'Carregando páginas...',
       'content.processing': 'Processando...',
       'content.join': 'Entrar',
@@ -397,9 +407,9 @@
       'content.hideDescription': 'Ocultar descrição',
       'content.winOddsTitle': 'chance aproximada de vitória',
       'content.suspensionRisk':
-        'Ao usar o botão AutoJoin e o AutoJoin em background você corre o risco de ser suspenso.',
-      'content.readMore': 'Clique para ler mais...',
-      'content.notifications.autoJoinFailed': 'AutoJoin falhou: {message}',
+        'A entrada automática (botão ou segundo plano) viola as regras do SteamGifts e pode suspender sua conta.',
+      'content.notifications.autoJoinFailed':
+        'O piloto automático falhou: {message}',
       'content.notifications.settingsLoadFailed':
         'Falha ao carregar as configurações. Recarregue a página.',
       'content.notifications.settingsSaveFailed':
@@ -427,7 +437,6 @@
         'Conceda a permissão quando solicitado e garanta que os detalhes dos jogos e a wishlist do seu perfil Steam estejam públicos.',
       'content.permissionBanner.loginBody':
         'Entre na Steam neste navegador, permita cookies da Steam para as requisições da extensão se o navegador as estiver bloqueando, e garanta que os detalhes dos seus jogos e a wishlist estejam públicos.',
-      'content.permissionBanner.retry': 'Verificar permissão novamente',
       'content.noDescription': 'Sem descrição.',
       'utils.notification.success': 'Sucesso',
       'utils.notification.error': 'Erro',
@@ -453,22 +462,7 @@
       'page.infinite.page': 'Página {page}',
       'page.theme.dark': 'Tema escuro ativado',
       'page.theme.light': 'Tema claro ativado',
-      'page.aria.joinGiveaway': 'Participar do sorteio: {label}',
-      'page.aria.leaveGiveaway': 'Sair do sorteio: {label}',
-      'page.aria.viewGiveaway': 'Ver sorteio: {name}',
-      'page.aria.viewGiveawayFallback': 'Jogo',
-      'page.aria.viewSteamStore': 'Ver na Steam Store',
-      'page.skip.content': 'Pular para o conteúdo principal',
-      'page.skip.settings': 'Pular para as configurações',
-      'suspensionNotice.ariaLabel':
-        'Aviso de suspensão. Pressione Escape ou clique no X para dispensar.',
-      'suspensionNotice.title': 'Opções do aviso de suspensão',
-      'suspensionNotice.description': 'Como você deseja lidar com este aviso?',
-      'suspensionNotice.option.permanent': 'Ocultar permanentemente',
-      'suspensionNotice.option.minimize': 'Minimizar',
-      'suspensionNotice.option.session': 'Ocultar nesta sessão',
-      'suspensionNotice.option.cancel': 'Cancelar',
-      'background.title': 'AutoJoin',
+      'background.title': 'GiftPilot',
       'background.winFallbackName': 'um jogo',
       'background.notifications.win':
         'Você ganhou {name}! Clique aqui para abrir o SteamGifts.com',
@@ -528,6 +522,8 @@
       'validation.fields.hideCostsBelow': 'Ocultar custos abaixo de',
       'validation.fields.hideCostsAbove': 'Ocultar custos acima de',
       'validation.fields.backgroundMinimumLevel': 'Nível mínimo em background',
+      'validation.fields.backgroundMaxTimeLeft':
+        'Tempo máximo restante em background',
     },
   });
 
@@ -604,7 +600,12 @@
 
   const setLocale = (locale) => {
     currentLocale = resolveLocale(locale);
-    if (typeof document !== 'undefined' && document.documentElement) {
+    // Never touch <html lang> on steamgifts.com pages (content scripts).
+    if (
+      typeof document !== 'undefined' &&
+      document.documentElement &&
+      !globalThis.location?.protocol?.startsWith('http')
+    ) {
       document.documentElement.lang = currentLocale.toLowerCase();
     }
     return currentLocale;
@@ -633,5 +634,5 @@
     module.exports = api;
   }
 
-  globalThis.AutoJoinI18n = api;
+  globalThis.GiftPilotI18n = api;
 })();

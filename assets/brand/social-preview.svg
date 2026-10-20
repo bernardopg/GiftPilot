@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0E1222"/>
+      <stop offset="1" stop-color="#101A2E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.3" r="0.7">
+      <stop offset="0" stop-color="#6D5BFF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#6D5BFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.9" cy="0.9" r="0.6">
+      <stop offset="0" stop-color="#14B8D4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#14B8D4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <rect width="1280" height="640" fill="url(#glow2)"/>
+  <image href="logo.svg" x="110" y="200" width="240" height="240"/>
+  <text x="410" y="300" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="104" font-weight="800" fill="#FFFFFF">GiftPilot</text>
+  <text x="414" y="368" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="38" fill="#B9C2DD">Seu copiloto no SteamGifts</text>
+  <text x="414" y="430" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" fill="#8A95B5">Tema escuro · filtros · chance de vitória · piloto automático</text>
+</svg>

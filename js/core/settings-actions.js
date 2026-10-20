@@ -40,5 +40,5 @@
     module.exports = api;
   }
 
-  globalThis.AutoJoinSettingsActions = api;
+  globalThis.GiftPilotSettingsActions = api;
 })();

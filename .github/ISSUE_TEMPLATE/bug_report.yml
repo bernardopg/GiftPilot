@@ -1,0 +1,59 @@
+name: Relatar um problema
+description: Algo não funciona como deveria.
+title: '[bug] '
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por reportar! Confira se já não existe uma issue igual.
+  - type: textarea
+    id: what
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema e o que você esperava.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      placeholder: |
+        1. Abra https://www.steamgifts.com/...
+        2. Clique em ...
+        3. Veja ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Piloto automático
+        - Segundo plano
+        - Tema escuro / barra fixa
+        - Filtros / chance de vitória
+        - Configurações
+        - Notificações / resgate de chave
+        - Outra
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão do GiftPilot
+      placeholder: '3.0.0'
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Navegador e versão
+      placeholder: Chrome 155 / Brave 1.80 / Edge 155
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Erros do console
+      description: Console da página ou do service worker (chrome://extensions → GiftPilot → "service worker"). Remova tokens e cookies.
+      render: text

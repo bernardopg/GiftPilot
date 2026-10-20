@@ -34,5 +34,5 @@
     module.exports = api;
   }
 
-  globalThis.AutoJoinSteamCommunity = api;
+  globalThis.GiftPilotSteamCommunity = api;
 })();

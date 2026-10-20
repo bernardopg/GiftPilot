@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GiftPilot — seu copiloto no SteamGifts</title>
+    <meta
+      name="description"
+      content="Extensão para Chrome, Edge e Brave: tema escuro completo, filtros, chance de vitória e piloto automático com ritmo humano para o SteamGifts."
+    />
+    <meta name="theme-color" content="#0e1222" />
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="GiftPilot — seu copiloto no SteamGifts"
+    />
+    <meta
+      property="og:description"
+      content="Tema escuro, filtros, chance de vitória e piloto automático com ritmo humano."
+    />
+    <meta
+      property="og:image"
+      content="https://bernardopg.github.io/AutoJoin-for-SteamGifts/assets/og.png"
+    />
+    <meta
+      property="og:url"
+      content="https://bernardopg.github.io/AutoJoin-for-SteamGifts/"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <style>
+      :root {
+        --bg: #0b0f1c;
+        --bg-2: #11172a;
+        --card: #141b30;
+        --card-2: #1a2340;
+        --line: #26304f;
+        --fg: #eef1fb;
+        --fg-2: #aab4d0;
+        --fg-3: #7d88a8;
+        --violet: #6d5bff;
+        --cyan: #14b8d4;
+        --orange: #ff8a3d;
+        --warn-bg: #2a2012;
+        --warn-line: #6b4a17;
+        --radius: 16px;
+        --max: 1120px;
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          16px/1.6 Inter,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: #9fb0ff;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      [data-lang='en'] .pt,
+      [data-lang='pt'] .en {
+        display: none !important;
+      }
+
+      /* nav */
+      header.nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(12px);
+        background: rgba(11, 15, 28, 0.72);
+        border-bottom: 1px solid rgba(38, 48, 79, 0.6);
+      }
+      .nav .wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 64px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--fg);
+        text-decoration: none;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        font-size: 18px;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+      }
+      .nav nav {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .nav nav a {
+        color: var(--fg-2);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .nav nav a:hover {
+        color: var(--fg);
+      }
+      .lang {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--fg-2);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      /* hero */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 88px 0 40px;
+        text-align: center;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: -40% -10% auto;
+        height: 120%;
+        background:
+          radial-gradient(
+            40% 50% at 30% 30%,
+            rgba(109, 91, 255, 0.35),
+            transparent 70%
+          ),
+          radial-gradient(
+            35% 45% at 75% 40%,
+            rgba(20, 184, 212, 0.25),
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+      .hero > * {
+        position: relative;
+      }
+      .hero .logo {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 24px;
+        filter: drop-shadow(0 14px 30px rgba(109, 91, 255, 0.45));
+      }
+      .eyebrow {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #c9c2ff;
+        background: rgba(109, 91, 255, 0.16);
+        border: 1px solid rgba(109, 91, 255, 0.4);
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 18px;
+      }
+      h1 {
+        font-size: clamp(40px, 7vw, 72px);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin: 0 0 18px;
+        font-weight: 800;
+      }
+      h1 .grad {
+        background: linear-gradient(90deg, #a99cff, #5fe0f2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .lead {
+        font-size: clamp(17px, 2.2vw, 20px);
+        color: var(--fg-2);
+        max-width: 680px;
+        margin: 0 auto 32px;
+      }
+      .ctas {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        color: var(--fg);
+        background: var(--card);
+        transition:
+          transform 0.15s,
+          border-color 0.15s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: #3a4772;
+      }
+      .btn.primary {
+        border: 0;
+        color: #fff;
+        background: linear-gradient(135deg, var(--violet), var(--cyan));
+        box-shadow: 0 10px 30px rgba(109, 91, 255, 0.35);
+      }
+      .btn svg {
+        width: 18px;
+        height: 18px;
+      }
+      .meta {
+        margin-top: 14px;
+        font-size: 13px;
+        color: var(--fg-3);
+      }
+
+      /* screenshot */
+      .shot {
+        margin: 56px auto 0;
+        max-width: 1000px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+        background: #0f131c;
+        box-shadow:
+          0 40px 80px rgba(0, 0, 0, 0.55),
+          0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+      }
+      .shot .bar {
+        display: flex;
+        gap: 6px;
+        padding: 10px 14px;
+        background: #161c2c;
+        border-bottom: 1px solid var(--line);
+      }
+      .shot .bar i {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #39425c;
+      }
+
+      /* sections */
+      section {
+        padding: 88px 0;
+      }
+      .kicker {
+        color: var(--cyan);
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h2 {
+        font-size: clamp(28px, 4vw, 40px);
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        margin: 8px 0 14px;
+      }
+      .sub {
+        color: var(--fg-2);
+        max-width: 640px;
+        margin: 0 0 40px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: linear-gradient(180deg, var(--card), var(--bg-2));
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+      .card .ico {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: rgba(109, 91, 255, 0.14);
+        color: #b6abff;
+        margin-bottom: 14px;
+      }
+      .card .ico svg {
+        width: 22px;
+        height: 22px;
+      }
+      .card h3 {
+        margin: 0 0 6px;
+        font-size: 17px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--fg-2);
+        font-size: 15px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .checks {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+      .checks li {
+        display: flex;
+        gap: 12px;
+        color: var(--fg-2);
+      }
+      .checks li b {
+        color: var(--fg);
+      }
+      .checks svg {
+        flex: none;
+        width: 22px;
+        height: 22px;
+        color: var(--cyan);
+        margin-top: 2px;
+      }
+      .options-shot {
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .steps {
+        counter-reset: s;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .step {
+        position: relative;
+        padding: 22px 22px 22px 70px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        color: var(--fg-2);
+      }
+      .step::before {
+        counter-increment: s;
+        content: counter(s);
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        color: #fff;
+        background: linear-gradient(135deg, var(--violet), var(--cyan));
+      }
+      .step b {
+        color: var(--fg);
+        display: block;
+        margin-bottom: 2px;
+      }
+      code {
+        font-family:
+          'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.9em;
+        background: #0d1222;
+        border: 1px solid var(--line);
+        padding: 1px 6px;
+        border-radius: 6px;
+        color: #d6dcf5;
+      }
+
+      .warn {
+        display: flex;
+        gap: 14px;
+        margin-top: 28px;
+        padding: 18px 20px;
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-line);
+        border-radius: var(--radius);
+        color: #f3dcb6;
+      }
+      .warn svg {
+        flex: none;
+        width: 22px;
+        height: 22px;
+        color: #ffb547;
+      }
+
+      details {
+        border: 1px solid var(--line);
+        background: var(--card);
+        border-radius: 12px;
+        padding: 0 20px;
+        margin-bottom: 10px;
+      }
+      summary {
+        cursor: pointer;
+        padding: 16px 0;
+        font-weight: 600;
+        list-style: none;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::after {
+        content: '+';
+        float: right;
+        color: var(--fg-3);
+        font-weight: 400;
+      }
+      details[open] summary::after {
+        content: '–';
+      }
+      details p {
+        margin: 0 0 16px;
+        color: var(--fg-2);
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 36px 0 48px;
+        color: var(--fg-3);
+        font-size: 14px;
+      }
+      footer .wrap {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+      footer nav {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      footer a {
+        color: var(--fg-2);
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--fg);
+      }
+
+      @media (max-width: 820px) {
+        .nav nav a:not(.keep) {
+          display: none;
+        }
+        .split {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 64px 0;
+        }
+        .hero {
+          padding-top: 64px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .btn {
+          transition: none;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap">
+        <a class="brand" href="#top"
+          ><img src="assets/logo.svg" alt="" />GiftPilot</a
+        >
+        <nav aria-label="Principal">
+          <a href="#recursos"
+            ><span class="pt">Recursos</span><span class="en">Features</span></a
+          >
+          <a href="#instalar"
+            ><span class="pt">Instalar</span><span class="en">Install</span></a
+          >
+          <a href="#faq">FAQ</a>
+          <a
+            class="keep"
+            href="https://github.com/bernardopg/AutoJoin-for-SteamGifts"
+            >GitHub</a
+          >
+          <button
+            class="lang"
+            type="button"
+            id="langToggle"
+            aria-label="Idioma / Language"
+          >
+            <span class="pt">EN</span><span class="en">PT</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="hero">
+        <div class="wrap">
+          <img class="logo" src="assets/logo.svg" alt="" />
+          <span class="eyebrow"
+            ><span class="pt">Extensão para Chrome, Edge e Brave</span
+            ><span class="en">Extension for Chrome, Edge and Brave</span></span
+          >
+          <h1>
+            <span class="pt"
+              >Seu <span class="grad">copiloto</span> no SteamGifts</span
+            >
+            <span class="en"
+              >Your <span class="grad">co-pilot</span> on SteamGifts</span
+            >
+          </h1>
+          <p class="lead">
+            <span class="pt"
+              >Tema escuro de verdade, filtros que limpam a lista, chance de
+              vitória em cada sorteio e um piloto automático com ritmo humano.
+              Leve, discreto e sem nenhum servidor no meio.</span
+            >
+            <span class="en"
+              >A real dark theme, filters that clean up the list, win odds on
+              every giveaway and an auto-entry mode with human pacing.
+              Lightweight, discreet and with no servers in between.</span
+            >
+          </p>
+          <div class="ctas">
+            <a
+              class="btn primary"
+              id="downloadBtn"
+              href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases/latest"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" />
+              </svg>
+              <span class="pt">Baixar</span><span class="en">Download</span>
+              <span id="versionLabel">v3.0.0</span>
+            </a>
+            <a
+              class="btn"
+              href="https://github.com/bernardopg/AutoJoin-for-SteamGifts"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"
+                />
+              </svg>
+              <span class="pt">Código-fonte</span
+              ><span class="en">Source code</span>
+            </a>
+          </div>
+          <p class="meta">
+            <span class="pt">Gratuito e de código aberto · licença MIT</span
+            ><span class="en">Free and open source · MIT license</span>
+          </p>
+
+          <div class="shot">
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <img
+              src="assets/screenshot-listing.webp"
+              width="1280"
+              height="836"
+              alt="Lista de sorteios do SteamGifts com o tema escuro do GiftPilot, a chance de vitória em cada linha e o painel no canto inferior direito"
+            />
+          </div>
+        </div>
+      </div>
+
+      <section id="recursos">
+        <div class="wrap">
+          <div class="kicker">
+            <span class="pt">Recursos</span><span class="en">Features</span>
+          </div>
+          <h2>
+            <span class="pt">Tudo o que faltava no SteamGifts</span
+            ><span class="en">Everything SteamGifts was missing</span>
+          </h2>
+          <p class="sub">
+            <span class="pt"
+              >Cada recurso pode ser ligado ou desligado. O que é uso normal do
+              site vem ativo; a automação é opcional.</span
+            ><span class="en"
+              >Every feature can be toggled. Normal-use features are on by
+              default; automation is opt-in.</span
+            >
+          </p>
+          <div class="grid">
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Tema escuro completo</span
+                ><span class="en">Full dark theme</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Gerado do CSS oficial do site e aplicado antes da página
+                  pintar: sem flash branco.</span
+                ><span class="en"
+                  >Generated from the site's own CSS and applied before paint:
+                  no white flash.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"
+                  />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Chance de vitória</span
+                ><span class="en">Win odds</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Estimativa em cada sorteio, projetando as entradas até o
+                  fim.</span
+                ><span class="en"
+                  >An estimate on every giveaway, projecting entries until it
+                  ends.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M3 5h18l-7 8v6l-4 2v-8z" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Filtros</span><span class="en">Filters</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Nível, custo, já participados, grupos, whitelist, DLC, sem
+                  cartas e jogos que você já tem.</span
+                ><span class="en"
+                  >Level, cost, entered, groups, whitelist, DLC, no cards and
+                  games you already own.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Rolagem infinita</span
+                ><span class="en">Infinite scrolling</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >As próximas páginas chegam sozinhas, já com filtros e
+                  chances.</span
+                ><span class="en"
+                  >Next pages load on their own, with filters and odds
+                  applied.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="m3 11 18-8-8 18-2-8z" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Piloto automático</span
+                ><span class="en">Autopilot</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Um sorteio por vez, com intervalos irregulares, prioridade
+                  para wishlist e um botão Parar.</span
+                ><span class="en"
+                  >One giveaway at a time, irregular pacing, wishlist first and
+                  a Stop button.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Segundo plano</span
+                ><span class="en">Background mode</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Verifica vitórias e pontos a cada N horas e respeita os
+                  pontos que você quer guardar.</span
+                ><span class="en"
+                  >Checks wins and points every N hours and keeps the points you
+                  want to save.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4" />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Vitórias e chaves</span
+                ><span class="en">Wins and keys</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Notificação com som e resgate opcional da chave direto na
+                  Steam.</span
+                ><span class="en"
+                  >Notification with sound and optional key redemption on
+                  Steam.</span
+                >
+              </p>
+            </article>
+            <article class="card">
+              <div class="ico">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path
+                    d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"
+                  />
+                </svg>
+              </div>
+              <h3>
+                <span class="pt">Português e inglês</span
+                ><span class="en">English and Portuguese</span>
+              </h3>
+              <p>
+                <span class="pt"
+                  >Idioma detectado automaticamente, ou escolhido nas
+                  configurações.</span
+                ><span class="en"
+                  >Language detected automatically, or picked in settings.</span
+                >
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="discreto" style="background: var(--bg-2)">
+        <div class="wrap split">
+          <div>
+            <div class="kicker">
+              <span class="pt">Discreto por projeto</span
+              ><span class="en">Discreet by design</span>
+            </div>
+            <h2>
+              <span class="pt">A página não sabe que ele está lá</span
+              ><span class="en">The page cannot tell it is there</span>
+            </h2>
+            <ul class="checks">
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  aria-hidden="true"
+                >
+                  <path d="m5 12 5 5 9-10" />
+                </svg>
+                <span class="pt"
+                  ><b>Painel isolado.</b> Botões, status e avisos vivem num
+                  shadow root fechado, fora do alcance do site.</span
+                >
+                <span class="en"
+                  ><b>Isolated panel.</b> Buttons, status and notices live in a
+                  closed shadow root the site cannot reach.</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  aria-hidden="true"
+                >
+                  <path d="m5 12 5 5 9-10" />
+                </svg>
+                <span class="pt"
+                  ><b>Requisições iguais às do site.</b> Usa os botões nativos e
+                  o mesmo formato de pedido do SteamGifts.</span
+                >
+                <span class="en"
+                  ><b>Site-shaped requests.</b> It uses the native buttons and
+                  the exact request format of SteamGifts.</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  aria-hidden="true"
+                >
+                  <path d="m5 12 5 5 9-10" />
+                </svg>
+                <span class="pt"
+                  ><b>Ritmo humano.</b> Intervalos irregulares, pausas e tempo
+                  de leitura nas descrições obrigatórias.</span
+                >
+                <span class="en"
+                  ><b>Human pacing.</b> Irregular intervals, pauses and reading
+                  time on required descriptions.</span
+                >
+              </li>
+              <li>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  aria-hidden="true"
+                >
+                  <path d="m5 12 5 5 9-10" />
+                </svg>
+                <span class="pt"
+                  ><b>Sem rastros e sem servidores.</b> Nada de analytics, nada
+                  de recursos expostos, nenhum dado sai do seu navegador.</span
+                >
+                <span class="en"
+                  ><b>No traces, no servers.</b> No analytics, no exposed
+                  resources, no data leaves your browser.</span
+                >
+              </li>
+            </ul>
+          </div>
+          <img
+            class="options-shot"
+            src="assets/screenshot-options.webp"
+            width="760"
+            height="816"
+            loading="lazy"
+            alt="Página de configurações do GiftPilot com as opções de exibição"
+          />
+        </div>
+      </section>
+
+      <section id="instalar">
+        <div class="wrap">
+          <div class="kicker">
+            <span class="pt">Instalar</span><span class="en">Install</span>
+          </div>
+          <h2>
+            <span class="pt">Pronto em um minuto</span
+            ><span class="en">Ready in a minute</span>
+          </h2>
+          <p class="sub">
+            <span class="pt"
+              >Funciona em navegadores Chromium 116 ou mais novos: Chrome, Edge,
+              Brave, Opera e Vivaldi.</span
+            ><span class="en"
+              >Works on Chromium 116 or newer: Chrome, Edge, Brave, Opera and
+              Vivaldi.</span
+            >
+          </p>
+          <div class="steps">
+            <div class="step">
+              <b
+                ><span class="pt">Baixe</span
+                ><span class="en">Download</span></b
+              >
+              <span class="pt"
+                >o arquivo <code>giftpilot-vX.Y.Z.zip</code> da última release e
+                extraia.</span
+              >
+              <span class="en"
+                >the <code>giftpilot-vX.Y.Z.zip</code> file from the latest
+                release and extract it.</span
+              >
+            </div>
+            <div class="step">
+              <b><span class="pt">Ative</span><span class="en">Enable</span></b>
+              <span class="pt"
+                >o <em>Modo do desenvolvedor</em> em
+                <code>chrome://extensions</code>.</span
+              >
+              <span class="en"
+                ><em>Developer mode</em> in
+                <code>chrome://extensions</code>.</span
+              >
+            </div>
+            <div class="step">
+              <b
+                ><span class="pt">Carregue</span><span class="en">Load</span></b
+              >
+              <span class="pt"
+                >a pasta com <em>Carregar sem compactação</em> e abra o
+                SteamGifts.</span
+              >
+              <span class="en"
+                >the folder with <em>Load unpacked</em> and open
+                SteamGifts.</span
+              >
+            </div>
+          </div>
+          <div class="warn" role="note">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"
+              />
+            </svg>
+            <div>
+              <span class="pt"
+                ><b>Importante:</b> entrar em sorteios automaticamente viola as
+                <a href="https://www.steamgifts.com/about/guidelines"
+                  >regras do SteamGifts</a
+                >
+                e pode suspender a conta. O piloto automático vem desligado;
+                tema, filtros e chances são uso normal do site.</span
+              >
+              <span class="en"
+                ><b>Important:</b> entering giveaways automatically is against
+                the
+                <a href="https://www.steamgifts.com/about/guidelines"
+                  >SteamGifts rules</a
+                >
+                and may get your account suspended. Autopilot is off by default;
+                theme, filters and odds are normal site use.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" style="background: var(--bg-2)">
+        <div class="wrap" style="max-width: 820px">
+          <div class="kicker">FAQ</div>
+          <h2>
+            <span class="pt">Perguntas frequentes</span
+            ><span class="en">Frequently asked questions</span>
+          </h2>
+          <details>
+            <summary>
+              <span class="pt">O GiftPilot coleta algum dado?</span
+              ><span class="en">Does GiftPilot collect any data?</span>
+            </summary>
+            <p>
+              <span class="pt"
+                >Não. Não existe servidor do projeto. As configurações ficam no
+                armazenamento do seu navegador e só conversam com o SteamGifts e
+                a Steam.</span
+              ><span class="en"
+                >No. There is no project server. Settings live in your browser
+                storage and it only talks to SteamGifts and Steam.</span
+              >
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span class="pt">Funciona no Firefox?</span
+              ><span class="en">Does it work on Firefox?</span>
+            </summary>
+            <p>
+              <span class="pt"
+                >Ainda não. O GiftPilot usa APIs do Chromium (documento
+                offscreen). O suporte ao Firefox está no roadmap.</span
+              ><span class="en"
+                >Not yet. GiftPilot uses Chromium APIs (offscreen document).
+                Firefox support is on the roadmap.</span
+              >
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span class="pt"
+                >Por que a lista de prioridade da wishlist não funciona?</span
+              ><span class="en">Why is wishlist priority not working?</span>
+            </summary>
+            <p>
+              <span class="pt"
+                >Ela lê seus jogos e wishlist da Steam Store. Entre na Steam
+                Store no mesmo navegador ou permita o acesso ao seu perfil da
+                Steam Community nas configurações.</span
+              ><span class="en"
+                >It reads your games and wishlist from the Steam Store. Sign in
+                to the Steam Store in the same browser or allow access to your
+                Steam Community profile in settings.</span
+              >
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span class="pt"
+                >Ele tem relação com o AutoJoin for SteamGifts?</span
+              ><span class="en">Is it related to AutoJoin for SteamGifts?</span>
+            </summary>
+            <p>
+              <span class="pt"
+                >O GiftPilot foi inspirado nesse clássico da comunidade, mas é
+                uma reescrita independente, com nome e arquitetura próprios. Não
+                é afiliado ao SteamGifts nem à Valve.</span
+              ><span class="en"
+                >GiftPilot was inspired by that community classic, but it is an
+                independent rewrite with its own name and architecture. It is
+                not affiliated with SteamGifts or Valve.</span
+              >
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span class="pt">Como reporto um problema?</span
+              ><span class="en">How do I report a problem?</span>
+            </summary>
+            <p>
+              <span class="pt"
+                >Abra uma
+                <a
+                  href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues/new/choose"
+                  >issue no GitHub</a
+                >. Vulnerabilidades vão pelo
+                <a
+                  href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/security/advisories/new"
+                  >reporte privado</a
+                >.</span
+              ><span class="en"
+                >Open an
+                <a
+                  href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues/new/choose"
+                  >issue on GitHub</a
+                >. Vulnerabilities go through
+                <a
+                  href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/security/advisories/new"
+                  >private reporting</a
+                >.</span
+              >
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span
+          >© 2024-2026 Bernardo Pinto Gomes ·
+          <a
+            href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/blob/main/LICENSE"
+            >MIT</a
+          ></span
+        >
+        <nav aria-label="Rodapé">
+          <a
+            href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/blob/main/CHANGELOG.md"
+            ><span class="pt">Novidades</span
+            ><span class="en">Changelog</span></a
+          >
+          <a
+            href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/releases"
+            >Releases</a
+          >
+          <a href="https://github.com/bernardopg/AutoJoin-for-SteamGifts/issues"
+            >Issues</a
+          >
+          <a href="https://github.com/sponsors/bernardopg"
+            ><span class="pt">Apoiar</span><span class="en">Sponsor</span></a
+          >
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const setLang = (lang) => {
+          root.dataset.lang = lang;
+          root.lang = lang === 'en' ? 'en' : 'pt-BR';
+          try {
+            localStorage.setItem('giftpilot-lang', lang);
+          } catch {}
+        };
+        let saved = null;
+        try {
+          saved = localStorage.getItem('giftpilot-lang');
+        } catch {}
+        setLang(
+          saved || (/^pt\b/i.test(navigator.language || '') ? 'pt' : 'en'),
+        );
+        document
+          .getElementById('langToggle')
+          .addEventListener('click', () =>
+            setLang(root.dataset.lang === 'en' ? 'pt' : 'en'),
+          );
+
+        // Show the latest published version and link straight to its zip.
+        fetch(
+          'https://api.github.com/repos/bernardopg/AutoJoin-for-SteamGifts/releases/latest',
+        )
+          .then((r) => (r.ok ? r.json() : null))
+          .then((release) => {
+            if (!release?.tag_name) return;
+            document.getElementById('versionLabel').textContent =
+              release.tag_name;
+            const zip = (release.assets || []).find((a) =>
+              a.name.endsWith('.zip'),
+            );
+            if (zip) {
+              document.getElementById('downloadBtn').href =
+                zip.browser_download_url;
+            }
+          })
+          .catch(() => {});
+      })();
+    </script>
+  </body>
+</html>

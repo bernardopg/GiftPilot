@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2024 bernardopg
+Copyright (c) 2024-2026 Bernardo Pinto Gomes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,56 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## 📄 Licença MIT - Explicação em Português
-
-Esta é uma licença de código aberto permissiva que permite:
-
-### ✅ Permitido
-
-- ✅ **Uso comercial** - Você pode usar este software comercialmente
-- ✅ **Modificação** - Você pode modificar o código fonte
-- ✅ **Distribuição** - Você pode distribuir cópias do software
-- ✅ **Uso privado** - Você pode usar o software para fins privados
-- ✅ **Sublicenciamento** - Você pode conceder uma sublicença do software
-
-### ❌ Limitações
-
-- ❌ **Responsabilidade** - O software é fornecido "como está", sem garantias
-- ❌ **Garantia** - Não há garantia de que o software funcionará perfeitamente
-
-### 📋 Condições
-
-- 📋 **Aviso de licença e copyright** - Deve incluir a licença em todas as cópias
-
-### 💡 Por que MIT?
-
-A licença MIT foi escolhida porque:
-
-1. **🚀 Simplicidade** - É fácil de entender e implementar
-2. **🌍 Compatibilidade** - Compatível com praticamente todas as outras licenças
-3. **💼 Flexibilidade comercial** - Permite uso em projetos comerciais
-4. **🤝 Adoção ampla** - Amplamente aceita pela comunidade de desenvolvedores
-5. **📈 Crescimento do projeto** - Encoraja contribuições e forks
-
-### 🔗 Links Úteis
-
-- [Texto completo da MIT License](https://opensource.org/licenses/MIT)
-- [Choose a License - MIT](https://choosealicense.com/licenses/mit/)
-- [SPDX License Identifier](https://spdx.org/licenses/MIT.html)
-
----
-
-## 🤝 Atribuição
-
-Se você usar este projeto, uma atribuição seria apreciada, mas não é obrigatória:
-
-```
-AutoJoin for SteamGifts - https://github.com/bernardopg/AutoJoin-for-SteamGifts
-```
-
----
-
-**Feito com ❤️ para a comunidade open source**

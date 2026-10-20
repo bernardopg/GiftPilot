@@ -67,5 +67,5 @@
     module.exports = api;
   }
 
-  globalThis.AutoJoinSteamStore = api;
+  globalThis.GiftPilotSteamStore = api;
 })();

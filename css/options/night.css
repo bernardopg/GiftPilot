@@ -1,0 +1,1405 @@
+/* Night Theme Styles */
+/* Enhanced dark theme with better contrast and modern design */
+
+/* Apply dark theme data attribute when night theme is enabled */
+body.night-theme {
+  --bg-primary: #111723;
+  --bg-secondary: #1b2231;
+  --text-primary: #f4f6ff;
+  --text-secondary: #c0c9e6;
+  --border-color: rgba(98, 116, 164, 0.45);
+  --overlay-bg: rgba(7, 10, 18, 0.92);
+  --warning-color: #ff9800;
+  --warning-light: rgba(255, 152, 0, 0.1);
+  --warning-border: rgba(255, 152, 0, 0.3);
+  --warning-text: #ffcc80;
+  background: radial-gradient(
+    circle at top,
+    #161d2b 0%,
+    #0d131d 45%,
+    #070b12 100%
+  );
+  color: var(--text-primary);
+}
+
+body.night-theme a {
+  color: #7cc7ff;
+}
+
+body.night-theme a:hover {
+  color: #9fd6ff;
+  text-decoration: underline;
+}
+
+body.night-theme .featured__inner-wrap,
+body.night-theme .featured__outer-wrap--home {
+  background: rgba(19, 26, 39, 0.92);
+}
+
+body.night-theme header,
+body.night-theme .page__outer-wrap,
+body.night-theme .pinned-giveaways__inner-wrap,
+body.night-theme .pinned-giveaways__outer-wrap,
+body.night-theme .page__inner-wrap,
+body.night-theme .widget-container,
+body.night-theme .sidebar,
+body.night-theme .featured__outer-wrap,
+body.night-theme .featured__summary,
+body.night-theme .giveaway__row-inner-wrap,
+body.night-theme .giveaway__links,
+body.night-theme .page__heading,
+body.night-theme .pagination,
+body.night-theme .pagination__navigation a,
+body.night-theme .sidebar__navigation__item {
+  background: rgba(23, 30, 44, 0.92);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+body.night-theme .pinned-giveaways__button {
+  background: rgba(82, 156, 255, 0.32);
+  color: #bfe1ff;
+  border-color: rgba(82, 156, 255, 0.5);
+}
+
+body.night-theme .sidebar__navigation__item.is-selected,
+body.night-theme .giveaway__row-inner-wrap:hover,
+body.night-theme .featured__outer-wrap:hover {
+  background: rgba(28, 35, 45, 0.98);
+}
+
+body.night-theme .giveaway__heading__name,
+body.night-theme .featured__heading__medium,
+body.night-theme .giveaway__heading__name a,
+body.night-theme .featured__heading__medium a {
+  color: #f6f8ff;
+}
+
+body.night-theme .giveaway__heading__thin,
+body.night-theme .giveaway__column,
+body.night-theme .giveaway__column--width-fill,
+body.night-theme .giveaway__column--region-restricted,
+body.night-theme .giveaway__links span,
+body.night-theme .sidebar__navigation__item__name,
+body.night-theme .pagination__navigation a {
+  color: #e8f1ff !important; /* Muito mais claro para melhor contraste */
+  font-weight: 500; /* Ligeiramente mais pesado para melhor legibilidade */
+}
+
+body.night-theme .giveaway__links a,
+body.night-theme .sidebar__navigation__item__link,
+body.night-theme .page__heading__breadcrumbs a {
+  color: #d6e6ff;
+  text-shadow: 0 0 6px rgba(12, 18, 26, 0.85);
+}
+
+body.night-theme .giveaway__links a:hover,
+body.night-theme .sidebar__navigation__item__link:hover,
+body.night-theme .page__heading__breadcrumbs a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(18, 89, 160, 0.45);
+}
+
+body.night-theme .featured__outer-wrap,
+body.night-theme .featured__outer-wrap--home {
+  background: rgba(19, 26, 39, 0.92);
+}
+
+body.night-theme .giveaway__links a:hover,
+body.night-theme .sidebar__navigation__item__link:hover,
+body.night-theme .page__heading__breadcrumbs a:hover {
+  color: #9fd6ff;
+}
+
+body.night-theme .featured__outer-wrap {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+body.night-theme .pagination__navigation a.is-selected,
+body.night-theme
+  .sidebar__navigation__item.is-selected
+  .sidebar__navigation__item__link {
+  background: rgba(82, 156, 255, 0.32);
+  color: #bfe1ff;
+  border-color: rgba(82, 156, 255, 0.5);
+}
+
+body.night-theme .sidebar__search-container {
+  background: rgba(12, 18, 26, 0.9);
+  border-color: var(--border-color);
+}
+
+body.night-theme .sidebar__search-input {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.night-theme .sidebar__search-input::placeholder {
+  color: rgba(192, 201, 230, 0.65);
+}
+
+body.night-theme .featured__heading__medium a,
+body.night-theme .giveaway__heading__name a {
+  color: #e4e9ff;
+}
+
+body.night-theme .featured__heading__medium a:hover,
+body.night-theme .giveaway__heading__name:hover {
+  color: #9fd6ff;
+}
+
+body.night-theme .featured__column {
+  color: #d2dcff;
+}
+
+body.night-theme .giveaway__column--width-fill,
+body.night-theme .giveaway__links span,
+body.night-theme .featured__column {
+  color: #b1bce4;
+}
+
+body.night-theme .giveaway__row-inner-wrap {
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+}
+
+body.night-theme .sidebar,
+body.night-theme .sidebar__navigation,
+body.night-theme .sidebar__navigation__item {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =================================
+   NAVIGATION & DROPDOWNS
+   ================================= */
+body.night-theme .nav__absolute-dropdown {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-theme .nav__row {
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: background-color 0.2s ease !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row:hover {
+  background-color: rgba(124, 203, 255, 0.1) !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row__summary__name {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .nav__row__summary__description {
+  color: var(--text-secondary) !important;
+}
+
+/* Nav Button Containers */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification) {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  ) !important;
+  background-color: var(--bg-secondary) !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__button {
+  color: var(--text-primary) !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button:hover,
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  ) !important;
+  color: #ffffff !important;
+}
+
+/* Active/Selected category */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification).is-selected {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(124, 203, 255, 0.15) 0%,
+    rgba(124, 203, 255, 0.05) 100%
+  ) !important;
+  border-color: rgba(124, 203, 255, 0.3) !important;
+  box-shadow: 0 1px 4px rgba(124, 203, 255, 0.1) !important;
+}
+
+body.night-theme .nav__button-container.is-selected .nav__button {
+  background-image: none !important;
+  color: #7cc7ff !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button:hover:not(.is-selected),
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(124, 203, 255, 0.25) 0%,
+    rgba(124, 203, 255, 0.1) 100%
+  ) !important;
+  color: #ffffff !important;
+}
+
+/* Selected nested button (not commonly used but handled) */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button.is-selected {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  ) !important;
+  color: #7cc7ff !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Arrow separator */
+body.night-theme .nav__button--is-dropdown-arrow {
+  border-left: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow {
+  border-left: 1px solid rgba(124, 203, 255, 0.3) !important;
+}
+
+/* Right-side Notification/Message buttons */
+body.night-theme .nav__button-container--inactive i {
+  color: var(--text-secondary) !important;
+  text-shadow: none !important;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .nav__button-container--inactive:hover i {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .nav__button-container--active i,
+body.night-theme .nav__button-container--active .nav__button,
+body.night-theme .nav__button-container--notification .nav__button:hover i {
+  color: #7cc7ff !important;
+  text-shadow: 0 0 5px rgba(124, 203, 255, 0.4) !important;
+}
+
+body.night-theme .nav__notification {
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__avatar-outer-wrap {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Setting items */
+body.night-theme .setting-item {
+  background: rgba(22, 29, 43, 0.8) !important;
+  border: 1px solid rgba(98, 116, 164, 0.2) !important;
+  border-radius: 8px !important;
+}
+
+body.night-theme .setting-item:hover {
+  background: rgba(27, 34, 49, 0.9) !important;
+  border-color: rgba(124, 203, 255, 0.3) !important;
+}
+
+body.night-theme .setting-item label {
+  color: #f4f6ff !important;
+}
+
+body.night-theme .setting-text {
+  color: #f4f6ff !important;
+}
+
+/* Form elements */
+body.night-theme #settingsDiv input[type='text'],
+body.night-theme #settingsDiv input[type='number'],
+body.night-theme #settingsDiv select,
+body.night-theme #settingsDiv textarea {
+  background: #0d131d !important;
+  border: 2px solid rgba(98, 116, 164, 0.4) !important;
+  color: #f4f6ff !important;
+  border-radius: 8px !important;
+}
+
+body.night-theme #settingsDiv input[type='text']:focus,
+body.night-theme #settingsDiv input[type='number']:focus,
+body.night-theme #settingsDiv select:focus,
+body.night-theme #settingsDiv textarea:focus {
+  border-color: #7cc7ff !important;
+  box-shadow: 0 0 0 3px rgba(124, 203, 255, 0.2) !important;
+}
+
+/* Checkboxes and radio buttons */
+body.night-theme #settingsDiv input[type='checkbox'],
+body.night-theme #settingsDiv input[type='radio'] {
+  accent-color: #7cc7ff !important;
+}
+
+/* Range sliders */
+body.night-theme #settingsDiv input[type='range'] {
+  background: rgba(98, 116, 164, 0.4) !important;
+}
+
+body.night-theme #settingsDiv input[type='range']::-webkit-slider-thumb {
+  background: #7cc7ff !important;
+}
+
+body.night-theme #settingsDiv input[type='range']::-moz-range-thumb {
+  background: #7cc7ff !important;
+}
+
+/* Subsections */
+body.night-theme .subsection {
+  background: rgba(11, 15, 25, 0.8) !important;
+  border: 1px solid rgba(98, 116, 164, 0.3) !important;
+  border-radius: 10px !important;
+}
+
+body.night-theme .subsection h4 {
+  color: #f4f6ff !important;
+}
+
+body.night-theme .subsection h4 i {
+  color: #7cc7ff !important;
+}
+
+/* Save/Cancel buttons */
+body.night-theme #SaveCancelContainer {
+  background: rgba(22, 29, 43, 0.6) !important;
+  border-top: 1px solid rgba(98, 116, 164, 0.4) !important;
+}
+
+body.night-theme #btnSetSave {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3) !important;
+}
+
+body.night-theme #btnSetSave:hover:not(:disabled) {
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+}
+
+body.night-theme #btnSetSave:disabled {
+  background: rgba(40, 167, 69, 0.6) !important;
+  opacity: 0.7;
+}
+
+body.night-theme #btnSetCancel {
+  background: rgba(22, 29, 43, 0.9) !important;
+  color: #c0c9e6 !important;
+  border: 2px solid rgba(98, 116, 164, 0.4) !important;
+}
+
+body.night-theme #btnSetCancel:hover {
+  background: rgba(27, 34, 49, 1) !important;
+  border-color: rgba(124, 203, 255, 0.6) !important;
+  color: #f4f6ff !important;
+}
+
+/* Links container */
+body.night-theme #linksContainer {
+  background: rgba(22, 29, 43, 0.8) !important;
+  border-top: 1px solid rgba(98, 116, 164, 0.4) !important;
+}
+
+body.night-theme .link-item a {
+  color: #c0c9e6 !important;
+}
+
+body.night-theme .link-item a:hover {
+  background: rgba(124, 203, 255, 0.1) !important;
+  color: #7cc7ff !important;
+}
+
+body.night-theme .link-item a i {
+  color: #7cc7ff !important;
+}
+
+/* Scrollbar for settings modal */
+body.night-theme #settingsDiv::-webkit-scrollbar {
+  width: 12px;
+}
+
+body.night-theme #settingsDiv::-webkit-scrollbar-track {
+  background: rgba(11, 15, 25, 0.8) !important;
+  border-radius: 6px;
+}
+
+body.night-theme #settingsDiv::-webkit-scrollbar-thumb {
+  background: rgba(124, 203, 255, 0.6) !important;
+  border-radius: 6px;
+}
+
+body.night-theme #settingsDiv::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 203, 255, 0.8) !important;
+}
+
+/* Scrollbar dark theme */
+body.night-theme ::-webkit-scrollbar-track {
+  background: var(--gray-700);
+}
+
+body.night-theme ::-webkit-scrollbar-thumb {
+  background: var(--gray-500);
+}
+
+body.night-theme ::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1 !important;
+  }
+  50% {
+    opacity: 1 !important;
+  }
+}
+
+/* Smooth transitions for theme switching */
+body,
+#settingsDiv,
+.settings-section,
+.setting-item {
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+/* =================================
+   NAVIGATION & DROPDOWNS
+   ================================= */
+body.night-theme .nav__absolute-dropdown {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-theme .nav__row {
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: background-color 0.2s ease !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row:hover {
+  background-color: rgba(124, 203, 255, 0.1) !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row__summary__name {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .nav__row__summary__description {
+  color: var(--text-secondary) !important;
+}
+
+/* Nav Button Containers */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification) {
+  background-image: linear-gradient(#3a4254 0px, #242a38 100%) !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+body.night-theme .nav__button {
+  color: #b8c4d9 !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button:hover,
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(#4b5468 0px, #303748 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Active/Selected category */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification).is-selected,
+body.night-theme .nav__button-container.is-selected .nav__button {
+  background-image: linear-gradient(#1f2633 0px, #161b24 100%) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.night-theme .nav__button-container.is-selected .nav__button {
+  color: #7cc7ff !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button:hover:not(.is-selected),
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(#272f3f 0px, #1a202a 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Selected nested button (not commonly used but handled) */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button.is-selected {
+  background-image: linear-gradient(
+    #141822 0px,
+    #0e1118 5px,
+    #0a0d12 100%
+  ) !important;
+  color: #7cc7ff !important;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Arrow separator */
+body.night-theme .nav__button--is-dropdown-arrow {
+  border-left: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow {
+  border-left: 1px solid rgba(0, 0, 0, 0.4) !important;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Right-side Notification/Message buttons */
+body.night-theme .nav__button-container--inactive i {
+  color: rgba(255, 255, 255, 0.3) !important;
+  text-shadow: none !important;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .nav__button-container--inactive:hover i {
+  color: #ffffff !important;
+}
+
+body.night-theme .nav__button-container--active i,
+body.night-theme .nav__button-container--active .nav__button,
+body.night-theme .nav__button-container--notification .nav__button:hover i {
+  color: #7cc7ff !important;
+  text-shadow: 0 0 5px rgba(124, 203, 255, 0.4) !important;
+}
+
+body.night-theme .nav__notification {
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__avatar-outer-wrap {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-theme .nav__points {
+  color: #ffcc80 !important;
+}
+
+body.night-theme .giveaway__username:hover,
+body.night-theme .featured__column a:hover {
+  color: #d4e8ff !important;
+  text-shadow: 0 0 8px rgba(180, 212, 255, 0.3);
+}
+
+/* =================================
+   LOADING STATES & ANIMATIONS
+   ================================= */
+
+/* Smooth loading for theme-aware elements */
+body.night-theme .giveaway__row-outer-wrap,
+body.night-theme .sidebar__navigation__item,
+body.night-theme .featured__outer-wrap {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animation delays for visual hierarchy */
+body.night-theme .giveaway__row-outer-wrap:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+body.night-theme .giveaway__row-outer-wrap:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+body.night-theme .giveaway__row-outer-wrap:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+body.night-theme .giveaway__row-outer-wrap:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+body.night-theme .giveaway__row-outer-wrap:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* =================================
+   RESPONSIVE ENHANCEMENTS
+   ================================= */
+
+/* Better mobile experience in night theme */
+@media (max-width: 768px) {
+  body.night-theme {
+    background-attachment: fixed;
+  }
+
+  body.night-theme .giveaway__row-inner-wrap {
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+
+  body.night-theme .sidebar {
+    background-color: rgba(17, 23, 35, 0.98) !important;
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  body.night-theme {
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  body.night-theme *,
+  body.night-theme *::before,
+  body.night-theme *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =================================
+   PROFESSIONAL MINIMALIST GIVEAWAY COLUMNS
+   ================================= */
+
+/* Clean, professional typography for giveaway columns */
+body.night-theme .giveaway__columns {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+/* Minimalist icon styling - subtle but clear */
+body.night-theme .giveaway__columns .fa-clock-o,
+body.night-theme .giveaway__columns .fa-trophy {
+  color: #a0a7b8 !important;
+  font-size: 13px;
+  margin-right: 6px;
+  opacity: 0.8;
+}
+
+/* Clean text styling - excellent readability without excess */
+body.night-theme .giveaway__columns,
+body.night-theme .giveaway__columns div,
+body.night-theme .giveaway__columns span {
+  color: #e5e7eb !important;
+  font-weight: 400;
+  font-size: 13px;
+  text-shadow: none;
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+/* Professional username links - subtle accent */
+body.night-theme .giveaway__columns .giveaway__username {
+  color: #94a3b8 !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .giveaway__columns .giveaway__username:hover {
+  color: #cbd5e1 !important;
+  text-shadow: none;
+}
+
+/* Clean timestamp styling */
+body.night-theme span[data-timestamp] {
+  color: #e5e7eb !important;
+  font-weight: 400;
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Minimal odds styling - clean and professional */
+body.night-theme .giveaway__columns div[title='approx. odds of winning'] {
+  color: #e5e7eb !important;
+  font-weight: 400;
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Clean "ago by" text */
+body.night-theme .giveaway__columns .text-right {
+  color: #9ca3af !important;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Remove all excessive styling from column elements */
+body.night-theme .giveaway__columns *,
+body.night-theme .featured__columns * {
+  text-shadow: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Professional featured columns styling */
+body.night-theme .featured__columns {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+}
+
+body.night-theme .featured__columns,
+body.night-theme .featured__columns div,
+body.night-theme .featured__columns span {
+  color: #e5e7eb !important;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+body.night-theme .featured__columns i {
+  color: #a0a7b8 !important;
+  opacity: 0.8;
+  margin-right: 6px;
+}
+
+body.night-theme .featured__columns a {
+  color: #94a3b8 !important;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .featured__columns a:hover {
+  color: #cbd5e1 !important;
+}
+
+/* Clean tooltip styling */
+body.night-theme [data-ui-tooltip] {
+  color: inherit !important;
+}
+
+/* Override any problematic inline styles with minimal approach */
+body.night-theme .giveaway__columns [style*='color'] {
+  color: #e5e7eb !important;
+}
+
+/* Subtle spacing improvements */
+body.night-theme .giveaway__columns > div {
+  margin-bottom: 2px;
+}
+
+body.night-theme .giveaway__columns > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Professional hover states - very subtle */
+body.night-theme .giveaway__row-inner-wrap:hover .giveaway__columns {
+  opacity: 1;
+}
+
+body.night-theme .giveaway__row-inner-wrap:hover .giveaway__columns .fa-clock-o,
+body.night-theme .giveaway__row-inner-wrap:hover .giveaway__columns .fa-trophy {
+  opacity: 1;
+  color: #b4bcc8 !important;
+}
+
+/* =================================
+   NAVIGATION & DROPDOWNS
+   ================================= */
+body.night-theme .nav__absolute-dropdown {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-theme .nav__row {
+  border-bottom: 1px solid var(--border-color) !important;
+  transition: background-color 0.2s ease !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row:hover {
+  background-color: rgba(124, 203, 255, 0.1) !important;
+  background-image: none !important;
+}
+
+body.night-theme .nav__row__summary__name {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .nav__row__summary__description {
+  color: var(--text-secondary) !important;
+}
+
+/* Nav Button Containers */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification) {
+  background-image: linear-gradient(
+    to bottom,
+    #323b4f 0%,
+    #202635 100%
+  ) !important;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__button {
+  color: #e5e7eb !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5) !important;
+}
+
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button:hover,
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(
+    to bottom,
+    #424e66 0%,
+    #293144 100%
+  ) !important;
+  color: #ffffff !important;
+}
+
+/* Active/Selected category */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification).is-selected {
+  background-image: linear-gradient(
+    to bottom,
+    #1d2b42 0%,
+    #151d2d 100%
+  ) !important;
+  border: 1px solid #111824 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__button-container.is-selected .nav__button {
+  background-image: linear-gradient(
+    to bottom,
+    #1d2b42 0%,
+    #151d2d 100%
+  ) !important;
+  color: #7cc7ff !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button:hover:not(.is-selected),
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow:hover {
+  background-image: linear-gradient(
+    to bottom,
+    #2b3e5c 0%,
+    #1f2a40 100%
+  ) !important;
+  color: #ffffff !important;
+}
+
+/* Selected nested button (not commonly used but handled) */
+body.night-theme
+  .nav__button-container:not(.nav__button-container--notification)
+  .nav__button.is-selected {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  ) !important;
+  color: #7cc7ff !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Arrow separator */
+body.night-theme .nav__button--is-dropdown-arrow {
+  border-left: 1px solid rgba(0, 0, 0, 0.4) !important;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+body.night-theme
+  .nav__button-container.is-selected
+  .nav__button--is-dropdown-arrow {
+  border-left: 1px solid rgba(0, 0, 0, 0.5) !important;
+  box-shadow: inset 1px 0 0 rgba(124, 203, 255, 0.1) !important;
+}
+
+/* Right-side Notification/Message buttons */
+body.night-theme .nav__button-container--inactive i {
+  color: var(--text-secondary) !important;
+  text-shadow: none !important;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .nav__button-container--inactive:hover i {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .nav__button-container--active i,
+body.night-theme .nav__button-container--active .nav__button,
+body.night-theme .nav__button-container--notification .nav__button:hover i {
+  color: #7cc7ff !important;
+  text-shadow: 0 0 5px rgba(124, 203, 255, 0.4) !important;
+}
+
+body.night-theme .nav__notification {
+  border: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.night-theme .nav__avatar-outer-wrap {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    inset 1px 1px 2px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+body.night-theme .nav__points {
+  color: #ffcc80 !important;
+}
+
+/* =================================
+   POPUPS & MODALS
+   ================================= */
+body.night-theme .popup {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.night-theme .popup__heading {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .popup__actions {
+  background-color: var(--bg-primary) !important;
+  border-top: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .form__submit-button {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+body.night-theme .form__submit-button:hover {
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+}
+
+body.night-theme .form__saving-button {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* =================================
+   LIGHTBOX
+   ================================= */
+body.night-theme .lightbox {
+  background-color: rgba(7, 10, 18, 0.95) !important;
+}
+
+body.night-theme .lightbox-header,
+body.night-theme .lightbox-footer-outer {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.night-theme .lightbox-header-description-name {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .lightbox-header-description-count {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .lightbox-header-icon {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .lightbox-header-icon:hover {
+  color: #7cc7ff !important;
+}
+
+/* =================================
+   SIDEBAR ENHANCEMENTS
+   ================================= */
+body.night-theme .sidebar__heading {
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .sidebar__navigation__item__underline {
+  background-color: var(--border-color) !important;
+}
+
+/* =================================
+   GIVEAWAY ELEMENTS
+   ================================= */
+body.night-theme .giveaway__column--contributor-level {
+  color: #a0a7b8 !important;
+}
+
+body.night-theme .giveaway__column--contributor-level--positive {
+  color: #4caf50 !important;
+}
+
+body.night-theme .giveaway__column--contributor-level--negative {
+  color: #f44336 !important;
+}
+
+body.night-theme .giveaway__icon {
+  color: rgba(255, 255, 255, 0.5) !important;
+  transition: color 0.2s ease !important;
+}
+
+body.night-theme .giveaway__icon:hover {
+  color: #7cc7ff !important;
+}
+
+body.night-theme .giveaway_image_avatar,
+body.night-theme .featured_giveaway_image_avatar {
+  border: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .giveaway_image_thumbnail {
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =================================
+   FANATICAL / ADS
+   ================================= */
+body.night-theme .fanatical_description {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .fanatical_name {
+  color: #7cc7ff !important;
+}
+
+body.night-theme .fanatical_date {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .fanatical_pricing {
+  color: #4caf50 !important;
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  border: 1px solid rgba(76, 175, 80, 0.3) !important;
+}
+
+/* =================================
+   COMMENTS & DISCUSSIONS
+   ================================= */
+body.night-theme .comment__parent,
+body.night-theme .comment__child {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .comment__summary {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .comment__display-state {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .markdown {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .markdown blockquote {
+  border-left: 4px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+body.night-theme .markdown code {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffcc80 !important;
+}
+
+body.night-theme .markdown pre {
+  background-color: var(--bg-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .page__heading__button {
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .page__heading__button:hover {
+  background-color: rgba(124, 203, 255, 0.1) !important;
+  color: #7cc7ff !important;
+}
+
+/* =================================
+   FORMS & INPUTS
+   ================================= */
+body.night-theme textarea,
+body.night-theme input[type='text'],
+body.night-theme input[type='password'],
+body.night-theme select {
+  background-color: var(--bg-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+body.night-theme textarea:focus,
+body.night-theme input[type='text']:focus,
+body.night-theme input[type='password']:focus,
+body.night-theme select:focus {
+  border-color: #7cc7ff !important;
+  outline: none !important;
+}
+
+/* =================================
+   TABLES & BLOCKS
+   ================================= */
+body.night-theme .table {
+  border: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+body.night-theme .table__heading {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+
+body.night-theme .table__row-outer-wrap {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+body.night-theme .table__row-inner-wrap {
+  background-color: transparent !important;
+}
+
+body.night-theme .table__row-outer-wrap:hover .table__row-inner-wrap {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+body.night-theme .table__column__heading,
+body.night-theme .homepage_table_column_heading {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .table__column__heading:hover,
+body.night-theme .homepage_table_column_heading:hover {
+  color: #7cc7ff !important;
+}
+
+body.night-theme .table__column__secondary-link {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .table__column__secondary-link:hover {
+  color: #c0c9e6 !important;
+}
+
+body.night-theme .block_header {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+body.night-theme .block_header_text,
+body.night-theme .block_header_link {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .block_header_link:hover {
+  color: #7cc7ff !important;
+}
+
+/* =================================
+   PAGE HEADING & UI FIXES
+   ================================= */
+body.night-theme .page__heading {
+  box-shadow: none !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+body.night-theme .page__heading > * {
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  ) !important;
+  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .page__heading > *:hover {
+  background-image: linear-gradient(
+    rgba(124, 203, 255, 0.1) 0%,
+    rgba(124, 203, 255, 0.05) 100%
+  ) !important;
+}
+
+body.night-theme .page__heading * {
+  text-shadow: none !important;
+}
+
+body.night-theme .page__heading__breadcrumbs a {
+  color: #7cc7ff !important;
+}
+
+body.night-theme .page__heading__breadcrumbs a:hover {
+  color: #9fd6ff !important;
+}
+
+body.night-theme .page__heading a i.fa-cog,
+body.night-theme .page__heading a i {
+  color: var(--text-secondary) !important;
+  transition: color 0.2s ease;
+}
+
+body.night-theme .page__heading a:hover i {
+  color: #7cc7ff !important;
+}
+
+body.night-theme .pagination {
+  box-shadow: none !important;
+}
+
+body.night-theme .pagination__results {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .pagination__results strong {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .pagination__navigation a {
+  box-shadow: none !important;
+}
+
+body.night-theme header {
+  box-shadow: none !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Giveaways Fixes */
+body.night-theme .giveaway__row-outer-wrap {
+  border-color: var(--border-color) !important;
+}
+
+body.night-theme .giveaway_image_thumbnail_missing,
+body.night-theme .global__image-outer-wrap--missing-image {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.night-theme .giveaway_image_thumbnail_missing i,
+body.night-theme .global__image-outer-wrap--missing-image i {
+  color: var(--text-secondary) !important;
+}
+
+/* Footer fixes */
+body.night-theme footer {
+  background-color: var(--bg-secondary) !important;
+  background-image: none !important;
+  border-top: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+}
+
+body.night-theme .footer_column_heading {
+  color: var(--text-primary) !important;
+}
+
+body.night-theme .footer_column_name,
+body.night-theme .footer_steam div,
+body.night-theme .footer_column_link {
+  color: var(--text-secondary) !important;
+}
+
+body.night-theme .footer_column_link:hover {
+  color: #7cc7ff !important;
+}

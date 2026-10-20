@@ -11,7 +11,7 @@ function loadTiming() {
   const sandbox = {};
   vm.createContext(sandbox);
   vm.runInContext(moduleSource, sandbox);
-  return sandbox.AutoJoinTiming;
+  return sandbox.GiftPilotTiming;
 }
 
 // Deterministic rng that cycles through the given values

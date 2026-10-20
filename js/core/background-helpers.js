@@ -60,5 +60,5 @@
     module.exports = api;
   }
 
-  globalThis.AutoJoinBackgroundHelpers = api;
+  globalThis.GiftPilotBackgroundHelpers = api;
 })();

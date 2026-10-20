@@ -1,14 +1,11 @@
-# 🔧 .prettierignore - AutoJoin for SteamGifts
-# Prettier 4 drops the `--ignore-path` flag and no longer reads .gitignore,
-# so the paths that must stay out of format checks are listed here explicitly.
-
-# Build outputs (mirrors of the source tree)
+# Prettier 4 no longer reads .gitignore; keep generated and vendored paths here.
 build/
 dist/
-
-# Installed tooling
 node_modules/
-
-# Agent/tooling scratch directories
+css/vendor/
+css/site/dark.css
+tests/fixtures/
 .claude/
 .serena/
+.headroom/
+.tokensave/

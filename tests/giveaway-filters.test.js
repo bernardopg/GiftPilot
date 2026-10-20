@@ -1,10 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const {
-  createGiveawayHelpers,
-  secToTime,
-} = require('../js/core/autoentry-giveaway');
+const { createGiveawayHelpers, secToTime } = require('../js/content/rows');
 
 function makeHelpers(settingsOverrides = {}, stateOverrides = {}) {
   const state = {
@@ -19,6 +16,11 @@ function makeHelpers(settingsOverrides = {}, stateOverrides = {}) {
       HideNonTradingCards: false,
       HideGroups: false,
       HideWhitelist: false,
+      HideLevelsBelow: 0,
+      HideLevelsAbove: 10,
+      HideCostsBelow: 0,
+      HideCostsAbove: 50,
+      HideEntered: false,
       ...settingsOverrides,
     },
     ownedSteamApps: [],
@@ -45,32 +47,7 @@ function makeHelpers(settingsOverrides = {}, stateOverrides = {}) {
       createElement: () => ({}),
       createTextNode: (value) => ({ value }),
     },
-    thisVersion: 1,
   });
-}
-
-function makeGiveaway(appId, { group = false, whitelist = false } = {}) {
-  return {
-    querySelector(selector) {
-      if (selector === '.fa-steam') {
-        return {
-          parentElement: {
-            href: `https://store.steampowered.com/app/${appId}/`,
-          },
-        };
-      }
-
-      if (selector === '.giveaway__column--group') {
-        return group ? {} : null;
-      }
-
-      if (selector === '.giveaway__column--whitelist') {
-        return whitelist ? {} : null;
-      }
-
-      return null;
-    },
-  };
 }
 
 test('secToTime formats long and short durations', () => {
@@ -80,88 +57,61 @@ test('secToTime formats long and short durations', () => {
   assert.equal(secToTime(90061), '1d 1:01:01');
 });
 
-test('priority and ignore rules follow the configured flags', () => {
+test('row filters hide by level, cost, entry state, groups and ownership', () => {
   const helpers = makeHelpers(
     {
-      PriorityWishlist: true,
-      PriorityGroup: true,
-      PriorityRegion: true,
-      PriorityWhitelist: true,
-      IgnoreGroups: true,
-      IgnoreWhitelist: true,
-    },
-    {
-      wishList: [123],
-    },
-  );
-
-  assert.equal(
-    helpers.priorityGiveaway(makeGiveaway(123), false, false, false),
-    true,
-  );
-  assert.equal(
-    helpers.priorityGiveaway(makeGiveaway(456), true, false, false),
-    true,
-  );
-  assert.equal(
-    helpers.priorityGiveaway(makeGiveaway(456), false, true, false),
-    true,
-  );
-  assert.equal(
-    helpers.priorityGiveaway(makeGiveaway(456), false, false, true),
-    true,
-  );
-  assert.equal(helpers.ignoreGiveaway(true, false), true);
-  assert.equal(helpers.ignoreGiveaway(false, true), true);
-  assert.equal(helpers.ignoreGiveaway(false, false), false);
-});
-
-test('filter rules remove owned, DLC, group, and whitelist giveaways', () => {
-  const helpers = makeHelpers(
-    {
-      HideNonTradingCards: true,
-      HideDlc: true,
+      HideLevelsBelow: 1,
+      HideLevelsAbove: 8,
+      HideCostsBelow: 2,
+      HideCostsAbove: 40,
+      HideEntered: true,
       HideGroups: true,
       HideWhitelist: true,
     },
-    {
-      ownedSteamApps: [100],
-      wishList: [200],
-    },
+    { ownedSteamApps: [100] },
+  );
+  const base = {
+    level: 3,
+    cost: 10,
+    entered: false,
+    isGroup: false,
+    isWhitelist: false,
+    appId: 0,
+  };
+
+  assert.equal(helpers.shouldHide(base), false);
+  assert.equal(helpers.shouldHide({ ...base, level: 0 }), true);
+  assert.equal(helpers.shouldHide({ ...base, level: 9 }), true);
+  assert.equal(helpers.shouldHide({ ...base, cost: 1 }), true);
+  assert.equal(helpers.shouldHide({ ...base, cost: 45 }), true);
+  assert.equal(helpers.shouldHide({ ...base, entered: true }), true);
+  assert.equal(helpers.shouldHide({ ...base, isGroup: true }), true);
+  assert.equal(helpers.shouldHide({ ...base, isWhitelist: true }), true);
+  assert.equal(helpers.shouldHide({ ...base, appId: 100 }), true);
+});
+
+test('store filters remove owned, DLC and card-less apps but keep wishlist', () => {
+  const helpers = makeHelpers(
+    { HideNonTradingCards: true, HideDlc: true },
+    { ownedSteamApps: [100], wishList: [200] },
   );
 
+  assert.equal(helpers.storeFilterHides(100, null), true);
   assert.equal(
-    helpers.filterGiveaway(makeGiveaway(100), 100, 'game', true),
-    true,
-  );
-  assert.equal(
-    helpers.filterGiveaway(makeGiveaway(200), 200, 'game', true),
+    helpers.storeFilterHides(200, { type: 'dlc', hasTradingCards: false }),
     false,
   );
   assert.equal(
-    helpers.filterGiveaway(makeGiveaway(300), 300, 'game', false),
+    helpers.storeFilterHides(300, { type: 'game', hasTradingCards: false }),
     true,
   );
   assert.equal(
-    helpers.filterGiveaway(makeGiveaway(301), 301, 'dlc', true),
+    helpers.storeFilterHides(301, { type: 'dlc', hasTradingCards: true }),
     true,
   );
   assert.equal(
-    helpers.filterGiveaway(
-      makeGiveaway(302, { group: true }),
-      302,
-      'game',
-      true,
-    ),
-    true,
+    helpers.storeFilterHides(302, { type: 'game', hasTradingCards: true }),
+    false,
   );
-  assert.equal(
-    helpers.filterGiveaway(
-      makeGiveaway(303, { whitelist: true }),
-      303,
-      'game',
-      true,
-    ),
-    true,
-  );
+  assert.equal(helpers.storeFilterHides(303, null), false);
 });

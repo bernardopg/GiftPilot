@@ -66,7 +66,7 @@
     return copy;
   };
 
-  globalThis.AutoJoinTiming = {
+  globalThis.GiftPilotTiming = {
     buildSchedule,
     createScheduler,
     humanStepMultiplier,

@@ -16,7 +16,7 @@ if (!fs.existsSync(buildDir)) {
 }
 
 fs.mkdirSync(distDir, { recursive: true });
-const archiveName = `AutoJoin-for-SteamGifts-v${manifest.version}.zip`;
+const archiveName = `giftpilot-v${manifest.version}.zip`;
 const archivePath = path.join(distDir, archiveName);
 fs.rmSync(archivePath, { force: true });
 

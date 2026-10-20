@@ -1,0 +1,72 @@
+/* Hand-tuned dark theme rules appended to the generated mirror rules. */
+
+:root {
+  color-scheme: dark;
+  scrollbar-color: #3a465d #121722;
+}
+
+:root ::selection {
+  background: rgba(91, 140, 255, 0.35);
+  color: #ffffff;
+}
+
+:root input,
+:root textarea,
+:root select {
+  background-color: #161c28;
+  border-color: #34405a;
+  color: #e3e8f2;
+}
+
+:root input::placeholder,
+:root textarea::placeholder {
+  color: #7d889e;
+}
+
+:root .markdown code,
+:root .markdown pre {
+  background-color: #161c28;
+  border-color: #2c3648;
+  color: #d7deea;
+}
+
+:root .markdown blockquote {
+  border-left-color: #3a465d;
+  color: #aeb8cc;
+}
+
+/* Keep pictures and capsules untouched by any inherited filter/tint. */
+:root .global__image-inner-wrap,
+:root .giveaway_image_thumbnail,
+:root .table_image_thumbnail {
+  filter: none;
+}
+
+/* Row widgets added by the extension (css/site/widgets.css). */
+:root .sgx-entry {
+  border-color: #3d6b2c;
+  background: linear-gradient(#24361f 0%, #1c2c18 100%);
+  color: #a6e283;
+}
+
+:root .sgx-entry[data-state='leave'] {
+  border-color: #6b2c3d;
+  background: linear-gradient(#36202a 0%, #2b1820 100%);
+  color: #f0a3b6;
+}
+
+:root .sgx-entry:disabled {
+  border-color: #2c3648;
+  background: #171d29;
+  color: #6f7a90;
+}
+
+:root .sgx-desc-panel {
+  border-color: #2c3648;
+  background: #141a25;
+  color: #d7deea;
+}
+
+:root .sgx-page-note {
+  color: #8f9bb3;
+}

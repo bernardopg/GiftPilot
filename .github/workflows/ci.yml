@@ -1,203 +1,157 @@
-name: 🚀 CI/CD Pipeline
+name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
+    paths-ignore: ['docs/**', '**/*.md', '.github/ISSUE_TEMPLATE/**']
   pull_request:
-    branches: [main, develop]
+    branches: [main]
   schedule:
-    - cron: '0 3 * * 0'
+    - cron: '0 3 * * 0' # weekly, catches toolchain/site drift
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  # Default runtime for the single-version jobs. Keep it in sync with .nvmrc
-  # and with the `engines`/`devEngines` ranges in package.json.
+  # Keep in sync with .nvmrc and the engines range in package.json.
   NODE_VERSION: '24'
 
 jobs:
   lint:
-    name: 🔍 Code Analysis
+    name: Lint & format
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
+    timeout-minutes: 10
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
-
-      - name: 🔍 ESLint Analysis
-        run: npm run lint
-
-      - name: 🎨 Prettier Format Check
-        run: npm run format
+          cache: npm
+      - run: npm ci --no-audit
+      - run: npm run check
 
   test:
-    name: 🧪 Test Suite
+    name: Test (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
     needs: lint
-    timeout-minutes: 15
-
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        # Supported Node.js lines: 22 (maintenance LTS), 24 (active LTS) and
-        # 26 (current). Node 20 reached end-of-life on 2026-04-30.
-        node-version: [22, 24, 26]
-
+        node: [22, 24, 26]
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-
-      - name: 🟢 Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
-
-      - name: ✅ Verify Metadata, i18n and Tests
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci --no-audit
+      - name: Metadata, i18n and unit tests
         run: npm run verify
 
-  security:
-    name: 🔒 Security Audit
+  audit:
+    name: Dependency audit
     runs-on: ubuntu-latest
     needs: lint
-    timeout-minutes: 15
-
+    timeout-minutes: 10
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
-
-      # The extension ships zero runtime dependencies, so anything reported here
-      # would actually reach users. Blocking is correct.
-      - name: 🛡️ Runtime Dependency Audit
+          cache: npm
+      - run: npm ci --no-audit
+      # Runtime dependencies would ship to users: block on them.
+      - name: Runtime dependencies
         run: npm audit --omit=dev --audit-level=moderate
-
-      # Dev tooling never ships. Report it as a warning so a fresh advisory does
-      # not break the scheduled run before Dependabot lands the bump.
-      - name: 🧰 Dev Dependency Audit (report only)
+      # Dev tooling never ships: report only, Dependabot will follow up.
+      - name: Dev dependencies (report only)
         continue-on-error: true
         run: npm audit --audit-level=high
 
   build:
-    name: 🏗️ Build Extension
+    name: Build package
     runs-on: ubuntu-latest
-    needs: [test, security]
-    timeout-minutes: 15
-
+    needs: [test, audit]
+    timeout-minutes: 10
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: 📦 Install Dependencies
-        run: npm ci --prefer-offline --no-audit
-
-      - name: 🏗️ Build Extension Package
-        run: npm run package
-
-      - name: 📤 Upload Build Artifact
-        uses: actions/upload-artifact@v7
+          cache: npm
+      - run: npm ci --no-audit
+      - run: npm run package
+      - name: Release notes must exist for this version
+        run: node scripts/changelog-section.mjs > /dev/null
+      - uses: actions/upload-artifact@v7
         with:
-          name: extension-build-${{ github.sha }}
+          name: giftpilot-${{ github.sha }}
           path: dist/*.zip
           if-no-files-found: error
           retention-days: 30
 
   release:
-    name: 🚀 Release
+    name: Release
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    timeout-minutes: 15
-
+    timeout-minutes: 10
     permissions:
       contents: write
-      actions: read
-
     steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-
-      - name: 🏷️ Resolve Release Tag
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Resolve tag
         id: tag
         run: |
           VERSION="v$(node -p "require('./manifest.json').version")"
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "release_name=AutoJoin for SteamGifts ${VERSION}" >> "$GITHUB_OUTPUT"
           if git rev-parse -q --verify "refs/tags/${VERSION}" >/dev/null; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "::notice::Tag ${VERSION} already published, skipping release."
+            echo "::notice::${VERSION} already released, skipping."
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: 📥 Download Build Artifact
+      - name: Release notes from CHANGELOG.md
         if: steps.tag.outputs.exists == 'false'
-        uses: actions/download-artifact@v8
+        run: |
+          {
+            node scripts/changelog-section.mjs
+            echo
+            echo '---'
+            echo
+            cat <<'NOTE'
+          **Instalação:** baixe o `.zip`, extraia, abra `chrome://extensions`, ative o modo do desenvolvedor e use **Carregar sem compactação**.
+          NOTE
+          } > RELEASE_NOTES.md
+      - uses: actions/download-artifact@v8
+        if: steps.tag.outputs.exists == 'false'
         with:
-          name: extension-build-${{ github.sha }}
+          name: giftpilot-${{ github.sha }}
           path: dist
-
-      - name: 🚀 Create Release
+      - uses: softprops/action-gh-release@v3.0.3
         if: steps.tag.outputs.exists == 'false'
-        uses: softprops/action-gh-release@v3.0.3
         with:
           tag_name: ${{ steps.tag.outputs.version }}
-          name: ${{ steps.tag.outputs.release_name }}
-          body: |
-            ## 🎮 AutoJoin for SteamGifts ${{ steps.tag.outputs.version }}
-
-            ### 📦 Installation
-            1. Download the `.zip` attached to this release
-            2. Extract and load as unpacked extension in Chrome/Firefox
-            3. Visit [SteamGifts.com](https://www.steamgifts.com) and enjoy!
-
-            ### 🔧 Changes in this version
-            See [CHANGELOG.md](https://github.com/bernardopg/AutoJoin-for-SteamGifts/blob/main/CHANGELOG.md).
-          generate_release_notes: true
+          name: GiftPilot ${{ steps.tag.outputs.version }}
+          body_path: RELEASE_NOTES.md
           files: dist/*.zip
-          draft: false
-          prerelease: false

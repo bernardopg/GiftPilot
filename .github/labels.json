@@ -1,0 +1,84 @@
+[
+  { "name": "bug", "color": "d73a4a", "description": "Algo não funciona" },
+  {
+    "name": "enhancement",
+    "color": "6d5bff",
+    "description": "Novo recurso ou melhoria"
+  },
+  { "name": "triage", "color": "fbca04", "description": "Aguardando análise" },
+  {
+    "name": "documentation",
+    "color": "0075ca",
+    "description": "Docs, README e site"
+  },
+  {
+    "name": "dependencies",
+    "color": "0366d6",
+    "description": "Atualização de dependências"
+  },
+  {
+    "name": "github-actions",
+    "color": "000000",
+    "description": "Atualização de actions"
+  },
+  {
+    "name": "ci",
+    "color": "1d76db",
+    "description": "Workflows e automação do repositório"
+  },
+  { "name": "tests", "color": "0e8a16", "description": "Testes e fixtures" },
+  { "name": "i18n", "color": "c5def5", "description": "Traduções" },
+  {
+    "name": "manifest",
+    "color": "b60205",
+    "description": "Mudança no manifest.json (revisar permissões)"
+  },
+  {
+    "name": "brand",
+    "color": "ff8a3d",
+    "description": "Logo, ícones e identidade visual"
+  },
+  {
+    "name": "area: content",
+    "color": "14b8d4",
+    "description": "Scripts da página do SteamGifts"
+  },
+  {
+    "name": "area: core",
+    "color": "14b8d4",
+    "description": "Módulos compartilhados"
+  },
+  {
+    "name": "area: background",
+    "color": "14b8d4",
+    "description": "Service worker e offscreen"
+  },
+  {
+    "name": "area: options",
+    "color": "14b8d4",
+    "description": "Página de configurações"
+  },
+  {
+    "name": "area: theme",
+    "color": "14b8d4",
+    "description": "Tema escuro e estilos do site"
+  },
+  {
+    "name": "good first issue",
+    "color": "7057ff",
+    "description": "Boa para começar"
+  },
+  {
+    "name": "help wanted",
+    "color": "008672",
+    "description": "Ajuda bem-vinda"
+  },
+  { "name": "question", "color": "d876e3", "description": "Dúvida" },
+  {
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "description": "Issue ou PR repetido"
+  },
+  { "name": "wontfix", "color": "ffffff", "description": "Não será feito" },
+  { "name": "invalid", "color": "e4e669", "description": "Não parece correto" }
+]

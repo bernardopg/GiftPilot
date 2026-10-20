@@ -1,5 +1,7 @@
-name: 🤖 Auto-merge Dependabot PRs
+name: Dependabot auto-merge
 
+# Requires "Allow auto-merge" in the repository settings and branch protection
+# requiring CI, so a PR only merges after the checks pass.
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -13,7 +15,7 @@ concurrency:
 
 jobs:
   auto-merge:
-    name: 🔄 Enable Auto-merge
+    name: Enable auto-merge
     runs-on: ubuntu-latest
     timeout-minutes: 10
     if: github.event.pull_request.user.login == 'dependabot[bot]'
@@ -23,13 +25,13 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: 🔍 Fetch Dependabot metadata
+      - name: Fetch Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v3.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🔄 Enable auto-merge for patch and minor updates
+      - name: Auto-merge minor and patch updates
         if: contains(fromJSON('["version-update:semver-patch","version-update:semver-minor"]'), steps.metadata.outputs.update-type)
         run: gh pr merge --auto --squash --delete-branch "$PR_URL"
         env:

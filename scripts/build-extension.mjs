@@ -6,10 +6,12 @@ const rootDir = process.cwd();
 const buildDir = path.join(rootDir, 'build', 'extension');
 const includePaths = [
   '_locales',
+  'assets/brand',
+  'assets/icons',
+  'assets/sounds',
   'css',
   'html',
   'js',
-  'media',
   'manifest.json',
   'LICENSE',
   'README.md',
@@ -18,7 +20,11 @@ const includePaths = [
 fs.rmSync(buildDir, { recursive: true, force: true });
 fs.mkdirSync(buildDir, { recursive: true });
 
+// Generator inputs that never ship in the extension package.
+const isSourceOnly = (filePath) => filePath.endsWith('.overrides.css');
+
 const copyRecursive = (sourcePath, destinationPath) => {
+  if (isSourceOnly(sourcePath)) return;
   const stat = fs.statSync(sourcePath);
 
   if (stat.isDirectory()) {

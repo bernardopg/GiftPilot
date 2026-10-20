@@ -1,0 +1,72 @@
+/*
+  Small light-DOM widgets added to SteamGifts rows. Everything else the
+  extension shows lives in a closed shadow root (js/content/panel.js); the dark
+  theme and pinned navbar are injected on demand by the service worker.
+*/
+
+.sgx-entry {
+  margin: 0 0 0 10px;
+  padding: 6px 12px;
+  min-width: 92px;
+  align-self: center;
+  border: 1px solid #b4df8a;
+  border-radius: 4px;
+  background: linear-gradient(#e6f7d6 0%, #caeea7 100%);
+  color: #3f7300;
+  font:
+    bold 11px 'Open Sans',
+    sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sgx-entry[data-state='leave'] {
+  border-color: #e6c3cd;
+  background: linear-gradient(#fbecf0 0%, #f2d9e0 100%);
+  color: #a3283f;
+}
+
+.sgx-entry:disabled {
+  border-color: #d2d6e0;
+  background: #f0f2f5;
+  color: #8f96a6;
+  cursor: default;
+}
+
+.sgx-odds {
+  cursor: help;
+  white-space: nowrap;
+}
+
+.sgx-odds .fa {
+  margin-right: 2px;
+}
+
+.sgx-desc {
+  cursor: pointer;
+}
+
+.sgx-desc-panel {
+  margin: 0 0 10px;
+  padding: 10px 15px;
+  border: 1px solid #d2d6e0;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+  background: #f6f7f9;
+  max-height: 420px;
+  overflow: auto;
+}
+
+.sgx-desc-panel img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sgx-page-note {
+  padding: 12px 0;
+  text-align: center;
+  color: #6b7a8c;
+  font:
+    700 12px 'Open Sans',
+    sans-serif;
+}
