@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="pt-BR" data-lang="pt">
+<html lang="en" data-lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GiftPilot — seu copiloto no SteamGifts</title>
+    <title>GiftPilot — your co-pilot on SteamGifts</title>
     <meta
       name="description"
-      content="Extensão para Chrome, Edge e Brave: tema escuro completo, filtros, chance de vitória e piloto automático com ritmo humano para o SteamGifts."
+      content="Chromium extension for SteamGifts: full dark theme, filters, win odds and an autopilot with human pacing."
     />
     <meta name="theme-color" content="#0e1222" />
     <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
@@ -15,11 +15,11 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="GiftPilot — seu copiloto no SteamGifts"
+      content="GiftPilot — your co-pilot on SteamGifts"
     />
     <meta
       property="og:description"
-      content="Tema escuro, filtros, chance de vitória e piloto automático com ritmo humano."
+      content="Dark theme, filters, win odds and an autopilot with human pacing."
     />
     <meta
       property="og:image"
@@ -519,7 +519,7 @@
         <a class="brand" href="#top"
           ><img src="assets/logo.svg" alt="" />GiftPilot</a
         >
-        <nav aria-label="Principal">
+        <nav aria-label="Main">
           <a href="#recursos"
             ><span class="pt">Recursos</span><span class="en">Features</span></a
           >
@@ -534,7 +534,7 @@
             class="lang"
             type="button"
             id="langToggle"
-            aria-label="Idioma / Language"
+            aria-label="Language / Idioma"
           >
             <span class="pt">EN</span><span class="en">PT</span>
           </button>
@@ -609,7 +609,7 @@
               src="assets/screenshot-listing.webp"
               width="1280"
               height="836"
-              alt="Lista de sorteios do SteamGifts com o tema escuro do GiftPilot, a chance de vitória em cada linha e o painel no canto inferior direito"
+              alt="SteamGifts giveaway list with the GiftPilot dark theme, win odds on each row and the panel in the bottom-right corner"
             />
           </div>
         </div>
@@ -946,7 +946,7 @@
             width="760"
             height="816"
             loading="lazy"
-            alt="Página de configurações do GiftPilot com as opções de exibição"
+            alt="GiftPilot settings page with display options"
           />
         </div>
       </section>
@@ -1159,7 +1159,7 @@
             >MIT</a
           ></span
         >
-        <nav aria-label="Rodapé">
+        <nav aria-label="Footer">
           <a
             href="https://github.com/bernardopg/GiftPilot/blob/main/CHANGELOG.md"
             ><span class="pt">Novidades</span
@@ -1190,9 +1190,7 @@
         try {
           saved = localStorage.getItem('giftpilot-lang');
         } catch {}
-        setLang(
-          saved || (/^pt\b/i.test(navigator.language || '') ? 'pt' : 'en'),
-        );
+        setLang(saved || 'en');
         document
           .getElementById('langToggle')
           .addEventListener('click', () =>

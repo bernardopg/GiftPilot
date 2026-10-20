@@ -140,7 +140,7 @@ jobs:
             echo '---'
             echo
             cat <<'NOTE'
-          **Instalação:** baixe o `.zip`, extraia, abra `chrome://extensions`, ative o modo do desenvolvedor e use **Carregar sem compactação**.
+          **Install:** download the `.zip`, extract it, open `chrome://extensions`, turn on Developer mode and use **Load unpacked**.
           NOTE
           } > RELEASE_NOTES.md
       - uses: actions/download-artifact@v8

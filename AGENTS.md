@@ -7,7 +7,7 @@ Guidance for AI coding agents (and humans) working on **GiftPilot**, a Manifest 
 - Plain JavaScript, CSS and HTML. **No bundler, no framework, no runtime dependencies.** Dev tooling only: ESLint 10, Prettier 3, `node:test`.
 - Node.js 22, 24 or 26 (`.nvmrc` = 24). Package manager: npm.
 - Load the repository root as an unpacked extension in `chrome://extensions` during development. `npm run build` produces `build/extension`.
-- Code comments and identifiers are in English. User-facing docs (README, CHANGELOG, TO-DO, site) are in Portuguese (Brazil); the extension UI ships `en` and `pt-BR`.
+- Code, comments and documentation are in English. A Portuguese (Brazil) copy of the user docs lives in `docs/pt-br-documentation/`; the extension UI and the website ship `en` and `pt-BR`.
 
 ## Commands
 
@@ -49,6 +49,7 @@ css/site/                injected into steamgifts.com (dark.css is GENERATED)
 css/options/             options page styles
 tests/                   node:test suites + SteamGifts fixtures
 docs/                    GitHub Pages site (static HTML, served from /docs)
+  pt-br-documentation/   Portuguese copy of README, CHANGELOG, TO-DO and community docs
 ```
 
 ## Invariants (do not break)
@@ -83,7 +84,7 @@ These exist because SteamGifts actively detects automation extensions. Its bundl
 ## Releasing
 
 1. Bump `version` in `manifest.json`, `package.json` and `package-lock.json`, and the README badge (`npm run metadata:check` enforces it).
-2. Move `## [Não lançado]` items in `CHANGELOG.md` into a new version section.
+2. Move `## [Unreleased]` items in `CHANGELOG.md` into a new version section (mirror it in `docs/pt-br-documentation/CHANGELOG.md`).
 3. Push to `main`: CI builds, and the release job creates tag `v<version>` with the zip when the tag does not exist yet.
 
 ## Do not

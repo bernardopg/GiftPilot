@@ -1,21 +1,21 @@
-# Política de segurança
+# Security policy
 
-## Versões suportadas
+## Supported versions
 
-Somente a versão mais recente (a da [última release](https://github.com/bernardopg/GiftPilot/releases/latest)) recebe correções.
+Only the latest version (the [latest release](https://github.com/bernardopg/GiftPilot/releases/latest)) receives fixes.
 
-## Como reportar
+## Reporting
 
-Use o [reporte privado de vulnerabilidades](https://github.com/bernardopg/GiftPilot/security/advisories/new) do GitHub. Inclua:
+Use GitHub's [private vulnerability reporting](https://github.com/bernardopg/GiftPilot/security/advisories/new). Include:
 
-- versão do GiftPilot e do navegador;
-- passos para reproduzir e impacto esperado;
-- prova de conceito, se houver.
+- GiftPilot and browser versions;
+- steps to reproduce and expected impact;
+- a proof of concept, if you have one.
 
-Não abra issues públicas nem divulgue detalhes antes da correção. A primeira resposta costuma vir em até 7 dias.
+Do not open public issues or disclose details before a fix ships. First response usually within 7 days.
 
-## Escopo
+## Scope
 
-Dentro do escopo: execução de código não confiável, vazamento de cookies, tokens ou dados da conta, falhas que permitam a uma página identificar ou controlar a extensão.
+In scope: untrusted code execution, leaks of cookies, tokens or account data, flaws that let a page identify or control the extension.
 
-Fora do escopo: a detecção da automação pelo próprio SteamGifts ou suspensões de conta decorrentes do uso do piloto automático (o risco está documentado no README).
+Out of scope: SteamGifts' own detection of automation, or account suspensions caused by using the autopilot (the risk is documented in the README).

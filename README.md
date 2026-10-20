@@ -4,160 +4,152 @@
 
 # GiftPilot
 
-**Seu copiloto no SteamGifts.** Tema escuro de verdade, filtros que limpam a lista, chance de vitória em cada sorteio e um piloto automático com ritmo humano.
+**Your co-pilot on SteamGifts.** A real dark theme, filters that clean up the list, win odds on every giveaway and an autopilot with human pacing.
 
 [![Version](https://img.shields.io/badge/version-3.0.0-6D5BFF)](https://github.com/bernardopg/GiftPilot/releases)
 [![CI](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml/badge.svg)](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-14B8D4)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22C55E)](LICENSE)
 
-[Site](https://bernardopg.github.io/GiftPilot/) ·
-[Instalar](#instalação) ·
-[Recursos](#recursos) ·
-[Desenvolvimento](#desenvolvimento) ·
-[Novidades](CHANGELOG.md) ·
-[English](#english)
+[Website](https://bernardopg.github.io/GiftPilot/) ·
+[Install](#install) ·
+[Features](#features) ·
+[Development](#development) ·
+[Changelog](CHANGELOG.md) ·
+[Português](docs/pt-br-documentation/README.md)
 
-<img src="docs/assets/screenshot-listing.webp" width="860" alt="Lista de sorteios do SteamGifts com o tema escuro do GiftPilot, chance de vitória em cada linha e o painel no canto inferior direito" />
+<img src="docs/assets/screenshot-listing.webp" width="860" alt="SteamGifts giveaway list with the GiftPilot dark theme, win odds on each row and the panel in the bottom-right corner" />
 
 </div>
 
 ---
 
-## Por que GiftPilot
+## Why GiftPilot
 
-- **Discreto por projeto.** Tudo o que você vê vem de um painel em _shadow root_ fechado. A página não enxerga botões, ids nem classes da extensão, e as requisições têm o mesmo formato das do próprio site.
-- **Respeita o seu ritmo.** O piloto automático entra um sorteio por vez, com intervalos irregulares, pausa para "ler" descrições obrigatórias e para no primeiro sinal de que faltam pontos.
-- **Bonito sem quebrar o site.** O tema escuro é gerado a partir do CSS oficial do SteamGifts, então cobre a página inteira sem flash branco.
-- **Zero dependências em produção.** Só JavaScript, CSS e HTML da própria extensão. Nada de rastreamento, analytics ou servidores de terceiros.
+- **Discreet by design.** Everything you see comes from a panel in a closed shadow root. The page sees no extension buttons, ids or classes, and requests have the same shape as the site's own.
+- **Respects your pace.** The autopilot enters one giveaway at a time, with irregular intervals, pauses to "read" required descriptions and stops as soon as points run out.
+- **Pretty without breaking the site.** The dark theme is generated from the official SteamGifts stylesheet, so it covers the whole page with no white flash.
+- **Zero production dependencies.** Only the extension's own JavaScript, CSS and HTML. No tracking, no analytics, no third-party servers.
 
 > [!WARNING]
-> Entrar em sorteios automaticamente viola as [regras do SteamGifts](https://www.steamgifts.com/about/guidelines) e pode levar à suspensão da conta. O piloto automático vem **desligado** e é opcional. Todo o resto (tema, filtros, chances, rolagem infinita) é uso normal do site.
+> Entering giveaways automatically is against the [SteamGifts rules](https://www.steamgifts.com/about/guidelines) and may get your account suspended. The autopilot is **off** by default and optional. Everything else (theme, filters, odds, infinite scrolling) is normal site use.
 
-## Recursos
+## Features
 
-| Área                     | O que faz                                                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🌙 **Tema escuro**       | Gerado do CSS oficial; aplicado antes da página pintar, ligado/desligado no painel.                                                                           |
-| 📌 **Barra fixa**        | Mantém a navegação do SteamGifts no topo durante a rolagem.                                                                                                   |
-| 🎯 **Chance de vitória** | Estimativa por sorteio, projetando as entradas até o fim.                                                                                                     |
-| 🧹 **Filtros**           | Oculta por nível, custo, já participados, grupo, whitelist, DLC, sem cartas e jogos que você já tem.                                                          |
-| ♾️ **Rolagem infinita**  | Carrega as próximas páginas com todos os recursos aplicados.                                                                                                  |
-| 🛩️ **Piloto automático** | Fila sequencial e cancelável, prioridade para wishlist/grupo/região/whitelist, custo mínimo e máximo, descrições obrigatórias tratadas como uma pessoa faria. |
-| ⏰ **Segundo plano**     | A cada _N_ horas verifica vitórias, avisa sobre pontos acumulados e, se você quiser, participa respeitando os pontos reservados.                              |
-| 🏆 **Vitórias**          | Notificação com som e resgate opcional da chave na Steam.                                                                                                     |
-| 🌐 **Idiomas**           | Português (Brasil) e inglês, com detecção automática.                                                                                                         |
+| Area                   | What it does                                                                                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 🌙 **Dark theme**      | Generated from the official CSS; applied before the page paints, toggled from the panel.                                                         |
+| 📌 **Pinned navbar**   | Keeps the SteamGifts navigation at the top while scrolling.                                                                                      |
+| 🎯 **Win odds**        | Per-giveaway estimate, projecting entries until the end.                                                                                         |
+| 🧹 **Filters**         | Hide by level, cost, already entered, group, whitelist, DLC, no trading cards and games you already own.                                         |
+| ♾️ **Infinite scroll** | Loads the next pages with every feature applied.                                                                                                 |
+| 🛩️ **Autopilot**       | Sequential, cancellable queue; wishlist/group/region/whitelist priority; min and max cost; required descriptions handled the way a person would. |
+| ⏰ **Background mode** | Every _N_ hours checks for wins, warns about accumulated points and, if you want, enters giveaways while keeping your reserved points.           |
+| 🏆 **Wins**            | Notification with sound and optional key redemption on Steam.                                                                                    |
+| 🌐 **Languages**       | English and Portuguese (Brazil), detected automatically.                                                                                         |
 
 <div align="center">
-<img src="docs/assets/screenshot-options.webp" width="520" alt="Página de configurações do GiftPilot" />
+<img src="docs/assets/screenshot-options.webp" width="520" alt="GiftPilot settings page" />
 </div>
 
-## Instalação
+## Install
 
-GiftPilot funciona em navegadores Chromium (Chrome, Edge, Brave, Opera, Vivaldi) a partir da versão 116.
+GiftPilot runs on Chromium browsers (Chrome, Edge, Brave, Opera, Vivaldi) version 116 or newer.
 
-**Pelo pacote da release**
+**From a release**
 
-1. Baixe `giftpilot-vX.Y.Z.zip` na [última release](https://github.com/bernardopg/GiftPilot/releases/latest) e extraia.
-2. Abra `chrome://extensions` e ative o **Modo do desenvolvedor**.
-3. Clique em **Carregar sem compactação** e escolha a pasta extraída.
+1. Download `giftpilot-vX.Y.Z.zip` from the [latest release](https://github.com/bernardopg/GiftPilot/releases/latest) and extract it.
+2. Open `chrome://extensions` and turn on **Developer mode**.
+3. Click **Load unpacked** and pick the extracted folder.
 
-**Pelo código-fonte**
+**From source**
 
 ```bash
 git clone https://github.com/bernardopg/GiftPilot.git
 cd GiftPilot
 npm ci
-npm run build   # gera build/extension
+npm run build   # outputs build/extension
 ```
 
-Carregue `build/extension` (ou a raiz do repositório, durante o desenvolvimento) em `chrome://extensions`.
+Load `build/extension` (or the repository root while developing) in `chrome://extensions`.
 
-## Uso
+## Usage
 
-1. Entre no [SteamGifts](https://www.steamgifts.com) com a sua conta.
-2. O painel aparece no canto inferior direito com seus pontos e os atalhos: 🌙 tema, 📌 barra fixa, ⚙️ configurações e − minimizar.
-3. Para usar o piloto automático, ative **Mostrar botão Piloto automático** nas configurações. O botão vira **Parar** enquanto roda.
-4. Clique no ícone da extensão na barra do navegador para abrir as configurações a qualquer momento.
+1. Sign in to [SteamGifts](https://www.steamgifts.com).
+2. The panel shows up in the bottom-right corner with your points and shortcuts: 🌙 theme, 📌 pinned navbar, ⚙️ settings and − minimize.
+3. To use the autopilot, enable **Show Autopilot button** in the settings. The button turns into **Stop** while it runs.
+4. Click the extension icon in the browser toolbar to open the settings at any time.
 
-**Atalhos de teclado** (fora de campos de texto): `Alt+S` configurações · `Alt+T` tema · `Alt+J` / `Alt+K` próximo / anterior sorteio.
+**Keyboard shortcuts** (outside text fields): `Alt+S` settings · `Alt+T` theme · `Alt+J` / `Alt+K` next / previous giveaway.
 
-### Configurações principais
+### Main settings
 
-| Configuração                   | Padrão    | Observação                                         |
-| ------------------------------ | --------- | -------------------------------------------------- |
-| Tema escuro                    | desligado | Também no botão 🌙 do painel.                      |
-| Rolagem infinita               | ligada    |                                                    |
-| Chance de vitória              | ligada    |                                                    |
-| Botão Piloto automático        | desligado | Opcional; leia o aviso acima.                      |
-| Intervalo médio entre entradas | 10 s      | Com variação aleatória e pausas.                   |
-| Priorizar wishlist             | ligado    | Requer estar logado na Steam Store.                |
-| Ignorar sorteios em destaque   | ligado    |                                                    |
-| Piloto em segundo plano        | desligado | Página padrão: wishlist; a cada 5 h.               |
-| Pontos para preservar          | 0         | Em segundo plano, nunca gasta abaixo desse número. |
+| Setting                       | Default | Notes                                              |
+| ----------------------------- | ------- | -------------------------------------------------- |
+| Dark theme                    | off     | Also on the 🌙 panel button.                       |
+| Infinite scrolling            | on      |                                                    |
+| Win odds                      | on      |                                                    |
+| Autopilot button              | off     | Optional; read the warning above.                  |
+| Average delay between entries | 10 s    | With random jitter and pauses.                     |
+| Wishlist priority             | on      | Requires being signed in to the Steam Store.       |
+| Ignore featured giveaways     | on      |                                                    |
+| Background autopilot          | off     | Default page: wishlist; every 5 h.                 |
+| Points to preserve            | 0       | In background mode, never spends below this value. |
 
-## Privacidade
+## Privacy
 
-- Nenhum dado sai do seu navegador para servidores do projeto: não existem servidores do projeto.
-- As configurações ficam em `chrome.storage` (sincronizadas pela sua conta do navegador).
-- Permissões: `storage`, `alarms`, `notifications`, `tabs`, `scripting`, `offscreen` e `declarativeNetRequest`, mais acesso a `steamgifts.com` e à Steam Store. O acesso a perfis da Steam Community é opcional e pedido só quando necessário.
+- No data leaves your browser for project servers: there are no project servers.
+- Settings are stored in `chrome.storage` (synced through your browser account).
+- Permissions: `storage`, `alarms`, `notifications`, `tabs`, `scripting`, `offscreen` and `declarativeNetRequest`, plus access to `steamgifts.com` and the Steam Store. Access to Steam Community profiles is optional and only requested when needed.
 
-## Desenvolvimento
+## Development
 
-Requer Node.js 22, 24 ou 26 (veja `.nvmrc`).
+Requires Node.js 22, 24 or 26 (see `.nvmrc`).
 
 ```bash
 npm ci
 npm run check     # ESLint + Prettier
-npm test          # testes unitários (node:test)
-npm run verify    # metadados + i18n + testes
+npm test          # unit tests (node:test)
+npm run verify    # metadata + i18n + tests
 npm run build     # check + verify + build/extension
 npm run package   # build + dist/giftpilot-vX.Y.Z.zip
-npm run release   # alias de package (a release em si é feita pelo CI)
+npm run release   # alias of package (the release itself is created by CI)
 ```
 
-Para regenerar o tema escuro depois que o SteamGifts mudar o CSS: salve o novo arquivo em `tests/fixtures/steamgifts/site.css` e rode `node scripts/build-site-dark.mjs`.
+To regenerate the dark theme after SteamGifts changes its CSS: save the new file to `tests/fixtures/steamgifts/site.css` and run `node scripts/build-site-dark.mjs`.
 
-### Estrutura
+### Layout
 
 ```
 manifest.json
-_locales/            nome e descrição traduzidos
-assets/              logo, ícones e som de vitória
+_locales/            translated name and description
+assets/              logo, icons and win sound
 css/
-  site/              estilos injetados no SteamGifts (tema, barra fixa, widgets)
-  options/           página de configurações
+  site/              styles injected into SteamGifts (theme, pinned navbar, widgets)
+  options/           settings page
   vendor/            Font Awesome
-html/                configurações e documento offscreen
+html/                settings and offscreen document
 js/
-  background/        service worker: rotina, notificações, ponte de requisições
-  content/           scripts de página: painel, linhas, rolagem, piloto automático
-  core/              módulos puros e compartilhados (parse, plano, i18n, timing…)
-  offscreen/         parse de HTML, áudio e resgate de chaves
-  options/           lógica da página de configurações
-scripts/             build, empacotamento, checagens e gerador do tema
-tests/               testes e fixtures do SteamGifts
-docs/                site do GitHub Pages
+  background/        service worker: routine, notifications, request bridge
+  content/           page scripts: panel, rows, scrolling, autopilot
+  core/              pure shared modules (parsing, planning, i18n, timing…)
+  offscreen/         HTML parsing, audio and key redemption
+  options/           settings page logic
+scripts/             build, packaging, checks and theme generator
+tests/               tests and SteamGifts fixtures
+docs/                GitHub Pages site and Portuguese documentation
 ```
 
-Mais detalhes em [AGENTS.md](AGENTS.md) (arquitetura e regras do projeto) e no [guia de contribuição](.github/CONTRIBUTING.md).
+More details in [AGENTS.md](AGENTS.md) (architecture and project rules) and in the [contributing guide](.github/CONTRIBUTING.md).
 
-## Contribuindo
+## Contributing
 
-Issues e pull requests são bem-vindos. Leia o [guia de contribuição](.github/CONTRIBUTING.md) e o [código de conduta](.github/CODE_OF_CONDUCT.md). Vulnerabilidades: siga a [política de segurança](.github/SECURITY.md).
+Issues and pull requests are welcome. Read the [contributing guide](.github/CONTRIBUTING.md) and the [code of conduct](.github/CODE_OF_CONDUCT.md). For vulnerabilities, follow the [security policy](.github/SECURITY.md).
 
-Se o GiftPilot te ajuda, considere [apoiar o projeto](https://github.com/sponsors/bernardopg).
+If GiftPilot helps you, consider [sponsoring the project](https://github.com/sponsors/bernardopg).
 
-## Licença
+## License
 
 [MIT](LICENSE) © 2024-2026 Bernardo Pinto Gomes
 
----
-
-## English
-
-**GiftPilot** is a Chromium extension (Manifest V3) for [SteamGifts](https://www.steamgifts.com): a full dark theme generated from the site's own CSS, filters, win odds, infinite scrolling, win notifications with optional key redemption and an opt-in, human-paced auto-entry mode. Its UI lives in a closed shadow root and its requests match the site's own, so the page cannot see it.
-
-Install: download the zip from [Releases](https://github.com/bernardopg/GiftPilot/releases/latest), open `chrome://extensions`, enable Developer mode and use **Load unpacked**. Build from source with `npm ci && npm run build`.
-
-Auto-entry is against SteamGifts rules and may get your account suspended; it is off by default. Licensed under [MIT](LICENSE).
+Not affiliated with SteamGifts or Valve.

@@ -1,59 +1,59 @@
-name: Relatar um problema
-description: Algo não funciona como deveria.
+name: Report a bug
+description: Something doesn't work as it should.
 title: '[bug] '
 labels: [bug, triage]
 body:
   - type: markdown
     attributes:
-      value: Obrigado por reportar! Confira se já não existe uma issue igual.
+      value: Thanks for reporting! Please check that a similar issue does not exist yet.
   - type: textarea
     id: what
     attributes:
-      label: O que aconteceu?
-      description: Descreva o problema e o que você esperava.
+      label: What happened?
+      description: Describe the problem and what you expected.
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Como reproduzir
+      label: How to reproduce
       placeholder: |
-        1. Abra https://www.steamgifts.com/...
-        2. Clique em ...
-        3. Veja ...
+        1. Open https://www.steamgifts.com/...
+        2. Click ...
+        3. See ...
     validations:
       required: true
   - type: dropdown
     id: area
     attributes:
-      label: Área
+      label: Area
       options:
-        - Piloto automático
-        - Segundo plano
-        - Tema escuro / barra fixa
-        - Filtros / chance de vitória
-        - Configurações
-        - Notificações / resgate de chave
-        - Outra
+        - Autopilot
+        - Background mode
+        - Dark theme / pinned navbar
+        - Filters / win odds
+        - Settings
+        - Notifications / key redemption
+        - Other
     validations:
       required: true
   - type: input
     id: version
     attributes:
-      label: Versão do GiftPilot
+      label: GiftPilot version
       placeholder: '3.0.0'
     validations:
       required: true
   - type: input
     id: browser
     attributes:
-      label: Navegador e versão
+      label: Browser and version
       placeholder: Chrome 155 / Brave 1.80 / Edge 155
     validations:
       required: true
   - type: textarea
     id: logs
     attributes:
-      label: Erros do console
-      description: Console da página ou do service worker (chrome://extensions → GiftPilot → "service worker"). Remova tokens e cookies.
+      label: Console errors
+      description: Page console or service worker console (chrome://extensions → GiftPilot → "service worker"). Remove tokens and cookies.
       render: text

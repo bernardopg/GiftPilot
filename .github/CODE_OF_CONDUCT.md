@@ -1,18 +1,18 @@
-# Código de conduta
+# Code of conduct
 
-O GiftPilot adota o [Contributor Covenant 2.1](https://www.contributor-covenant.org/pt-br/version/2/1/code_of_conduct/).
+GiftPilot adopts the [Contributor Covenant 2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/).
 
-## Resumo
+## Summary
 
-- Seja respeitoso e acolhedor, independentemente de experiência, origem ou identidade.
-- Critique ideias e código, nunca pessoas.
-- Sem assédio, insultos, ataques pessoais, conteúdo sexual ou discriminatório, nem exposição de dados privados de terceiros.
-- Isso vale para issues, pull requests, discussões, comentários e qualquer espaço do projeto.
+- Be respectful and welcoming, regardless of experience, background or identity.
+- Critique ideas and code, never people.
+- No harassment, insults, personal attacks, sexual or discriminatory content, or exposure of other people's private data.
+- This applies to issues, pull requests, discussions, comments and every project space.
 
-## Como reportar
+## Reporting
 
-Reporte comportamentos inaceitáveis de forma privada ao mantenedor, [@bernardopg](https://github.com/bernardopg), pelo [reporte privado do GitHub](https://github.com/bernardopg/GiftPilot/security/advisories/new) (indique que é um caso de conduta). Os reportes são tratados com sigilo.
+Report unacceptable behavior privately to the maintainer, [@bernardopg](https://github.com/bernardopg), through [GitHub private reporting](https://github.com/bernardopg/GiftPilot/security/advisories/new) (state that it is a conduct case). Reports are handled confidentially.
 
-## Consequências
+## Consequences
 
-O mantenedor pode, conforme a gravidade: advertir, remover conteúdo, bloquear temporariamente ou banir permanentemente quem violar este código, seguindo as diretrizes de aplicação do Contributor Covenant.
+Depending on severity, the maintainer may warn, remove content, temporarily block or permanently ban anyone who violates this code, following the Contributor Covenant enforcement guidelines.

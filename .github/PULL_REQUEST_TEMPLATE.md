@@ -1,14 +1,14 @@
-## O que muda
+## What changes
 
-<!-- Resumo curto. Referencie a issue: Closes #123 -->
+<!-- Short summary. Reference the issue: Closes #123 -->
 
-## Como testar
+## How to test
 
-<!-- Passos no SteamGifts e/ou testes adicionados. -->
+<!-- Steps on SteamGifts and/or tests added. -->
 
 ## Checklist
 
-- [ ] `npm run check && npm test` passam
-- [ ] Textos novos estão em `en` e `pt-BR` (`js/core/i18n.js`)
-- [ ] Nada novo no DOM visível da página, sem `web_accessible_resources` e sem `permissions` novas (ver [AGENTS.md](../AGENTS.md))
-- [ ] `CHANGELOG.md` atualizado em **[Não lançado]**, se for visível ao usuário
+- [ ] `npm run check && npm test` pass
+- [ ] New strings exist in `en` and `pt-BR` (`js/core/i18n.js`)
+- [ ] Nothing new in the page's visible DOM, no `web_accessible_resources` and no new `permissions` (see [AGENTS.md](../AGENTS.md))
+- [ ] `CHANGELOG.md` updated under **[Unreleased]** when user-visible

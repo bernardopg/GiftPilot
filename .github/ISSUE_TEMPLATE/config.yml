@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Vulnerabilidade de segurança
+  - name: Security vulnerability
     url: https://github.com/bernardopg/GiftPilot/security/advisories/new
-    about: Reporte de forma privada, nunca em issue pública.
-  - name: Documentação
+    about: Report privately, never in a public issue.
+  - name: Documentation
     url: https://bernardopg.github.io/GiftPilot/
-    about: Instalação, recursos e perguntas frequentes.
+    about: Install, features and FAQ.

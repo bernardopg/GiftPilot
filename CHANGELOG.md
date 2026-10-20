@@ -1,109 +1,114 @@
 # Changelog
 
-Todas as mudanças relevantes do GiftPilot ficam registradas aqui.
+All notable changes to GiftPilot are documented here.
 
-O formato segue o [Keep a Changelog 1.1.0](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/). Seções possíveis por versão: **Adicionado**, **Alterado**, **Descontinuado**, **Removido**, **Corrigido** e **Segurança**.
+The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Sections per version: **Added**, **Changed**, **Deprecated**, **Removed**, **Fixed** and **Security**.
 
-## [Não lançado]
+## [Unreleased]
+
+### Changed
+
+- Documentation is now in English; the Portuguese version lives in [`docs/pt-br-documentation/`](docs/pt-br-documentation/).
+- Repository renamed to `bernardopg/GiftPilot`; website moved to <https://bernardopg.github.io/GiftPilot/>.
 
 ## [3.0.0] - 2026-10-20
 
-Nova identidade: o projeto passa a se chamar **GiftPilot**. As configurações salvas são mantidas.
+New identity: the project is now called **GiftPilot**. Saved settings are kept.
 
-### Adicionado
+### Added
 
-- Nome, logotipo, ícones e paleta próprios (`assets/brand/`, `assets/icons/`).
-- Painel flutuante em _shadow root_ fechado com pontos, nível, botão do piloto automático, status, avisos e notificações (`js/content/panel.js`).
-- Piloto automático com fila sequencial e cancelável (o botão vira "Parar"), retomada após o recarregamento do modo "repetir a cada N horas" e espera com recuo em erros de rede.
-- Tratamento de sorteios com descrição obrigatória: o site trava o botão de entrada (`is-locked`) até a descrição ser aberta. O piloto abre a descrição nativa, espera um tempo de leitura proporcional ao texto e só depois entra; o segundo plano faz o mesmo com `do=giveaway_description`.
-- Ponte de requisições: com uma aba do SteamGifts aberta, o service worker executa as requisições dentro dela e espelha pontos e linhas na aba.
-- Tema escuro gerado a partir do CSS oficial do site (`scripts/build-site-dark.mjs` → `css/site/dark.css`, ajustes em `css/site/dark.overrides.css`).
-- Clique no ícone da extensão abre as configurações.
-- Campos de configuração que existiam sem controle na tela: ignorar whitelist em segundo plano, tempo máximo restante (em horas) e prioridade por nível.
-- Links do site, de issues e do changelog na página de configurações.
-- Testes de seleção do piloto automático (`tests/autojoin-plan.test.js`) e novas verificações anti-detecção.
-- Site no GitHub Pages, `FUNDING.yml`, rotulagem automática de PRs, formulários de issue e `AGENTS.md` para agentes de IA.
+- Own name, logo, icons and palette (`assets/brand/`, `assets/icons/`).
+- Floating panel in a closed shadow root with points, level, autopilot button, status, notices and toasts (`js/content/panel.js`).
+- Autopilot with a sequential, cancellable queue (the button turns into "Stop"), resume after the "repeat every N hours" reload and back-off on network errors.
+- Handling of giveaways with a required description: the site locks the entry button (`is-locked`) until the description is opened. The autopilot opens the native description, waits a reading delay proportional to the text and only then enters; background mode does the same through `do=giveaway_description`.
+- Request bridge: with a SteamGifts tab open, the service worker runs requests inside it and mirrors points and rows in that tab.
+- Dark theme generated from the site's official CSS (`scripts/build-site-dark.mjs` → `css/site/dark.css`, tweaks in `css/site/dark.overrides.css`).
+- Clicking the extension icon opens the settings.
+- Controls for settings that existed without one: ignore whitelist in background, max time left (hours) and level priority.
+- Website, issues and changelog links on the settings page.
+- Autopilot selection tests (`tests/autojoin-plan.test.js`) and new anti-detection checks.
+- GitHub Pages site, `FUNDING.yml`, automatic PR labeling, issue forms and an `AGENTS.md` for AI agents.
 
-### Alterado
+### Changed
 
-- Estrutura de pastas: `js/{background,content,core,offscreen,options}`, `css/{site,options,vendor}`, `assets/`; documentos da comunidade em `.github/`.
-- Parser de sorteios reescrito para o HTML atual (links relativos sem barra final, `?utm_source`, cópias e custo por expressão regular, nível pelo `title` decimal) e compartilhado entre página e documento offscreen.
-- Uma única rolagem infinita (`js/content/infinite-scroll.js`); as páginas carregadas recebem botões, filtros e chance de vitória.
-- Entradas seguem o formato do bundle ativo do site: `FormData` multipart no `bundle-v18` e jQuery urlencoded no `bundle-v19`.
-- Tema escuro e barra fixa aplicados pelo service worker com `chrome.scripting.insertCSS`, sem classe no `<body>` e sem flash branco.
-- Cache de dados da Steam com validade; DLC e cartas via `appdetails`; comentários enviados como formulário comum.
-- Globais internos renomeados de `AutoJoin*` para `GiftPilot*`. As chaves de configuração não mudaram.
-- README, guia de contribuição, política de segurança, `TO-DO.md` e este changelog reescritos e padronizados.
-- Workflows do GitHub revisados: CI sem a branch inexistente `develop`, release com o nome novo, Dependabot com grupos e rótulos coerentes.
+- Folder layout: `js/{background,content,core,offscreen,options}`, `css/{site,options,vendor}`, `assets/`; community docs in `.github/`.
+- Giveaway parser rewritten for the current markup (relative links without trailing slash, `?utm_source`, copies and cost by regular expression, level from the decimal `title`) and shared between the page and the offscreen document.
+- A single infinite scroller (`js/content/infinite-scroll.js`); loaded pages get buttons, filters and win odds.
+- Entries follow the active site bundle format: multipart `FormData` on `bundle-v18`, jQuery urlencoded on `bundle-v19`.
+- Dark theme and pinned navbar applied by the service worker with `chrome.scripting.insertCSS`, with no `<body>` class and no white flash.
+- Steam data cache with expiry; DLC and trading cards via `appdetails`; comments sent as a plain form.
+- Internal globals renamed from `AutoJoin*` to `GiftPilot*`. Settings keys did not change.
+- README, contributing guide, security policy, `TO-DO.md` and this changelog rewritten and standardized.
+- GitHub workflows reviewed: CI without the non-existent `develop` branch, release named after the new brand with notes taken from this file, Dependabot with consistent groups and labels.
 
-### Removido
+### Removed
 
-- `web_accessible_resources` (permitiam sondar a extensão a partir da página).
-- Script do aviso de suspensão, escritas no `localStorage` da página e alteração de `<html lang>`.
-- Módulo legado `js/core/giveaway.js`, `css/general.css`, `IMPROVEMENTS.md` e links para a extensão original na página de configurações.
+- `web_accessible_resources` (they let the page probe for the extension).
+- Suspension-notice script, writes to the page's `localStorage` and changes to `<html lang>`.
+- Legacy module `js/core/giveaway.js`, `css/general.css`, `IMPROVEMENTS.md` and store links on the settings page.
 
-### Corrigido
+### Fixed
 
-- Resgate automático de chaves: `res.json()` sem `await`, `winner_id` enviado como o texto literal `'winnerId'` e sessão da Steam ausente.
-- Busca de `/giveaways/won` sem cookies; vitórias agora detectadas também pelo contador de ganhos.
-- `PointsToPreserve`, `MaxTimeLeftBG` e `MinLevelBG` ignorados em segundo plano; service worker mantido ativo durante a rotina.
-- Configurações: listener de restauração duplicado, comparação `this.value === 0` que nunca era verdadeira e campo "repetir a cada" gravado na chave errada (`hoursField` em vez de `RepeatHours`).
-- Notificações da página de configurações, que não carregava o módulo de avisos.
+- Automatic key redemption: `res.json()` without `await`, `winner_id` sent as the literal string `'winnerId'` and missing Steam session.
+- `/giveaways/won` fetched without cookies; wins are now also detected from the won counter.
+- `PointsToPreserve`, `MaxTimeLeftBG` and `MinLevelBG` ignored in background mode; service worker kept alive during the routine.
+- Settings: duplicated reset listener, a `this.value === 0` comparison that was never true and the "repeat every" field saved to the wrong key (`hoursField` instead of `RepeatHours`).
+- Notifications on the settings page, which did not load the notification module.
 
-### Segurança
+### Security
 
-- Canário do `bundle-v19.js` neutralizado: o site reporta a conta (`ajax.php`, `do=jh8Dn`) ao encontrar qualquer um de `input#btnAutoJoin`, `#btnSettings` com o texto "AutoJoin Settings", `#ajFooter`, `#navbarPin` ou `#ajFooterArrow`. Nenhum desses marcadores existe mais na página.
+- `bundle-v19.js` canary neutralized: the site reports the account (`ajax.php`, `do=jh8Dn`) when it finds any of `input#btnAutoJoin`, `#btnSettings` with the text "AutoJoin Settings", `#ajFooter`, `#navbarPin` or `#ajFooterArrow`. None of these markers exist on the page anymore.
 
 ## [2.1.0] - 2026-10-15
 
-### Adicionado
+### Added
 
-- Permissão `declarativeNetRequest` com regras de sessão que reescrevem `Origin` e `Referer` das requisições do service worker para `https://www.steamgifts.com`.
+- `declarativeNetRequest` permission with session rules that rewrite `Origin` and `Referer` of service-worker requests to `https://www.steamgifts.com`.
 
-### Alterado
+### Changed
 
-- Classes e globais com assinatura de autojoin (`btnSingle`, `buttonsAJ`, `AutoJoinButtonEnabled`, `pointsFloating`, `aj-*`, `__AJ_*`) renomeados para o prefixo neutro `sgx`.
+- Classes and globals with an autojoin signature (`btnSingle`, `buttonsAJ`, `AutoJoinButtonEnabled`, `pointsFloating`, `aj-*`, `__AJ_*`) renamed to the neutral `sgx` prefix.
 
-### Segurança
+### Security
 
-- `tests/stealth.test.js` passa a varrer content scripts e CSS injetado em busca de marcadores conhecidos.
+- `tests/stealth.test.js` now scans content scripts and injected CSS for known markers.
 
 ## [2.0.3] - 2026-10-15
 
-### Adicionado
+### Added
 
-- `js/core/timing.js`: agendamento com variação não uniforme (ritmo normal, leitura lenta e pausas ocasionais) no lugar do intervalo fixo.
+- `js/core/timing.js`: non-uniform jittered scheduling (normal pace, slow reading and occasional pauses) instead of a fixed interval.
 
-### Alterado
+### Changed
 
-- Requisições de entrada do service worker com `credentials: 'include'`.
+- Service-worker entry requests use `credentials: 'include'`.
 
-### Segurança
+### Security
 
-- Ids detectados pelo canário do `bundle-v18.js` (`ajFooter`, `navbarPin`, `ajFooterArrow`) renomeados; o site reportava contas via `ajax.php?do=dbb8ff` ao encontrar os três.
+- Ids matched by the `bundle-v18.js` canary (`ajFooter`, `navbarPin`, `ajFooterArrow`) renamed; the site reported accounts via `ajax.php?do=dbb8ff` when it found all three.
 
 ## [2.0.2] - 2026-10-15
 
-### Adicionado
+### Added
 
-- Workflows de CodeQL e de revisão de dependências, `CODEOWNERS`, scripts `lint:fix` e `format:fix`, testes de configurações, regras, metadados e fixtures do SteamGifts.
+- CodeQL and dependency review workflows, `CODEOWNERS`, `lint:fix` and `format:fix` scripts, tests for settings, rules, metadata and SteamGifts fixtures.
 
-### Alterado
+### Changed
 
-- Font Awesome 6.0.0 → 7.3.1 (somente `woff2`), ESLint 8 → 10 com _flat config_, Node.js 22/24/26 na matriz de CI.
+- Font Awesome 6.0.0 → 7.3.1 (`woff2` only), ESLint 8 → 10 with flat config, Node.js 22/24/26 in the CI matrix.
 
-### Corrigido
+### Fixed
 
-- Oito alertas do CodeQL (checagem de host por `includes`, sanitização por regex, injeção de propriedade em `getUrlParams`), vulnerabilidades em dependências de desenvolvimento e o 404 do logotipo nas configurações.
+- Eight CodeQL alerts (host checks with `includes`, regex sanitization, property injection in `getUrlParams`), vulnerabilities in dev dependencies and the settings logo 404.
 
-## [2.0.1] e anteriores
+## [2.0.1] and earlier
 
-Versões publicadas como "AutoJoin for SteamGifts", incluindo a migração para Manifest V3 (2.0.0). O histórico detalhado anterior a 2.0.2 não é verificável no git atual; consulte as [releases](https://github.com/bernardopg/GiftPilot/releases).
+Releases published under the previous name, including the Manifest V3 migration (2.0.0). Detailed history before 2.0.2 is not verifiable in the current git history; see the [releases](https://github.com/bernardopg/GiftPilot/releases).
 
-[Não lançado]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...HEAD
 [3.0.0]: https://github.com/bernardopg/GiftPilot/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/bernardopg/GiftPilot/compare/v2.0.1...v2.1.0
 [2.0.3]: https://github.com/bernardopg/GiftPilot/commit/57465c8
 [2.0.2]: https://github.com/bernardopg/GiftPilot/commit/e6063d5
 
-[2.0.1] e anteriores: https://github.com/bernardopg/GiftPilot/releases/tag/v2.0.1
+[2.0.1] and earlier: https://github.com/bernardopg/GiftPilot/releases/tag/v2.0.1

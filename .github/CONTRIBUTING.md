@@ -1,40 +1,42 @@
-# Contribuindo com o GiftPilot
+# Contributing to GiftPilot
 
-Obrigado por ajudar! Este guia cobre o essencial; as regras técnicas completas estão no [AGENTS.md](../AGENTS.md).
+Thanks for helping! This guide covers the essentials; the full technical rules are in [AGENTS.md](../AGENTS.md).
 
-## Antes de começar
+## Before you start
 
-- Procure uma [issue](https://github.com/bernardopg/GiftPilot/issues) existente ou abra uma descrevendo o problema ou a ideia.
-- Para vulnerabilidades, **não** abra issue pública: siga a [política de segurança](SECURITY.md).
-- Ao participar você concorda com o [código de conduta](CODE_OF_CONDUCT.md).
+- Look for an existing [issue](https://github.com/bernardopg/GiftPilot/issues) or open one describing the problem or idea.
+- For vulnerabilities, **do not** open a public issue: follow the [security policy](SECURITY.md).
+- By participating you agree to the [code of conduct](CODE_OF_CONDUCT.md).
 
-## Ambiente
+## Setup
 
 ```bash
 git clone https://github.com/bernardopg/GiftPilot.git
 cd GiftPilot
-nvm use        # Node.js 24 (22 e 26 também são suportados)
+nvm use        # Node.js 24 (22 and 26 are supported too)
 npm ci
 ```
 
-Carregue a raiz do repositório em `chrome://extensions` → **Carregar sem compactação**. Depois de editar, recarregue a extensão e a aba do SteamGifts.
+Load the repository root in `chrome://extensions` → **Load unpacked**. After editing, reload the extension and the SteamGifts tab.
 
-## Fluxo
+## Workflow
 
-1. Crie uma branch a partir de `main`: `feat/…`, `fix/…`, `docs/…`.
-2. Faça a mudança com testes quando houver lógica nova em `js/core/`.
-3. Rode `npm run check && npm test` (ou `npm run build`, que roda tudo).
-4. Atualize `CHANGELOG.md` em **[Não lançado]** quando a mudança for visível ao usuário.
-5. Abra o PR preenchendo o template. Os rótulos são aplicados automaticamente.
+1. Branch off `main`: `feat/…`, `fix/…`, `docs/…`.
+2. Make the change, with tests when you add logic to `js/core/`.
+3. Run `npm run check && npm test` (or `npm run build`, which runs everything).
+4. Update `CHANGELOG.md` under **[Unreleased]** when the change is user-visible.
+5. Open the PR using the template. Labels are applied automatically.
 
-## Regras que não podem quebrar
+## Rules that must not break
 
-- Nenhuma interface da extensão no DOM visível da página: use o painel em `js/content/panel.js`.
-- Nenhum `id`/classe com cara de autojoin, nenhum `web_accessible_resources`, nenhuma escrita no `localStorage` da página.
-- Requisições ao SteamGifts sempre via `js/core/sg-request.js` ou pelos botões nativos do site.
-- Todo texto visível passa por `js/core/i18n.js`, em `en` e `pt-BR`.
-- Mudanças em `permissions` exigem aprovação do mantenedor.
+- No extension UI in the page's visible DOM: use the panel in `js/content/panel.js`.
+- No autojoin-looking `id`/class, no `web_accessible_resources`, no writes to the page's `localStorage`.
+- SteamGifts requests always go through `js/core/sg-request.js` or the site's native buttons.
+- Every visible string goes through `js/core/i18n.js`, in both `en` and `pt-BR`.
+- `permissions` changes require maintainer approval.
 
 ## Commits
 
-[Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/): `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`, `ci:`. Exemplo: `fix(content): espera o desbloqueio da descrição antes de entrar`.
+[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/): `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`, `ci:`. Example: `fix(content): wait for the description unlock before entering`.
+
+Portuguese docs: [`docs/pt-br-documentation/`](../docs/pt-br-documentation/).

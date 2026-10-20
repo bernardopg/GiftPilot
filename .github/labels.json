@@ -1,84 +1,112 @@
 [
-  { "name": "bug", "color": "d73a4a", "description": "Algo não funciona" },
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "Something is not working"
+  },
   {
     "name": "enhancement",
     "color": "6d5bff",
-    "description": "Novo recurso ou melhoria"
+    "description": "New feature or improvement"
   },
-  { "name": "triage", "color": "fbca04", "description": "Aguardando análise" },
+  {
+    "name": "triage",
+    "color": "fbca04",
+    "description": "Waiting for triage"
+  },
   {
     "name": "documentation",
     "color": "0075ca",
-    "description": "Docs, README e site"
+    "description": "Docs, README and website"
   },
   {
     "name": "dependencies",
     "color": "0366d6",
-    "description": "Atualização de dependências"
+    "description": "Dependency update"
   },
   {
     "name": "github-actions",
     "color": "000000",
-    "description": "Atualização de actions"
+    "description": "GitHub Actions update"
   },
   {
     "name": "ci",
     "color": "1d76db",
-    "description": "Workflows e automação do repositório"
+    "description": "Workflows and repository automation"
   },
-  { "name": "tests", "color": "0e8a16", "description": "Testes e fixtures" },
-  { "name": "i18n", "color": "c5def5", "description": "Traduções" },
+  {
+    "name": "tests",
+    "color": "0e8a16",
+    "description": "Tests and fixtures"
+  },
+  {
+    "name": "i18n",
+    "color": "c5def5",
+    "description": "Translations"
+  },
   {
     "name": "manifest",
     "color": "b60205",
-    "description": "Mudança no manifest.json (revisar permissões)"
+    "description": "manifest.json change (review permissions)"
   },
   {
     "name": "brand",
     "color": "ff8a3d",
-    "description": "Logo, ícones e identidade visual"
+    "description": "Logo, icons and visual identity"
   },
   {
     "name": "area: content",
     "color": "14b8d4",
-    "description": "Scripts da página do SteamGifts"
+    "description": "SteamGifts page scripts"
   },
   {
     "name": "area: core",
     "color": "14b8d4",
-    "description": "Módulos compartilhados"
+    "description": "Shared modules"
   },
   {
     "name": "area: background",
     "color": "14b8d4",
-    "description": "Service worker e offscreen"
+    "description": "Service worker and offscreen"
   },
   {
     "name": "area: options",
     "color": "14b8d4",
-    "description": "Página de configurações"
+    "description": "Settings page"
   },
   {
     "name": "area: theme",
     "color": "14b8d4",
-    "description": "Tema escuro e estilos do site"
+    "description": "Dark theme and site styles"
   },
   {
     "name": "good first issue",
     "color": "7057ff",
-    "description": "Boa para começar"
+    "description": "Good for newcomers"
   },
   {
     "name": "help wanted",
     "color": "008672",
-    "description": "Ajuda bem-vinda"
+    "description": "Extra attention is needed"
   },
-  { "name": "question", "color": "d876e3", "description": "Dúvida" },
+  {
+    "name": "question",
+    "color": "d876e3",
+    "description": "Further information is requested"
+  },
   {
     "name": "duplicate",
     "color": "cfd3d7",
-    "description": "Issue ou PR repetido"
+    "description": "Duplicate issue or PR"
   },
-  { "name": "wontfix", "color": "ffffff", "description": "Não será feito" },
-  { "name": "invalid", "color": "e4e669", "description": "Não parece correto" }
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "Will not be worked on"
+  },
+  {
+    "name": "invalid",
+    "color": "e4e669",
+    "description": "Doesn't seem right"
+  }
 ]
