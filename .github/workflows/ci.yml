@@ -148,7 +148,7 @@ jobs:
         with:
           name: giftpilot-${{ github.sha }}
           path: dist
-      - uses: softprops/action-gh-release@v3.0.3
+      - uses: softprops/action-gh-release@v3.0.4
         if: steps.tag.outputs.exists == 'false'
         with:
           tag_name: ${{ steps.tag.outputs.version }}
