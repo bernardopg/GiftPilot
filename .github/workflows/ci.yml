@@ -19,7 +19,7 @@ concurrency:
 
 env:
   # Keep in sync with .nvmrc and the engines range in package.json.
-  NODE_VERSION: '24'
+  NODE_VERSION: '26'
 
 jobs:
   lint:

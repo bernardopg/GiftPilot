@@ -6,10 +6,20 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-11-16
+
+Maintenance release: no behaviour change in the extension.
+
 ### Changed
 
+- Dev tooling updated: ESLint 10.15.0, `globals` 17.14.0 and Prettier 3.10.1.
+- Node.js 26 (LTS) is now the default version in `.nvmrc` and CI; 22 and 24 stay supported.
 - Documentation is now in English; the Portuguese version lives in [`docs/pt-br-documentation/`](docs/pt-br-documentation/).
 - Repository renamed to `bernardopg/GiftPilot`; website moved to <https://bernardopg.github.io/GiftPilot/>.
+
+### Security
+
+- `minimatch` (pulled in by ESLint) moves to 11.0.9, which fixes GHSA-g3hv-75wg-m249 and GHSA-cf2h-pxjq-68xw.
 
 ## [3.0.0] - 2026-10-20
 
@@ -105,7 +115,8 @@ New identity: the project is now called **GiftPilot**. Saved settings are kept.
 
 Releases published under the previous name, including the Manifest V3 migration (2.0.0). Detailed history before 2.0.2 is not verifiable in the current git history; see the [releases](https://github.com/bernardopg/GiftPilot/releases).
 
-[Unreleased]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/bernardopg/GiftPilot/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/bernardopg/GiftPilot/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/bernardopg/GiftPilot/compare/v2.0.1...v2.1.0
 [2.0.3]: https://github.com/bernardopg/GiftPilot/commit/57465c8

@@ -8,10 +8,20 @@ O formato segue o [Keep a Changelog 1.1.0](https://keepachangelog.com/pt-BR/1.1.
 
 ## [Não lançado]
 
+## [3.0.1] - 2026-11-16
+
+Versão de manutenção: nenhuma mudança de comportamento na extensão.
+
 ### Alterado
 
+- Ferramentas de desenvolvimento atualizadas: ESLint 10.15.0, `globals` 17.14.0 e Prettier 3.10.1.
+- Node.js 26 (LTS) passa a ser a versão padrão no `.nvmrc` e no CI; 22 e 24 continuam suportados.
 - Documentação principal agora em inglês; esta cópia em português fica em `docs/pt-br-documentation/`.
 - Repositório renomeado para `bernardopg/GiftPilot`; site em <https://bernardopg.github.io/GiftPilot/>.
+
+### Segurança
+
+- `minimatch` (dependência do ESLint) vai para 11.0.9, que corrige o GHSA-g3hv-75wg-m249 e o GHSA-cf2h-pxjq-68xw.
 
 ## [3.0.0] - 2026-10-20
 
@@ -107,7 +117,8 @@ Nova identidade: o projeto passa a se chamar **GiftPilot**. As configurações s
 
 Versões publicadas como "AutoJoin for SteamGifts", incluindo a migração para Manifest V3 (2.0.0). O histórico detalhado anterior a 2.0.2 não é verificável no git atual; consulte as [releases](https://github.com/bernardopg/GiftPilot/releases).
 
-[Não lançado]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...HEAD
+[Não lançado]: https://github.com/bernardopg/GiftPilot/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/bernardopg/GiftPilot/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/bernardopg/GiftPilot/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/bernardopg/GiftPilot/compare/v2.0.1...v2.1.0
 [2.0.3]: https://github.com/bernardopg/GiftPilot/commit/57465c8

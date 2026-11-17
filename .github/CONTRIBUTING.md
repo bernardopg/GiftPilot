@@ -13,7 +13,7 @@ Thanks for helping! This guide covers the essentials; the full technical rules a
 ```bash
 git clone https://github.com/bernardopg/GiftPilot.git
 cd GiftPilot
-nvm use        # Node.js 24 (22 and 26 are supported too)
+nvm use        # Node.js 26 (22 and 24 are supported too)
 npm ci
 ```
 
