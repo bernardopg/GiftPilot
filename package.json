@@ -1,6 +1,6 @@
 {
   "name": "giftpilot",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
   "main": "js/background/service-worker.js",
   "scripts": {

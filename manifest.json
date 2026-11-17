@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GiftPilot",
   "short_name": "GiftPilot",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Smart companion for SteamGifts: dark theme, filters, win odds and paced auto-entry.",
   "homepage_url": "https://bernardopg.github.io/GiftPilot/",
   "default_locale": "en",

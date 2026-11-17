@@ -6,7 +6,7 @@
 
 **Your co-pilot on SteamGifts.** A real dark theme, filters that clean up the list, win odds on every giveaway and an autopilot with human pacing.
 
-[![Version](https://img.shields.io/badge/version-3.0.0-6D5BFF)](https://github.com/bernardopg/GiftPilot/releases)
+[![Version](https://img.shields.io/badge/version-3.0.1-6D5BFF)](https://github.com/bernardopg/GiftPilot/releases)
 [![CI](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml/badge.svg)](https://github.com/bernardopg/GiftPilot/actions/workflows/ci.yml)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-14B8D4)](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22C55E)](LICENSE)
