@@ -5,7 +5,7 @@ Guidance for AI coding agents (and humans) working on **GiftPilot**, a Manifest 
 ## Project at a glance
 
 - Plain JavaScript, CSS and HTML. **No bundler, no framework, no runtime dependencies.** Dev tooling only: ESLint 10, Prettier 3, `node:test`.
-- Node.js 22, 24 or 26 (`.nvmrc` = 24). Package manager: npm.
+- Node.js 22, 24 or 26 (`.nvmrc` = 26). Package manager: npm.
 - Load the repository root as an unpacked extension in `chrome://extensions` during development. `npm run build` produces `build/extension`.
 - Code, comments and documentation are in English. A Portuguese (Brazil) copy of the user docs lives in `docs/pt-br-documentation/`; the extension UI and the website ship `en` and `pt-BR`.
 
